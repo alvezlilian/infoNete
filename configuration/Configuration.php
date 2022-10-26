@@ -9,7 +9,7 @@ include_once('model/CancionesModel.php');
 include_once('model/PresentacionesModel.php');
 include_once ("model/QuieroSerParteModel.php");
 include_once ("model/RegistrarseModel.php");
-
+include_once ("model/ValidarLoginModel.php");
 
 
 include_once('controller/PresentacionesController.php');
@@ -17,7 +17,7 @@ include_once('controller/CancionesController.php');
 include_once('controller/LaBandaController.php');
 include_once('controller/QuieroSerParteController.php');
 include_once('controller/RegistrarseController.php');
-
+include_once('controller/LoginController.php');
 
 include_once ('dependencies/mustache/src/Mustache/Autoloader.php');
 
@@ -52,6 +52,10 @@ class Configuration {
         return new RegistrarseController($this->view,$this->getRegistrarseModel());
     }
 
+    public function getLoginController(){
+        return new LoginController($this->view,$this->getValidarLoginModel());
+    }
+
     private function createCancionesModel(): CancionesModel {
         return new CancionesModel($this->database);
     }
@@ -72,4 +76,10 @@ class Configuration {
     {
         return new RegistrarseModel($this->database);
     }
+
+    private function getValidarLoginModel()
+    {
+        return new ValidarLoginModel($this->database);
+    }
+
 }
