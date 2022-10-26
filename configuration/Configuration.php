@@ -55,7 +55,6 @@ class Configuration {
     public function getLoginController(){
         return new LoginController($this->view,$this->getValidarLoginModel());
     }
-
     private function createCancionesModel(): CancionesModel {
         return new CancionesModel($this->database);
     }

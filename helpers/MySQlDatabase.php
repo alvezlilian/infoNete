@@ -27,7 +27,7 @@ class MySQlDatabase {
     }
 
     public function execute($sql) {
-        $this->conexion->query($sql);
+        $this->conexion->query($sql); 
     }
-
+    
 }

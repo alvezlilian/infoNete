@@ -4,6 +4,7 @@ class LoginController
 {
     private $renderer;
     private $model;
+    private $session;
 
     public function __construct($render, $model)
     {
@@ -21,12 +22,15 @@ class LoginController
         $email=$_POST["email"];
         $clave=$_POST["clave"];
         $resultado = $this->model->validarLogin($email,$clave);
-
-        if($resultado){
-            Redirect::doIt("/");
-        }else{
-            Redirect::doIt("https://www.google.com.ar/?hl=es-419");
+        
+        foreach($resultado as $i){
+            $_SESSION['rol']=$i['descripcion'];
         }
+        $_SESSION['email']=$email;
+        $_SESSION['rol'];
+
+        session_start();
+        Redirect::doIt("/");
     }
 
 }
