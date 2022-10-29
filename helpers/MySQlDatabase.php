@@ -17,12 +17,13 @@ class MySQlDatabase {
             $db);
     }
 
-    /* Esto estaba probando para usar workbench en mi pc
+    /*
+    // Esto estaba probando para usar workbench en mi pc
     public function __construct($host_param = null, $port_param=null, $socket_param= null ,$user_param= null,$pass_param= null,$db_param= null) {
         $config = parse_ini_file("configuration/config.ini");
 
         $host = $host_param ?:  $config['host'];
-        $port = $port_param ?: $config['port'];
+        $port = (int)$port_param ?: (int)$config['port'];
         $socket = $socket_param ?: $config['socket'];
         $user = $user_param ?: $config['user'];
         $pass = $pass_param ?:  $config['pass'];
