@@ -23,7 +23,8 @@ class RegistrarseController
         $email=$_POST["email"];
         $clave=$_POST["clave"];
         $direccion=$_POST["direccion"];
-    $this->model->alta($nombre,$email,$direccion,$clave);
+        $passwordHash = password_hash($clave, PASSWORD_DEFAULT);
+    $this->model->alta($nombre,$email,$direccion,$passwordHash);
     Redirect::doIt("/");
     }
 

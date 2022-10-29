@@ -62,7 +62,7 @@ CREATE TABLE `contenidista` (
 
 CREATE TABLE `contrasenia` (
   `id` int(11) NOT NULL,
-  `clave` varchar(30) NOT NULL,
+  `clave` char(60) NOT NULL,
   `vencimiento` datetime NOT NULL,
   `vencimientoDeLaValidacion` datetime NOT NULL,
   `codigoValidacion` smallint(6) NOT NULL
