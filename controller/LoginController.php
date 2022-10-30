@@ -11,13 +11,23 @@ class LoginController
         $this->renderer = $render;
         $this->model = $model;
     }
-    public function iniciarsesion(){
+    public function list(){
+
+    }
+    public function iniciarSesion(){
         $this->renderer->render("login.mustache");
     }
     public function verificarLogin(){
         $email=$_POST["email"];
         $clave=$_POST["clave"];
-        $this->model->verificarUsuario($email,$clave);
-        Redirect::doIt("/");
+       $data['usuario']=  $this->model->verificarUsuario($email,$clave);
+       if(count($data)>0){
+           Redirect::doIt("/",$data);
+       }else{
+           Redirect::doIt("login.mustache",$data);
+       }
+
+
+
     }
 }

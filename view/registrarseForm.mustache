@@ -1,33 +1,63 @@
 {{> header}}
 <!-- The Band Section -->
-<div class='w3-container w3-content w3-center w3-padding-64' style='max-width:800px' id='band'>
+<div class='w3-container w3-content w3-center w3-padding-64' style='max-width:50%'   id='band'>
     <h2 class='w3-wide'>Registrarse</h2>
-    <form method="post" action="/registrarse/procesarAlta">
-        <div class="mb-3">
+    <form method="post" action="/registrarse/procesarAlta" id="form">
+        <div class="mb-1">
             <label for="nombre" class="form-label">Nombre </label>
-            <input type="text" class="form-control" id="nombre" aria-describedby="nombre" name="nombre">
+            <input type="text" class="form-control" id="nombre" aria-describedby="nombre" name="nombre" required>
             <div id="nombre" class="form-text"></div>
         </div>
         <br>
-        <div class="mb-3">
+        <div class="mb-">
             <label for="direccion" class="form-label">Direccion </label>
-            <input type="text" class="form-control" id="direccion" aria-describedby="direccion" name="direccion">
+            <input type="text" class="form-control" id="direccion" aria-describedby="direccion" name="direccion" onchange="getLocation()">
             <div id="direccion" class="form-text"></div>
         </div>
         <br>
         <div class="mb-3">
             <label for="email" class="form-label">Email </label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email"required>
+            <span class="text-danger" id="mensajeError" >hola</span>
+
             <div id="emailHelp" class="form-text"></div>
         </div>
         <br>
         <div class="mb-3">
             <label for="clave" class="form-label">Clave</label>
-            <input type="password" class="form-control" id="clave" name="clave">
+            <input type="password" class="form-control" id="clave" name="clave"required>
         </div>
         <br>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <input id="latitud" name="latitud" >
 
-</div>
+        <input  id="longitud" name="longitud">
+        <p id="x" ></p>
+
+
+        <button type="submit" class="btn btn-primary" onclick="displayMap()">Submit</button>
+        <div id="map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3274.2680188587833!2d-58.654790285224386!3d-34.8494922770498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcdc841311ff73%3A0x2cc6ecd0cc5279d8!2sJos%C3%A9%20M.%20Cortina%206663%2C%20B1763CIC%20Virrey%20del%20Pino%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1667086092241!5m2!1ses-419!2sar" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+
+
+        <script>
+           x = document.getElementById("x");
+
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } else {
+                    x.innerHTML = "Geolocation is not supported by this browser.";
+                }
+            }
+
+            function showPosition(position) {
+                var latitud = position.coords.latitude ;
+               var longitud= position.coords.longitude;
+                document.getElementById("latitud").value=latitud;
+                document.getElementById("longitud").value=longitud;
+            }
+
+
+        </script>
+
+
 {{> footer}}
