@@ -50,7 +50,10 @@ class MySQlDatabase {
     }
 
     public function execute($sql) {
-        $this->conexion->query($sql); 
+       $this->conexion->query($sql);
+    }
+    public function insert(){
+         return $this->conexion->insert_id;
     }
     
 }

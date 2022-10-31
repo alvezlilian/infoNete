@@ -12,19 +12,23 @@ class RegistrarseController
         $this->model = $model;
     }
     public function list(){
-        echo "hola";
+      echo "hola";
     }
     public function alta(){
     $this->renderer->render("registrarseForm.mustache");
-
     }
     public function procesarAlta(){
         $nombre=$_POST["nombre"];
         $email=$_POST["email"];
-        $clave=$_POST["clave"];
+        $clave =$_POST["clave"];
         $direccion=$_POST["direccion"];
-        $passwordHash = password_hash($clave, PASSWORD_DEFAULT);
-    $this->model->alta($nombre,$email,$direccion,$passwordHash);
+
+        $latitud=$_POST["latitud"];
+        $longitud=$_POST["longitud"];
+
+        $claveEncriptada=password_hash($clave, PASSWORD_DEFAULT);
+        $this->model->alta($nombre,$email,$direccion,$claveEncriptada,$latitud,$longitud);
+
     Redirect::doIt("/");
     }
 
