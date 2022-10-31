@@ -9,6 +9,6 @@ class LaBandaController {
     }
 
     public function list() {
-        $this->view->render('labandaView.mustache');
+        $this->view->render('tourView.mustache');
     }
 }
