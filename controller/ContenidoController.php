@@ -23,6 +23,7 @@ class ContenidoController {
         $tipoNoticia=$_POST["tipoNoticia"];
         $precioNoticia=$_POST["precioNoticia"];
         $descripcionNoticia=$_POST["descripcionNoticia"];
+        $tipoNoticia2=$_POST["tipoDescripcion"];
     }
 
 }
