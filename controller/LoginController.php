@@ -15,16 +15,16 @@ class LoginController
 
     }
     public function iniciarSesion(){
-        $this->renderer->render("login.mustache");
+        $this->renderer->render("loginView.mustache");
     }
-    public function verificarLogin(){
+    public function validarLogin(){
         $email=$_POST["email"];
         $clave=$_POST["clave"];
        $data['usuario']=  $this->model->verificarUsuario($email,$clave);
        if(count($data)>0){
            Redirect::doIt("/",$data);
        }else{
-           Redirect::doIt("login.mustache",$data);
+           Redirect::doIt("loginView.mustache",$data);
        }
 
 
