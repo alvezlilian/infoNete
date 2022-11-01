@@ -9,8 +9,8 @@ include_once('model/CancionesModel.php');
 include_once('model/PresentacionesModel.php');
 include_once ("model/QuieroSerParteModel.php");
 include_once ("model/RegistrarseModel.php");
-
 include_once ("model/LoginModel.php");
+include_once ("model/ValidarLoginModel.php");
 
 
 
@@ -60,6 +60,7 @@ class Configuration {
     public function getLoginController(){
         return new LoginController($this->view,$this->getValidarLoginModel());
     }
+
     private function createCancionesModel(): CancionesModel {
         return new CancionesModel($this->database);
     }
