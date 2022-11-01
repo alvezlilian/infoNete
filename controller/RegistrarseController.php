@@ -13,6 +13,7 @@ class RegistrarseController
     }
     public function list(){
         echo "hola";
+
     }
     public function alta(){
     $this->renderer->render("registrarseForm.mustache");

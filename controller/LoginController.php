@@ -7,6 +7,7 @@ class LoginController
     private $session;
 
 
+
     public function __construct($render, $model)
     {
         $this->renderer = $render;

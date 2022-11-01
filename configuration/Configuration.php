@@ -9,7 +9,10 @@ include_once('model/CancionesModel.php');
 include_once('model/PresentacionesModel.php');
 include_once ("model/QuieroSerParteModel.php");
 include_once ("model/RegistrarseModel.php");
-include_once ("model/ValidarLoginModel.php");
+
+include_once ("model/LoginModel.php");
+
+
 
 
 include_once('controller/PresentacionesController.php');
@@ -18,6 +21,7 @@ include_once('controller/LaBandaController.php');
 include_once('controller/QuieroSerParteController.php');
 include_once('controller/RegistrarseController.php');
 include_once('controller/LoginController.php');
+
 
 include_once ('dependencies/mustache/src/Mustache/Autoloader.php');
 
