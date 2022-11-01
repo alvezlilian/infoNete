@@ -16,14 +16,17 @@ class RegistrarseController
     }
     public function alta(){
     $this->renderer->render("registrarseForm.mustache");
-
     }
     public function procesarAlta(){
         $nombre=$_POST["nombre"];
         $email=$_POST["email"];
-        $clave=$_POST["clave"];
+       $clave =$_POST["clave"];
         $direccion=$_POST["direccion"];
-    $this->model->alta($nombre,$email,$direccion,$clave);
+        $latitud=$_POST["latitud"];
+        $longitud=$_POST["longitud"];
+
+       $claveEncriptada=md5($clave);
+    $this->model->alta($nombre,$email,$direccion,$claveEncriptada,$latitud,$longitud);
     Redirect::doIt("/");
     }
 
