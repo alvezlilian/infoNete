@@ -10,8 +10,6 @@ class ValidarLoginModel
     }
 
     public function validarLogin($email,$clave){
-        //SELECT usuario.* from usuario JOIN contrasenia on usuario.id = contrasenia.id_usuario WHERE usuario.email = "test@test.com" AND contrasenia.clave = "prueba123";
-        //$sql = "SELECT usuario.email,rol.descripcion from usuario JOIN contrasenia on usuario.id = contrasenia.idUsuario join rol on usuario.idRol=rol.id WHERE usuario.email = '$email' AND contrasenia.clave = '$clave'";
         $sql = "SELECT email,descripcion from usuario JOIN contrasenia on usuario.id = contrasenia.idUsuario join rol on usuario.idRol=rol.id WHERE usuario.email = '$email' AND contrasenia.clave = '$clave'";
         $resultado = $this->database->query($sql);
 
@@ -19,5 +17,29 @@ class ValidarLoginModel
              Redirect::doIt("/login/validarLogin");
         }
         return $resultado;
+    }
+
+    public function crearSesionUsuario($email){
+        if (!isset($_SESSION))
+        {
+            session_start();
+            $_SESSION['email']=$email;
+            session_destroy();
+        }else{
+            die("HOLAAAAA");
+        }
+
+        if (!isset($_SESSION['email'])){
+            die("asdasdasdasdasdsad");
+        }
+    }
+
+    public function getIdByMail($email){
+        $sql = "SELECT id from usuario WHERE usuario.email = '$email'";
+        return $resultado = $this->database->query($sql);
+    }
+    
+    public function cerrarSesion(){
+        session_destroy();
     }
 }

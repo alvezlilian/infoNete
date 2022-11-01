@@ -6,6 +6,7 @@ class LoginController
     private $model;
     private $session;
 
+
     public function __construct($render, $model)
     {
         $this->renderer = $render;
@@ -15,22 +16,34 @@ class LoginController
     }
 
     public function validarLogin(){
-    $this->renderer->render("loginView.mustache");
-
+        if(!isset($_SESSION)){
+            $this->renderer->render("loginView.mustache");
+        }else{
+            $this->renderer->render("tourView.mustache");
+        }
     }
+
     public function procesarLogin(){
         $email=$_POST["email"];
         $clave=$_POST["clave"];
         $resultado = $this->model->validarLogin($email,$clave);
-        
+
         foreach($resultado as $i){
-            $_SESSION['rol']=$i['descripcion'];
+            $rol=$i['descripcion'];
         }
-        $_SESSION['email']=$email;
-        $_SESSION['rol'];
 
         session_start();
+        $_SESSION['email']=$email.", rol: ".$rol;
+
         Redirect::doIt("/");
+    }
+    public function cerrarSesion(){
+        if (isset($_SESSION['email'])) {
+            session_destroy();
+        }
+        if(!isset($_session['email'])){
+            die("esta vacio");
+        }
     }
 
 }
