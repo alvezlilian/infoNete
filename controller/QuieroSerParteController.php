@@ -22,7 +22,6 @@ class QuieroSerParteController {
         $instrumento = $_POST["instrumento"];
 
         $this->model->alta($nombre,$instrumento);
-
         Redirect::doIt('/');
     }
 

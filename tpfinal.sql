@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-10-2022 a las 02:42:32
+-- Tiempo de generación: 30-10-2022 a las 23:10:32
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -60,11 +60,13 @@ CREATE TABLE `contenidista` (
 -- Estructura de tabla para la tabla `contrasenia`
 --
 
-CREATE TABLE `contasenia` (
-                              `id` int NOT NULL,
-                              `clave` text NOT NULL,
-                              `idUsuario` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `contrasenia` (
+  `id` int(11) NOT NULL,
+  `clave` varchar(30) NOT NULL,
+  `vencimiento` datetime NOT NULL,
+  `vencimientoDeLaValidacion` datetime NOT NULL,
+  `codigoValidacion` smallint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -134,6 +136,16 @@ CREATE TABLE `rol` (
                        `descripcion` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`id`, `descripcion`) VALUES
+(1, 'ADMINISTRADOR'),
+(2, 'CONTENIDISTA'),
+(3, 'LECTOR'),
+(4, 'ESCRITOR');
+
 -- --------------------------------------------------------
 
 --
@@ -172,6 +184,19 @@ CREATE TABLE `usuario` (
                            `latitud` varchar(20) NOT NULL,
                            `longitud` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `ubicacion` varchar(50) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `idRol` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nombre`, `ubicacion`, `email`, `idRol`) VALUES
+(1, 'jonathan', 'oregon', 'asd@asd', 2);
 
 --
 -- Índices para tablas volcadas
@@ -187,20 +212,21 @@ ALTER TABLE `administrador`
 -- Indices de la tabla `articulo`
 --
 ALTER TABLE `articulo`
-    ADD PRIMARY KEY (`id`),
-    ADD KEY `fk_esc_articulo` (`idEscritor`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_esc_articulo` (`idEscritor`);
 
 --
 -- Indices de la tabla `contenidista`
 --
 ALTER TABLE `contenidista`
-    ADD KEY `fk_cont_usuario` (`idUsuario`);
+  ADD KEY `fk_cont_usuario` (`idUsuario`);
 
 --
 -- Indices de la tabla `contrasenia`
 --
 ALTER TABLE `contrasenia`
-    ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_usu_clave` (`idUsuario`);
 
 --
 -- Indices de la tabla `edicion`
@@ -250,8 +276,8 @@ ALTER TABLE `suscripcion`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-    ADD PRIMARY KEY (`id`);
-
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_rol_usuario` (`idRol`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -280,13 +306,13 @@ ALTER TABLE `edicion`
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `seccion`
@@ -304,7 +330,7 @@ ALTER TABLE `suscripcion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -314,44 +340,44 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `administrador`
 --
 ALTER TABLE `administrador`
-    ADD CONSTRAINT `fk_admin_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `fk_admin_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `articulo`
 --
 ALTER TABLE `articulo`
-    ADD CONSTRAINT `fk_esc_articulo` FOREIGN KEY (`idEscritor`) REFERENCES `escritor` (`idUsuario`);
+  ADD CONSTRAINT `fk_esc_articulo` FOREIGN KEY (`idEscritor`) REFERENCES `escritor` (`idUsuario`);
 
 --
 -- Filtros para la tabla `contenidista`
 --
 ALTER TABLE `contenidista`
-    ADD CONSTRAINT `fk_cont_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `fk_cont_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `edicion`
 --
 ALTER TABLE `edicion`
-    ADD CONSTRAINT `fk_pub_edicion` FOREIGN KEY (`idPublicacion`) REFERENCES `publicacion` (`id`);
+  ADD CONSTRAINT `fk_pub_edicion` FOREIGN KEY (`idPublicacion`) REFERENCES `publicacion` (`id`);
 
 --
 -- Filtros para la tabla `escritor`
 --
 ALTER TABLE `escritor`
-    ADD CONSTRAINT `fk_escritor_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `fk_escritor_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `lector`
 --
 ALTER TABLE `lector`
-    ADD CONSTRAINT `fk_lector_suscripcion` FOREIGN KEY (`idSuscripcion`) REFERENCES `suscripcion` (`id`),
-    ADD CONSTRAINT `fk_lector_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `fk_lector_suscripcion` FOREIGN KEY (`idSuscripcion`) REFERENCES `suscripcion` (`id`),
+  ADD CONSTRAINT `fk_lector_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-    ADD CONSTRAINT `fk_clave` FOREIGN KEY (`idUsuario`) REFERENCES `contrasenia` (`id`);
+  ADD CONSTRAINT `fk_clave` FOREIGN KEY (`idClave`) REFERENCES `contrasenia` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
