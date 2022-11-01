@@ -10,7 +10,9 @@ include_once('model/PresentacionesModel.php');
 include_once ("model/QuieroSerParteModel.php");
 include_once ("model/RegistrarseModel.php");
 include_once ("model/LoginModel.php");
+
 include_once ("model/ContenidoModel.php");
+
 
 
 
@@ -21,6 +23,7 @@ include_once('controller/QuieroSerParteController.php');
 include_once('controller/RegistrarseController.php');
 include_once('controller/LoginController.php');
 include_once('controller/ContenidoController.php');
+
 
 
 
@@ -59,9 +62,11 @@ class Configuration {
     public function getLoginController(){
         return new LoginController($this->view,$this->getLoginModel());
     }
+
     public function getContenidoController(){
         return new ContenidoController($this->view,$this->getContenidoModel());
     }
+
 
     private function createCancionesModel(): CancionesModel {
         return new CancionesModel($this->database);
@@ -88,8 +93,10 @@ class Configuration {
     {
         return new LoginModel($this->database);
     }
+
     private function getContenidoModel(){
         return new ContenidoModel($this->database);
 
     }
+
 }

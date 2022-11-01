@@ -11,6 +11,7 @@ class LoginController
         $this->renderer = $render;
         $this->model = $model;
     }
+
     public function list(){
 
     }
@@ -26,6 +27,7 @@ class LoginController
        }else{
            Redirect::doIt("loginView.mustache",$data);
        }
+
 
 
 
