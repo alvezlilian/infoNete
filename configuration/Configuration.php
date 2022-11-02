@@ -10,6 +10,7 @@ include_once('model/PresentacionesModel.php');
 include_once ("model/QuieroSerParteModel.php");
 include_once ("model/RegistrarseModel.php");
 include_once ("model/LoginModel.php");
+include_once ("model/ContenidoModel.php");
 include_once ("model/ValidarLoginModel.php");
 include_once("model/LectorModel.php");
 
@@ -19,10 +20,13 @@ include_once('controller/LaBandaController.php');
 include_once('controller/QuieroSerParteController.php');
 include_once('controller/RegistrarseController.php');
 include_once('controller/LoginController.php');
+include_once('controller/ContenidoController.php');
 include_once('controller/LectorController.php');
 
-include_once ('dependencies/mustache/src/Mustache/Autoloader.php');
 
+
+
+include_once ('dependencies/mustache/src/Mustache/Autoloader.php');
 
 class Configuration {
     private $database;
@@ -54,9 +58,12 @@ class Configuration {
     public function getRegistrarseController(){
         return new RegistrarseController($this->view,$this->getRegistrarseModel());
     }
-
     public function getLoginController(){
-        return new LoginController($this->view,$this->getValidarLoginModel());
+        return new LoginController($this->view,$this->getLoginModel());
+    }
+
+    public function getContenidoController(){
+        return new ContenidoController($this->view,$this->getContenidoModel());
     }
 
     public function getLectorController(){
@@ -84,9 +91,14 @@ class Configuration {
         return new RegistrarseModel($this->database);
     }
 
-    private function getValidarLoginModel()
+    private function getLoginModel()
     {
-        return new ValidarLoginModel($this->database);
+        return new LoginModel($this->database);
+    }
+
+    private function getContenidoModel(){
+        return new ContenidoModel($this->database);
+
     }
 
     private function getLectorModel(){

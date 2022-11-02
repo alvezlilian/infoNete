@@ -4,14 +4,16 @@ class RegistrarseModel
 {
     private  $database;
 
-    public function __construct($database)
+    public function __construct( $database)
     {
         $this->database=$database;
     }
-    public function alta($nombre,$email,$direccion,$clave){
-        $sql2="INSERT INTO infonete.contasenia(clave) VALUES ('$clave')";
-        $sql1="INSERT INTO infonete.usuario1(nombre1,direccion,email) VALUES ('$nombre','$direccion','$email')";
-        $datos= $this->database->query($sql2);
-        $this->database->execute($sql1);
+    public function alta($nombre,$email,$direccion,$clave,$latitud,$longitud){
+
+      $sql1="INSERT INTO infonete.usuario(nombre,ubicacion,email,latitud,longitud) VALUES ('$nombre','$direccion','$email','$latitud','$longitud')";
+       $this->database->execute($sql1);
+       $idUsuario=$this->database->insert();
+      $sqlContrasenia="INSERT INTO infonete.contrasenia(clave,idUsuario) VALUES ('$clave','$idUsuario')";
+      $this->database->execute($sqlContrasenia);
     }
 }

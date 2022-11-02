@@ -2,10 +2,9 @@
 
 class LoginController
 {
+
     private $renderer;
     private $model;
-    private $session;
-
 
 
     public function __construct($render, $model)
@@ -13,21 +12,22 @@ class LoginController
         $this->renderer = $render;
         $this->model = $model;
     }
+
     public function list(){
-    }
 
+    }
+    public function iniciarSesion(){
+        $this->renderer->render("loginView.mustache");
+    }
     public function validarLogin(){
-        if(!isset($_SESSION)){
-            $this->renderer->render("loginView.mustache");
-        }else{
-            $this->renderer->render("tourView.mustache");
-        }
-    }
-
-    public function procesarLogin(){
         $email=$_POST["email"];
         $clave=$_POST["clave"];
-        $resultado = $this->model->validarLogin($email,$clave);
+       $data['usuario']=  $this->model->verificarUsuario($email,$clave);
+       if(count($data)>0){
+           Redirect::doIt("/",$data);
+       }else{
+           Redirect::doIt("loginView.mustache",$data);
+       }
 
         session_start();
         $_SESSION['rol']= $resultado['descripcion'];
@@ -45,4 +45,5 @@ class LoginController
         }
     }
 
+    }
 }
