@@ -36,4 +36,10 @@ class MySQlDatabase {
 
     }
 
+    public function queryNum($sql){
+        $result = $this->conexion->query($sql);
+        return mysqli_fetch_array($result);
+    }
+
+    
 }

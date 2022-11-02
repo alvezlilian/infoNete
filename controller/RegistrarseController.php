@@ -12,7 +12,8 @@ class RegistrarseController
         $this->model = $model;
     }
     public function list(){
-      echo "hola";
+        echo "hola";
+
     }
     public function alta(){
     $this->renderer->render("registrarseForm.mustache");

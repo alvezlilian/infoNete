@@ -18,5 +18,8 @@ class LoginModel
     return $this->database->query($sql);
 
 
+             FROM usuario LEFT JOIN contasenia on usuario.idClave=contasenia.id 
+             WHERE usuario.email='$email' AND ancontasenia.clave='$clave'";
+        $this->database->execute($sql);
 
 }}
