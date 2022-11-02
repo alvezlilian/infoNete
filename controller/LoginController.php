@@ -29,15 +29,13 @@ class LoginController
         $clave=$_POST["clave"];
         $resultado = $this->model->validarLogin($email,$clave);
 
-        foreach($resultado as $i){
-            $rol=$i['descripcion'];
-        }
-
         session_start();
-        $_SESSION['email']=$email.", rol: ".$rol;
+        $_SESSION['rol']= $resultado['descripcion'];
+        $_SESSION['name']=$resultado['nombre'];
 
-        Redirect::doIt("/");
+        Redirect::doIt("/lector/index_lector");
     }
+
     public function cerrarSesion(){
         if (isset($_SESSION['email'])) {
             session_destroy();
