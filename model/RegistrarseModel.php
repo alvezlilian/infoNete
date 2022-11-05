@@ -18,6 +18,8 @@ class RegistrarseModel
         $idUsuario=$this->database->insert();
         $sqlContrasenia="INSERT INTO infonete.contrasenia(clave,idUsuario) VALUES ('$clave','$idUsuario')";
         $this->database->execute($sqlContrasenia);
+
+        Redirect::doIt("/login/validarUsuario");
     }
 
     public function sanitizarNombre($nombre){
