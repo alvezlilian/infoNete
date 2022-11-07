@@ -1,0 +1,25 @@
+{{> header}}
+
+<div class='w3-container w3-content w3-center w3-padding-64' style='max-width:50%'   id='band'>
+    <h2 class='w3-wide'>Ingrese el Código de Verificación</h2>
+    <br>
+    <h3>Su código es: </h3>
+    <p>
+        <?php
+        $c = mt_rand(100000, 999999);
+            echo $c;
+        ?>
+    </p>
+    <form method="post" action="/registrarse/validarUsuario" id="form">
+        <div class="mb-1">
+            <label for="codigo" class="form-label">Código </label>
+            <input type="text" class="form-control" id="codigo" aria-describedby="codigo" name="codigo" required>
+            <div id="codigo" class="form-text"></div>
+        </div>
+        <br>
+
+        <button type="submit" class="btn btn-primary" onclick="displayMap()">Submit</button>
+    </div>
+
+
+{{> footer}}

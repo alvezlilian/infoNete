@@ -41,5 +41,6 @@ class MySQlDatabase {
         return mysqli_fetch_array($result);
     }
 
-    
+
+
 }

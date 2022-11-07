@@ -1,7 +1,50 @@
 {{> header}}
 <!-- The Band Section -->
+<!--
+<?php
+    // NO ESTOY SEGURO DE SI ESTO ANDARÍA ESTANDO ACÁ, LA IDEA ERA VALIDAR MAIL, PASSWORD Y
+    // MOSTRAR ERRORES SI LOS HUBIERA
+    $errores = [];
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        var_dump($_POST);
+
+        if(!$email){
+            $errores[] = "Ingrese un Email Válido"
+        }
+
+        if(!$clave){
+             $errores[] = "La Clave es Obligatoria"
+        }
+
+        if(empty($errores)){
+            $query = "SELECT * FROM usuarios WHERE email = '${email}' ";
+            $resultado = mysqli_query($db, $query);
+            if($resultado->num_rows){
+                $usuario = mysqli_fetch_assoc($resultado);
+                $autenticar = password_verify($clave, $usuario['clave']);
+                if($autenticar){
+                    session_start();
+                    $_SESSION['usuario'] = $usuario['email'];
+                    $_SESSION['rol'] = $usuario['rol'];
+                    $_SESSION['login'] = true;
+                }else{
+                    $errores[] = "La Clave es Incorrecta"
+                }
+            }else{
+                $errores[] = "El Usuario No Existe"
+            }
+        }
+    }
+?>
+-->
 <div class='w3-container w3-content w3-center w3-padding-64' style='max-width:50%'   id='band'>
     <h2 class='w3-wide'>Registrarse</h2>
+        <?php foreach($errores as $error): ?>
+            <div class="alert text-danger">
+                <?php echo $error; ?>
+            </div>
+        <? endforeach; ?>
     <form method="post" action="/registrarse/procesarAlta" id="form">
         <div class="mb-1">
             <label for="nombre" class="form-label">Nombre </label>

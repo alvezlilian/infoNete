@@ -1,42 +1,32 @@
+
 {{> header}}
 <!-- The Band Section -->
+
 <div class="row d-flex justify-content-center align-items-center h-100">
-    <form method="post" action="/Contenido/cargarNoticia">
+    <form method="post" action="/contenido/cargarNoticia" enctype="multipart/form-data">
 
     <div class="form-row">
 
         <div class="form-group col-md-6">
-            <label for="inputnombre">Nombre de la Noticia</label>
-            <input type="text" class="form-control" id="inputnombre" placeholder="Nombre" name="nombreNoticia">
+            <label for="tituloNoticia">Titulo</label>
+            <input type="text" class="form-control" id="tituloNoticia" placeholder="Titulo" name="tituloNoticia">
         </div>
+        <div class="form-group col-md-6">
+            <label for="subtituloNoticia">Subtitulo</label>
+            <input type="text" class="form-control" id="subtituloNoticia"  name="subtituloNoticia">
+        </div>
+
+
 
         <div class="form-group col-md-6">
             <label for="inputEdicion">Edicion</label>
-            <input type="text" class="form-control" id="inputEdicion" placeholder="Edicion" name="edicion">
+            <input type="text" class="form-control" id="inputEdicion"  name="edicion">
         </div>
-
-    </div>
-
-
-    <div class="form-row">
-
         <div class="form-group col-md-6">
             <label for="seccionNoticia">Seccion de la noticia</label>
             <input type="text" class="form-control" id="seccionNoticia" name="seccionNoticia">
         </div>
 
-        <div class="form-group col-md-6">
-            <label for="tipoEdicion">Tipo de Edicion</label>
-            <select id="tipoEdicion" class="form-control"required name="tipoDescripcion">
-                <option selected>Choose...</option>
-                <option>Diario</option>
-                <option>Revista</option>
-            </select>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="tipoNoticia">Tipo de la noticia</label>
-            <input type="text" class="form-control" id="tipoNoticia" name="tipoNoticia">
-        </div>
 
         <div class="form-group col-md-6">
             <label for="precioNoticia">Precio de la Noticia</label>
@@ -45,18 +35,26 @@
 
     </div>
     <div class="form-group">
-        <label for="DescripcionNoticia">Descripcion de la noticia</label>
-        <textarea class="form-control" id="DescripcionNoticia" rows="5" name="descripcionNoticia"></textarea>
+        <label for="contenidoNoticia">Descripcion de la noticia</label>
+        <textarea class="form-control" id="contenidoNoticia" rows="5" name="contenidoNoticia"></textarea>
     </div>
-    <div class="form-group">
-        <label for="imagenes">imagenes </label>
-        <input type="file" class="form-control-file" id="imagenes">
+        <div class="form-group col-md-6">
+        <label for="imagen">imagenes </label>
+        <input type="file" class="form-control-file" id="imagen" name="imagen">
     </div>
 
-
-    <button type="submit"  class="btn btn-dark btn-lg btn-block ">Guardar</button>
+        <div class="form-group col-md-6">
+            <label for="link">Link de la noticia</label>
+            <input type="text" class="form-control" id="linkNoticia" name="linkNoticia">
+        </div>
+        <div class="form-group">
+    <button type="submit"  class="btn btn-dark btn-lg btn-block " name="boton">Guardar</button>
+            </div>
 </form>
 </div>
 
 </div>
+
+
 {{> footer}}
+<script type="text/javascript" src="../public/js/validarDatos.js"></script>

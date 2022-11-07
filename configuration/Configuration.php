@@ -63,7 +63,7 @@ class Configuration {
     }
 
     public function getContenidoController(){
-        return new ContenidoController($this->view,$this->getContenidoModel());
+        return new ContenidoController($this->view,$this->getContenidoModel(),new Logger());
     }
 
     public function getLectorController(){
