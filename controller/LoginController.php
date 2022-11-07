@@ -29,6 +29,12 @@ class LoginController
         
         session_start();
 
+
+        /*$resultado ="";
+        $_SESSION['rol']= $resultado['descripcion'];
+        $_SESSION['name']=$resultado['nombre'];*/
+
+
         $_SESSION['rol']= $data['descripcion'];
         $_SESSION['name']=$data['nombre'];
 
@@ -68,5 +74,5 @@ class LoginController
         }
     }
 
-    
+
 }

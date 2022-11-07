@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2022 a las 02:22:56
+-- Tiempo de generación: 07-11-2022 a las 21:37:00
 -- Versión del servidor: 8.0.29
 -- Versión de PHP: 8.1.6
 
@@ -41,32 +41,16 @@ CREATE TABLE `articulo` (
   `id` int NOT NULL,
   `texto` text NOT NULL,
   `idEscritor` int NOT NULL,
-  `valor` decimal(10,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `contasenia`
---
-
-CREATE TABLE `contasenia` (
-  `id` int NOT NULL,
-  `clave` text NOT NULL,
-  `idUsuario` int NOT NULL
+  `valor` decimal(10,0) NOT NULL,
+  `idEstado` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Volcado de datos para la tabla `contasenia`
+-- Volcado de datos para la tabla `articulo`
 --
 
-INSERT INTO `contasenia` (`id`, `clave`, `idUsuario`) VALUES
-(14, '645545', 28),
-(15, '65565', 29),
-(16, '5555', 30),
-(17, '44545454', 31),
-(18, '1579okoko', 32),
-(19, '1a676730b0c7f54654b0e09184448289', 33);
+INSERT INTO `articulo` (`id`, `texto`, `idEscritor`, `valor`, `idEstado`) VALUES
+(1, 'salio de viaje', 33, '300', 1);
 
 -- --------------------------------------------------------
 
@@ -86,11 +70,21 @@ CREATE TABLE `contenidista` (
 
 CREATE TABLE `contrasenia` (
   `id` int NOT NULL,
-  `clave` varchar(30) NOT NULL,
-  `vencimiento` datetime NOT NULL,
-  `vencimientoDeLaValidacion` datetime NOT NULL,
-  `codigoValidacion` smallint NOT NULL
+  `clave` text NOT NULL,
+  `idUsuario` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `contrasenia`
+--
+
+INSERT INTO `contrasenia` (`id`, `clave`, `idUsuario`) VALUES
+(14, '645545', 28),
+(15, '65565', 29),
+(16, '5555', 30),
+(17, '44545454', 31),
+(18, '1579okoko', 32),
+(19, '1a676730b0c7f54654b0e09184448289', 33);
 
 -- --------------------------------------------------------
 
@@ -105,6 +99,15 @@ CREATE TABLE `edicion` (
   `valor` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Volcado de datos para la tabla `edicion`
+--
+
+INSERT INTO `edicion` (`id`, `idPublicacion`, `descrip`, `valor`) VALUES
+(2, 1, 'UNO', '500'),
+(3, 2, 'DOS', '600'),
+(4, 3, 'TRES', '700');
+
 -- --------------------------------------------------------
 
 --
@@ -117,6 +120,15 @@ CREATE TABLE `edicion_seccion` (
   `valor` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Volcado de datos para la tabla `edicion_seccion`
+--
+
+INSERT INTO `edicion_seccion` (`idEdicion`, `idSeccion`, `valor`) VALUES
+(1, 1, '500'),
+(2, 2, '500'),
+(3, 3, '500');
+
 -- --------------------------------------------------------
 
 --
@@ -126,6 +138,33 @@ CREATE TABLE `edicion_seccion` (
 CREATE TABLE `escritor` (
   `idUsuario` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `escritor`
+--
+
+INSERT INTO `escritor` (`idUsuario`) VALUES
+(33);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estadodepublicacion`
+--
+
+CREATE TABLE `estadodepublicacion` (
+  `id` int NOT NULL,
+  `Estado` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `estadodepublicacion`
+--
+
+INSERT INTO `estadodepublicacion` (`id`, `Estado`) VALUES
+(1, 'pendiente'),
+(2, 'publicado'),
+(3, 'baja');
 
 -- --------------------------------------------------------
 
@@ -141,13 +180,52 @@ CREATE TABLE `lector` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `nota`
+--
+
+CREATE TABLE `nota` (
+  `id` int NOT NULL,
+  `Titulo` varchar(200) NOT NULL,
+  `Subtitulo` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `Imagen` varchar(2000) DEFAULT NULL,
+  `contenido` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `link` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `audio` int DEFAULT NULL,
+  `idSeccion` int DEFAULT NULL,
+  `idEdicion` int DEFAULT NULL,
+  `precio` float DEFAULT NULL,
+  `idEstado` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `nota`
+--
+
+INSERT INTO `nota` (`id`, `Titulo`, `Subtitulo`, `Imagen`, `contenido`, `link`, `audio`, `idSeccion`, `idEdicion`, `precio`, `idEstado`) VALUES
+(65, 'fdsf', 'kjnj', 'pagoReversa.jpg', 'fdfdf', NULL, NULL, 2, 2, 44, 1),
+(66, 'fdfdf', 'ftftf', 'pagoReversa.jpg', ',nkjnjn', NULL, NULL, 1, 2, 54, 1),
+(67, 'jnjnjn', 'dsd', 'otro.jpg', 'lj', NULL, NULL, 1, 3, 454, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `publicacion`
 --
 
 CREATE TABLE `publicacion` (
   `id` int NOT NULL,
-  `informacion` varchar(50) NOT NULL
+  `informacion` varchar(50) NOT NULL,
+  `tipoDePublicacion` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `publicacion`
+--
+
+INSERT INTO `publicacion` (`id`, `informacion`, `tipoDePublicacion`) VALUES
+(1, 'Clarin', ''),
+(2, 'La Nacion', ''),
+(3, '365', '');
 
 -- --------------------------------------------------------
 
@@ -170,6 +248,16 @@ CREATE TABLE `seccion` (
   `id` int NOT NULL,
   `descrip` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `seccion`
+--
+
+INSERT INTO `seccion` (`id`, `descrip`) VALUES
+(1, 'Deporte'),
+(2, 'Economia'),
+(3, 'Social'),
+(4, 'Politica');
 
 -- --------------------------------------------------------
 
@@ -226,13 +314,8 @@ ALTER TABLE `administrador`
 --
 ALTER TABLE `articulo`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `idEstado` (`idEstado`),
   ADD KEY `fk_esc_articulo` (`idEscritor`);
-
---
--- Indices de la tabla `contasenia`
---
-ALTER TABLE `contasenia`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `contenidista`
@@ -260,11 +343,26 @@ ALTER TABLE `escritor`
   ADD KEY `fk_escritor_usuario` (`idUsuario`);
 
 --
+-- Indices de la tabla `estadodepublicacion`
+--
+ALTER TABLE `estadodepublicacion`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `lector`
 --
 ALTER TABLE `lector`
   ADD KEY `fk_lector_usuario` (`idUsuario`),
   ADD KEY `fk_lector_suscripcion` (`idSuscripcion`);
+
+--
+-- Indices de la tabla `nota`
+--
+ALTER TABLE `nota`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idSeccion` (`idSeccion`),
+  ADD KEY `idEdicion` (`idEdicion`),
+  ADD KEY `idEstadoFk` (`idEstado`);
 
 --
 -- Indices de la tabla `publicacion`
@@ -304,31 +402,37 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `articulo`
 --
 ALTER TABLE `articulo`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `contasenia`
---
-ALTER TABLE `contasenia`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `contrasenia`
 --
 ALTER TABLE `contrasenia`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `edicion`
 --
 ALTER TABLE `edicion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `estadodepublicacion`
+--
+ALTER TABLE `estadodepublicacion`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `nota`
+--
+ALTER TABLE `nota`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -340,7 +444,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `seccion`
 --
 ALTER TABLE `seccion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `suscripcion`
@@ -368,7 +472,8 @@ ALTER TABLE `administrador`
 -- Filtros para la tabla `articulo`
 --
 ALTER TABLE `articulo`
-  ADD CONSTRAINT `fk_esc_articulo` FOREIGN KEY (`idEscritor`) REFERENCES `escritor` (`idUsuario`);
+  ADD CONSTRAINT `fk_esc_articulo` FOREIGN KEY (`idEscritor`) REFERENCES `escritor` (`idUsuario`),
+  ADD CONSTRAINT `fk_estado_articulo` FOREIGN KEY (`idEstado`) REFERENCES `estadodepublicacion` (`id`);
 
 --
 -- Filtros para la tabla `contenidista`
@@ -394,6 +499,14 @@ ALTER TABLE `escritor`
 ALTER TABLE `lector`
   ADD CONSTRAINT `fk_lector_suscripcion` FOREIGN KEY (`idSuscripcion`) REFERENCES `suscripcion` (`id`),
   ADD CONSTRAINT `fk_lector_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`);
+
+--
+-- Filtros para la tabla `nota`
+--
+ALTER TABLE `nota`
+  ADD CONSTRAINT `idEstadoFk` FOREIGN KEY (`idEstado`) REFERENCES `estadodepublicacion` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `nota_ibfk_1` FOREIGN KEY (`idSeccion`) REFERENCES `seccion` (`id`),
+  ADD CONSTRAINT `nota_ibfk_2` FOREIGN KEY (`idEdicion`) REFERENCES `edicion` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
