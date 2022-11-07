@@ -14,26 +14,49 @@ class LoginController
     }
 
     public function list(){
+        die("hola");
 
-    }
-    public function iniciarSesion(){
-        $this->renderer->render("loginView.mustache");
     }
     public function validarLogin(){
+        $this->renderer->render("loginView.mustache");
+    }
+    public function procesarLogin(){
         $email=$_POST["email"];
         $clave=$_POST["clave"];
-       $data['usuario']=  $this->model->verificarUsuario($email,$clave);
-       if(count($data)>0){
-           Redirect::doIt("/",$data);
-       }else{
-           Redirect::doIt("loginView.mustache",$data);
-       }
-
+        $data=  $this->model->validaLogin($email,$clave);
+       
+        
+        
         session_start();
-        $_SESSION['rol']= $resultado['descripcion'];
-        $_SESSION['name']=$resultado['nombre'];
 
-        Redirect::doIt("/lector/index_lector");
+        $_SESSION['rol']= $data['descripcion'];
+        $_SESSION['name']=$data['nombre'];
+
+        switch ($data['descripcion']) {
+            case "ADMINISTRADOR":
+                Redirect::doIt("/");
+                break;
+            case "CONTENIDISTA":
+                Redirect::doIt("/contenidista/home");
+                break;
+            case "ESCRITOR":
+                Redirect::doIt("/");
+                break;
+            case "LECTOR":
+                Redirect::doIt("/");
+                break;
+            default:
+            Redirect::doIt("/");
+                break;
+        } 
+
+
+        //Redirect::doIt("/",$data);
+
+        //session_start();
+        
+
+       //Redirect::doIt("/lector/index_lector");*/
     }
 
     public function cerrarSesion(){
@@ -45,5 +68,5 @@ class LoginController
         }
     }
 
-    }
+    
 }
