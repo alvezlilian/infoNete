@@ -1,10 +1,13 @@
 <?php
+/* Helpers */
 include_once ("helpers/Redirect.php");
 include_once('helpers/MySQlDatabase.php');
 include_once('helpers/MustacheRenderer.php');
 include_once('helpers/Logger.php');
 include_once('helpers/Router.php');
+include_once('helpers/validatorSession.php');
 
+/* Models */
 include_once('model/CancionesModel.php');
 include_once('model/PresentacionesModel.php');
 include_once ("model/QuieroSerParteModel.php");
@@ -15,6 +18,7 @@ include_once ("model/ValidarLoginModel.php");
 include_once("model/LectorModel.php");
 include_once("model/ContenidistaModel.php");
 
+/* Controlers */
 include_once('controller/PresentacionesController.php');
 include_once('controller/CancionesController.php');
 include_once('controller/LaBandaController.php');
@@ -25,9 +29,7 @@ include_once('controller/ContenidoController.php');
 include_once('controller/LectorController.php');
 include_once('controller/ContenidistaController.php');
 
-
-
-
+/* Dependencies */
 include_once ('dependencies/mustache/src/Mustache/Autoloader.php');
 
 class Configuration {
@@ -91,13 +93,11 @@ class Configuration {
         return new QuieroSerParteModel($this->database);
     }
 
-    private function getRegistrarseModel()
-    {
+    private function getRegistrarseModel(){
         return new RegistrarseModel($this->database);
     }
 
-    private function getLoginModel()
-    {
+    private function getLoginModel(){
         return new LoginModel($this->database);
     }
 
@@ -105,7 +105,6 @@ class Configuration {
         return new ContenidoModel($this->database);
 
     }
-
     private function getLectorModel(){
         return new LectorModel($this->database);
     }
