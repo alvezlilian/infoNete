@@ -10,25 +10,27 @@ class RegistrarseModel
     }
     public function alta($nombre,$email,$direccion,$clave,$latitud,$longitud){
 
-        $nombreIngresado = $this->sanitizarNombre($nombre);
-        $emailIngresado = $this->sanitizarEmail($email);
-
-        $sql1="INSERT INTO infonete.usuario(nombre,ubicacion,email,latitud,longitud) VALUES ('$nombreIngresado','$direccion', '$emailIngresado','$latitud','$longitud')";
+        $sql1="INSERT INTO infonete.usuario(nombre,ubicacion,email,latitud,longitud) VALUES ('$nombre','$direccion', '$email','$latitud','$longitud')";
         $this->database->execute($sql1);
         $idUsuario=$this->database->insert();
         $sqlContrasenia="INSERT INTO infonete.contrasenia(clave,idUsuario) VALUES ('$clave','$idUsuario')";
         $this->database->execute($sqlContrasenia);
 
-        Redirect::doIt("/login/validarUsuario");
+        Redirect::doIt("/registrarse/validarUsuarioForm");
     }
 
-    public function sanitizarNombre($nombre){
-        return $nombre = mysqli_real_escape_string($this->database, $_POST['nombre']);
+    public function generarCodigoVerificacion(){
+        $codigo = mt_rand(100000, 999999);
+        // AGREGAR CAMPO codigo y cuentaValidada a tabla contrasenia
+        // ejecutar sql para guardar el codigo
+        return $codigo;
     }
 
-    public function sanitizarEmail($email){
-        return $email = mysqli_real_escape_string($this->database, filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
+    public function validarCodigoGenerado($codigo){
+
     }
+
+
 
 
 }

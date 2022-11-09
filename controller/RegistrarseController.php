@@ -12,8 +12,11 @@ class RegistrarseController
         $this->model = $model;
     }
     public function list(){
-        echo "hola";
-
+        echo "adios";
+    }
+    public function validarClave(){
+        $codigo['codigo'] = $this->model->generarCodigoVerificacion();
+        $this->renderer->render("validarUsuarioForm.mustache", $codigo);
     }
     public function alta(){
     $this->renderer->render("registrarseForm.mustache");
@@ -50,8 +53,13 @@ class RegistrarseController
         }
 
     }
-    public function validarUsuario(){
-        $this->renderer->render("validarUsuarioForm.mustache");
+    public function validarUsuarioForm(){
+        Redirect::doIt("/registrarse/validarClave");
+
+    }
+
+    public function validarCodigo(){
+        $codigo = $this->model->validarCodigoGenerado($_POST['codigo']);
     }
 
 }
