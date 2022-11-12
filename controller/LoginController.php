@@ -15,54 +15,20 @@ class LoginController
 
     public function list(){
         die("hola");
-
     }
+
     public function validarLogin(){
         $this->renderer->render("loginView.mustache");
     }
     public function procesarLogin(){
         $email=$_POST["email"];
         $clave=$_POST["clave"];
+        if ($email == "" && $clave == ""){
+            Redirect::doIt("/login/validarLogin");
+        }
         $data=  $this->model->validaLogin($email,$clave);
-       
-        
-        
-        session_start();
-
-
-        /*$resultado ="";
-        $_SESSION['rol']= $resultado['descripcion'];
-        $_SESSION['name']=$resultado['nombre'];*/
-
-
-        $_SESSION['rol']= $data['descripcion'];
-        $_SESSION['name']=$data['nombre'];
-
-        switch ($data['descripcion']) {
-            case "ADMINISTRADOR":
-                Redirect::doIt("/");
-                break;
-            case "CONTENIDISTA":
-                Redirect::doIt("/contenidista/home");
-                break;
-            case "ESCRITOR":
-                Redirect::doIt("/");
-                break;
-            case "LECTOR":
-                Redirect::doIt("/");
-                break;
-            default:
-            Redirect::doIt("/");
-                break;
-        } 
-
-
-        //Redirect::doIt("/",$data);
-
-        //session_start();
-        
-
-       //Redirect::doIt("/lector/index_lector");*/
+        validatorSession::sessionInit($data);
+        validatorSession::routerSession();
     }
 
     public function cerrarSesion(){
