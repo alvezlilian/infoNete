@@ -1,5 +1,7 @@
 <?php
 
+use \PHPMailer\Envio;
+
 class RegistrarseModel
 {
     private  $database;
@@ -10,19 +12,37 @@ class RegistrarseModel
     }
     public function alta($nombre,$email,$direccion,$clave,$latitud,$longitud){
 
-        $sql1="INSERT INTO infonete.usuario(nombre,ubicacion,email,latitud,longitud) VALUES ('$nombre','$direccion', '$email','$latitud','$longitud')";
+        /*
+        if(!$this->emailRegistrado($email)){
+            //ACÁ VA LA VALIDACIÓN DE SI EL USUARIO EXISTE O NO
+        }else{
+            Redirect::doIt("/registrarse/registrarseForm");
+        }
+        */
+        $sql1="INSERT INTO infonete.usuario(nombre,ubicacion,email,latitud,longitud,activo) VALUES ('$nombre','$direccion','$email','$latitud','$longitud',FALSE)";
         $this->database->execute($sql1);
         $idUsuario=$this->database->insert();
-        $sqlContrasenia="INSERT INTO infonete.contrasenia(clave,idUsuario) VALUES ('$clave','$idUsuario')";
+        $codigo = $this->generarCodigoVerificacion();
+        $sqlContrasenia="INSERT INTO infonete.contrasenia(clave,idUsuario,codigo,validado) VALUES ('$clave','$idUsuario','$codigo',FALSE)";
         $this->database->execute($sqlContrasenia);
-
+        
         Redirect::doIt("/registrarse/validarUsuarioForm");
+
+    }
+
+    public function emailRegistrado($email){
+        $sql = "SELECT * FROM infonete.usuario WHERE email = '$email'";
+        $result = $this->database->execute($sql);
+
+        if(is_null($result)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function generarCodigoVerificacion(){
         $codigo = mt_rand(100000, 999999);
-        // AGREGAR CAMPO codigo y cuentaValidada a tabla contrasenia
-        // ejecutar sql para guardar el codigo
         return $codigo;
     }
 
