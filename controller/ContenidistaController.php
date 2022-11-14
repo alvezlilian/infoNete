@@ -34,9 +34,18 @@ class ContenidistaController{
         Redirect::doIt("/login/validarLogin");
     }
     public function procesarAlta(){
+        $path="public/img/publications/";
         $nombre = $_POST["descrip"];
 
-        $this->model->alta($nombre);
+        $name_img=$_FILES['imagen']['name'];
+        $archivoTemporal=$_FILES["imagen"]["tmp_name"];
+
+        $path_complete=$path.$name_img;
+
+        move_uploaded_file($archivoTemporal,$path_complete);
+
+        $this->model->alta($nombre,$path_complete);
+
         Redirect::doIt('/contenidista/home');
     }
 }

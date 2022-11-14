@@ -11,8 +11,8 @@ class ContenidistaModel {
         $sql = 'SELECT * FROM publicacion';
         return $this->database->query($sql);
     }
-    public function alta($nombre){
-            $sql = "INSERT INTO publicacion(informacion) VALUES ('$nombre')";
-            $this->database->execute($sql);
+    public function alta($nombre,$ruta){
+        $sql = "INSERT INTO publicacion(informacion,ruta) VALUES ('$nombre','$ruta')";
+        $this->database->execute($sql);
     }
 }
