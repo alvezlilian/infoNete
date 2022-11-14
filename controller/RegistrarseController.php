@@ -53,6 +53,16 @@ class RegistrarseController
         }
 
     }
+
+    //
+    public function verificacion(){
+        $email=$_GET['email'];
+        $hash=$_GET['hash'];
+        $this->registroModel->verificacionHash($email,$hash);
+        echo $this->render->render("view/inicio.php");
+
+    }
+    //
     public function validarUsuarioForm(){
         Redirect::doIt("/registrarse/validarClave");
 
