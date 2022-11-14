@@ -14,10 +14,7 @@ class RegistrarseController
     public function list(){
         echo "adios";
     }
-    public function validarClave(){
-        $codigo['codigo'] = $this->model->generarCodigoVerificacion();
-        $this->renderer->render("validarUsuarioForm.mustache", $codigo);
-    }
+
     public function alta(){
     $this->renderer->render("registrarseForm.mustache");
     }
@@ -36,6 +33,10 @@ class RegistrarseController
             return false;
         }
     }
+    public function generarCodigoVerificacion(){
+        $codigo = mt_rand(100000, 999999);
+        return $codigo;
+    }
     public function procesarAlta(){
         $nombre=$_POST["nombre"];
         $email=$_POST["email"];
@@ -43,14 +44,31 @@ class RegistrarseController
         $direccion=$_POST["direccion"];
         $latitud=$_POST["latitud"];
         $longitud=$_POST["longitud"];
-
+        $codigo= $this->generarCodigoVerificacion();
         $claveEncriptada=$this->encriptarClave($clave);
-        $emailValido = $this->is_valid_email($email);
-
-        if($this->validarEnvioDatosForm($emailValido)){
-            $this->model->alta($nombre,$email,$direccion,$claveEncriptada,$latitud,$longitud);
-            Redirect::doIt("/");
+        //$emailValido = $this->is_valid_email($email);
+        var_dump($this->estaRegistrado($email));
+        die();
+        if($this->estaRegistrado($email)){
+            $this->model->alta($nombre,$email,$direccion,$claveEncriptada,$latitud,$longitud,$codigo);
         }
+        //if($this->validarEnvioDatosForm($emailValido)){
+        //    $this->model->alta($nombre,$email,$direccion,$claveEncriptada,$latitud,$longitud,$codigo);
+            Redirect::doIt("/");
+
+
+    }
+
+    public function estaRegistrado($email){
+        $result = $this->model->verificarEmail($email);
+        if($result == 0){
+            return true;
+        }else{
+            return false;
+        }
+        //var_dump($result);
+        //die();
+        //return $result;
 
     }
 

@@ -12,28 +12,36 @@ class RegistrarseModel
     {
         $this->database=$database;
     }
-    public function alta($nombre,$email,$direccion,$clave,$latitud,$longitud){
+    public function alta($nombre,$email,$direccion,$clave,$latitud,$longitud, $codigo){
 
-        /*
-        if(!$this->emailRegistrado($email)){
-            //ACÁ VA LA VALIDACIÓN DE SI EL USUARIO EXISTE O NO
-        }else{
-            Redirect::doIt("/registrarse/registrarseForm");
-        }
-        */
         $sql1="INSERT INTO infonete.usuario(nombre,ubicacion,email,latitud,longitud,activo) VALUES ('$nombre','$direccion','$email','$latitud','$longitud',FALSE)";
         $this->database->execute($sql1);
         $idUsuario=$this->database->insert();
-        $codigo = $this->generarCodigoVerificacion();
+
         $sqlContrasenia="INSERT INTO infonete.contrasenia(clave,idUsuario,codigo,validado) VALUES ('$clave','$idUsuario','$codigo',FALSE)";
         $this->database->execute($sqlContrasenia);
-        $this->envioEmailConfirmacion($email,$clave,$nombre,$codigo);
+        //$this->envioEmailConfirmacion($email,$clave,$nombre,$codigo); //Al controller
 
-        Redirect::doIt("/registrarse/validarUsuarioForm");
+        Redirect::doIt("/registrarse/validarUsuarioForm"); //Al controller
 
 
 
     }
+
+    public function verificarEmail($email){
+        $sql="SELECT * FROM infonete.usuario WHERE email = '$email'";
+        $result = $this->database->query($sql);
+        $row_cnt = 0;
+        $row_cnt = $result->num_rows;
+        return $row_cnt;
+    }
+
+    public function validarCodigoGenerado($codigo){
+
+    }
+    // password_verify('rasmuslerdorf', $hash)
+    //
+
 
     public function emailRegistrado($email){
         $sql = "SELECT * FROM infonete.usuario WHERE email = '$email'";
@@ -45,17 +53,6 @@ class RegistrarseModel
             return false;
         }
     }
-
-    public function generarCodigoVerificacion(){
-        $codigo = mt_rand(100000, 999999);
-        return $codigo;
-    }
-
-    public function validarCodigoGenerado($codigo){
-
-    }
-    // password_verify('rasmuslerdorf', $hash)
-    //
 
     public function envioEmailConfirmacion($email,$clave,$nombre,$codigo)
     {
