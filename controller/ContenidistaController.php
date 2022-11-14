@@ -48,4 +48,10 @@ class ContenidistaController{
 
         Redirect::doIt('/contenidista/home');
     }
+    public function agregarEdSe(){
+        $data['secciones']=$this->model->getSecciones();
+        $data['publicaciones'] = $this->model->getPublicaciones();
+        $data["CONTENIDISTA"]=true;
+        $this->renderer->render("altaEdicionSeccion.mustache",$data);
+    }
 }

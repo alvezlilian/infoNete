@@ -15,4 +15,8 @@ class ContenidistaModel {
         $sql = "INSERT INTO publicacion(informacion,ruta) VALUES ('$nombre','$ruta')";
         $this->database->execute($sql);
     }
+    public function getSecciones(){
+        $sql = 'SELECT * FROM seccion';
+        return $this->database->query($sql);
+    }
 }
