@@ -1,6 +1,6 @@
 <?php
 
-    class validatorSession{
+    class ValidatorSession{
 
         public static function routerSession(){
             if (!isset($_SESSION)){
@@ -39,4 +39,30 @@
             $_SESSION['rol'] = $userData['descripcion'];
             $_SESSION['name'] = $userData['nombre'];
         }
+
+        public static function tienePermiso($rol){
+            if (is_null($rol)){
+                Redirect::doIt('/login/validarLogin');
+            }
+            switch ($rol){
+                case "ADMINISTRADOR":
+                    return true;
+                    break;
+                case "CONTENIDISTA":
+                    return true;
+                    break;
+                case "ESCRITOR":
+                    return true;
+                    break;
+                case "LECTOR":
+                    return true;
+                    break;
+                default:
+                    return false;
+                    break;
+            }
+        }
+
+
+
     }

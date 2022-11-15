@@ -21,14 +21,11 @@ class LoginController
         $this->renderer->render("loginView.mustache");
     }
     public function procesarLogin(){
-        $email=$_POST["email"];
-        $clave=$_POST["clave"];
-        if ($email == "" && $clave == ""){
-            Redirect::doIt("/login/validarLogin");
-        }
+        $email=$_POST['email'];
+        $clave=$_POST['clave'];
         $data=  $this->model->validaLogin($email,$clave);
-        validatorSession::sessionInit($data);
-        validatorSession::routerSession();
+        ValidatorSession::sessionInit($data);
+        ValidatorSession::routerSession();
     }
 
     public function cerrarSesion(){
