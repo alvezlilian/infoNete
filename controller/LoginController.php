@@ -14,8 +14,7 @@ class LoginController
     }
 
     public function list(){
-        echo("hola");
-
+        die("hola");
     }
 
     public function validarLogin(){
@@ -23,47 +22,11 @@ class LoginController
     }
 
     public function procesarLogin(){
-        $email=$_POST["email"];
-        $clave=$_POST["clave"];
-
+        $email=$_POST['email'];
+        $clave=$_POST['clave'];
         $data=  $this->model->validaLogin($email,$clave);
-
-        session_start();
-
-
-        /*$resultado ="";
-        $_SESSION['rol']= $resultado['descripcion'];
-        $_SESSION['name']=$resultado['nombre'];*/
-
-
-        $_SESSION['rol']= $data['descripcion'];
-        $_SESSION['name']=$data['nombre'];
-
-        switch ($data['descripcion']) {
-            case "ADMINISTRADOR":
-                Redirect::doIt("/");
-                break;
-            case "CONTENIDISTA":
-                Redirect::doIt("/contenidista/home");
-                break;
-            case "ESCRITOR":
-                Redirect::doIt("/");
-                break;
-            case "LECTOR":
-                Redirect::doIt("/");
-                break;
-            default:
-            Redirect::doIt("/");
-                break;
-        } 
-
-
-        //Redirect::doIt("/",$data);
-
-        //session_start();
-        
-
-       //Redirect::doIt("/lector/index_lector");*/
+        ValidatorSession::sessionInit($data);
+        ValidatorSession::routerSession();
     }
 
     public function cerrarSesion(){
