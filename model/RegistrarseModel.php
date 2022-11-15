@@ -22,7 +22,7 @@ class RegistrarseModel
         $this->database->execute($sqlContrasenia);
         //$this->envioEmailConfirmacion($email,$clave,$nombre,$codigo); //Al controller
 
-        Redirect::doIt("/registrarse/validarUsuarioForm"); //Al controller
+        //Redirect::doIt("/registrarse/validarUsuarioForm"); //Al controller
 
 
 
@@ -31,23 +31,24 @@ class RegistrarseModel
     public function verificarEmail($email){
         $sql="SELECT * FROM infonete.usuario WHERE email = '$email'";
         $result = $this->database->query($sql);
-        $row_cnt = 0;
-        $row_cnt = $result->num_rows;
-        return $row_cnt;
+        if(empty($result)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
-    public function validarCodigoGenerado($codigo){
-
-    }
     // password_verify('rasmuslerdorf', $hash)
     //
 
-
-    public function emailRegistrado($email){
-        $sql = "SELECT * FROM infonete.usuario WHERE email = '$email'";
-        $result = $this->database->execute($sql);
-
-        if(is_null($result)){
+    public function validarCodigoRegistro($codigo){
+        $sql = "SELECT * FROM infonete.contrasenia WHERE codigo = '$codigo'";
+        $result = $this->database->query($sql);
+        if(!(empty($result))){
+            $insert1="UPDATE infonete.contrasenia SET validado=TRUE WHERE codigo='$codigo'";
+            $this->database->execute($insert1);
+            $insert2="UPDATE infonete.usuario SET activo=TRUE WHERE id = (select idUsuario from infonete.contrasenia where codigo = '$codigo');";
+            $this->database->execute($insert2);
             return true;
         }else{
             return false;

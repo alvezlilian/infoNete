@@ -18,25 +18,16 @@ class RegistrarseController
     public function alta(){
     $this->renderer->render("registrarseForm.mustache");
     }
-    function is_valid_email($str)
-    {
-        $matches = null;
-        return (1 === preg_match('/^[A-z0-9\\._-]+@[A-z0-9][A-z0-9-]*(\\.[A-z0-9_-]+)*\\.([A-z]{2,6})$/', $str, $matches));
-    }
+
     function encriptarClave($clave){
         return password_hash($clave, PASSWORD_DEFAULT);
     }
-    function validarEnvioDatosForm($emailValido){
-        if($emailValido == 1){
-            return true;
-        }elseif($emailValido == 0 OR $emailValido == false){
-            return false;
-        }
-    }
+
     public function generarCodigoVerificacion(){
         $codigo = mt_rand(100000, 999999);
         return $codigo;
     }
+
     public function procesarAlta(){
         $nombre=$_POST["nombre"];
         $email=$_POST["email"];
@@ -44,31 +35,19 @@ class RegistrarseController
         $direccion=$_POST["direccion"];
         $latitud=$_POST["latitud"];
         $longitud=$_POST["longitud"];
-        $codigo= $this->generarCodigoVerificacion();
         $claveEncriptada=$this->encriptarClave($clave);
-        //$emailValido = $this->is_valid_email($email);
-        var_dump($this->estaRegistrado($email));
-        die();
+
         if($this->estaRegistrado($email)){
+            $codigo= $this->generarCodigoVerificacion();
             $this->model->alta($nombre,$email,$direccion,$claveEncriptada,$latitud,$longitud,$codigo);
+            $this->renderer->render("validarUsuarioForm.mustache");
         }
-        //if($this->validarEnvioDatosForm($emailValido)){
-        //    $this->model->alta($nombre,$email,$direccion,$claveEncriptada,$latitud,$longitud,$codigo);
-            Redirect::doIt("/");
 
 
     }
 
     public function estaRegistrado($email){
-        $result = $this->model->verificarEmail($email);
-        if($result == 0){
-            return true;
-        }else{
-            return false;
-        }
-        //var_dump($result);
-        //die();
-        //return $result;
+        return $result = $this->model->verificarEmail($email);
 
     }
 
@@ -80,14 +59,17 @@ class RegistrarseController
         echo $this->render->render("view/inicio.php");
 
     }
-    //
-    public function validarUsuarioForm(){
-        Redirect::doIt("/registrarse/validarClave");
 
-    }
+
 
     public function validarCodigo(){
-        $codigo = $this->model->validarCodigoGenerado($_POST['codigo']);
+        $codigo = $this->model->validarCodigoRegistro($_POST['codigo']);
+        if($codigo){
+            $this->renderer->render("login.mustache");
+        }else{
+            $mensaje['mensaje'] = "Codigo erroneo";
+            $this->renderer->render("validarUsuarioForm.mustache",$mensaje);
+        }
     }
 
 }
