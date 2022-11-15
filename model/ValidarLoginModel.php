@@ -9,25 +9,21 @@ class ValidarLoginModel
         $this->database=$database;
     }
 
-    public function validarLogin($email,$clave){
+    public function validaLogin($email,$clave){
 
-        $sql2 = "SELECT clave FROM infonete.contrasenia WHERE idUsuario = (SELECT id FROM infonete.usuario WHERE email = '$email')";
-
-        $hash = $this->database->query($sql2);
-
+        $sql1 = "SELECT clave FROM infonete.contrasenia WHERE idUsuario = (SELECT id FROM infonete.usuario WHERE email = '$email')";
+        $hash = $this->database->query($sql1);
+        var_dump($hash);
+        die();
         if (password_verify($clave, $hash)) {
-            $sql = "SELECT nombre,descripcion from usuario JOIN contrasenia on usuario.id = contrasenia.idUsuario join rol on usuario.idRol=rol.id WHERE usuario.email = '$email' AND contrasenia.clave = '$clave'";
-            $resultado = $this->database->queryNum($sql);
+            $sql2 = "SELECT nombre,idRol from infonete.usuario WHERE email = '$email'";
+            $resultado = $this->database->query($sql2);
+            var_dump($resultado);
+            die();
             return $resultado;
         } else {
-            Redirect::doIt("/login/validarLogin");
+            //Redirect::doIt("/login/validarLogin");
         }
-        /*
-        if(!isset($resultado)||$resultado==NULL){
-             Redirect::doIt("/login/validarLogin");
-        }
-        return $resultado;
-        */
     }
 
     public function crearSesionUsuario($email){

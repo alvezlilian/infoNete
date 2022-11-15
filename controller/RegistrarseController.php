@@ -53,17 +53,6 @@ class RegistrarseController
 
     }
 
-    //
-    public function verificacion(){
-        $email=$_GET['email'];
-        $hash=$_GET['hash'];
-        $this->registroModel->verificacionHash($email,$hash);
-        echo $this->render->render("view/inicio.php");
-
-    }
-
-
-
     public function validarCodigo(){
         $codigo = $this->model->validarCodigoRegistro($_POST['codigo']);
         if($codigo){

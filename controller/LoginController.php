@@ -14,19 +14,20 @@ class LoginController
     }
 
     public function list(){
-        die("hola");
+        echo("hola");
 
     }
+
     public function validarLogin(){
         $this->renderer->render("loginView.mustache");
     }
+
     public function procesarLogin(){
         $email=$_POST["email"];
         $clave=$_POST["clave"];
+
         $data=  $this->model->validaLogin($email,$clave);
-       
-        
-        
+
         session_start();
 
 
