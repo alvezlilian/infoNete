@@ -41,8 +41,10 @@ class RegistrarseController
             $codigo= $this->generarCodigoVerificacion();
             $this->model->alta($nombre,$email,$direccion,$claveEncriptada,$latitud,$longitud,$codigo);
             $this->renderer->render("validarUsuarioForm.mustache");
+        }else{
+            $mensaje['mensaje'] = "Ha ocurrido un error inesperado, reintente en unos minutos";
+            $this->renderer->render("registrarseForm.mustache",$mensaje);
         }
-
 
     }
 

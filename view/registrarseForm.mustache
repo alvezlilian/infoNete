@@ -19,7 +19,8 @@ input.error, textarea.error {
 </style>
 <div class='w3-container w3-content w3-center w3-padding-64' style='max-width:50%'   id='band'>
     <h2 class='w3-wide'>Registrarse</h2>
-
+    <br>
+    <h3>{{#mensaje}}{{mensaje}}{{/mensaje}} </h3>
     <form method="post" action="/registrarse/procesarAlta" id="form">
         <div class="mb-1">
             <label for="nombre" class="form-label">Nombre </label>

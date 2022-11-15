@@ -14,7 +14,7 @@ class RegistrarseModel
     }
     public function alta($nombre,$email,$direccion,$clave,$latitud,$longitud, $codigo){
 
-        $sql1="INSERT INTO infonete.usuario(nombre,ubicacion,email,latitud,longitud,activo) VALUES ('$nombre','$direccion','$email','$latitud','$longitud',FALSE)";
+        $sql1="INSERT INTO infonete.usuario(nombre,ubicacion,email,latitud,longitud,activo,idRol) VALUES ('$nombre','$direccion','$email','$latitud','$longitud',FALSE,1)";
         $this->database->execute($sql1);
         $idUsuario=$this->database->insert();
 
