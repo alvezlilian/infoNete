@@ -10,7 +10,7 @@ class ValidarLoginModel
     }
 
     public function validarLogin($email,$clave){
-        $sql = "SELECT nombre,descripcion from usuario JOIN contrasenia on usuario.id = contrasenia.idUsuario join rol on usuario.idRol=rol.id WHERE usuario.email = '$email' AND contrasenia.clave = '$clave'";
+        $sql = "SELECT nombre,descripcion from infonete.usuario JOIN infonete.contrasenia on usuario.id = contrasenia.idUsuario join infonete.rol on usuario.idRol=rol.id WHERE usuario.email = '$email' AND contrasenia.clave = '$clave'";
         $resultado = $this->database->queryNum($sql);
 
         if(!isset($resultado)||$resultado==NULL){
@@ -35,7 +35,7 @@ class ValidarLoginModel
     }
 
     public function getIdByMail($email){
-        $sql = "SELECT id from usuario WHERE usuario.email = '$email'";
+        $sql = "SELECT id from infonete.usuario WHERE usuario.email = '$email'";
         return $resultado = $this->database->query($sql);
     }
     

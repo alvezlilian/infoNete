@@ -8,11 +8,11 @@ class ContenidistaModel {
     }
 
     public function getPublicaciones() {
-        $sql = 'SELECT * FROM publicacion';
+        $sql = 'SELECT * FROM infonete.publicacion';
         return $this->database->query($sql);
     }
     public function alta($nombre){
-            $sql = "INSERT INTO publicacion(informacion) VALUES ('$nombre')";
+            $sql = "INSERT INTO infonete.publicacion(informacion) VALUES ('$nombre')";
             $this->database->execute($sql);
     }
 }

@@ -18,12 +18,18 @@ class ContenidoController
     public function list()
     {
 
+    $data['contenido']=$this->model->getContenido();
+        $this->renderer->render('listaContenido.mustache', $data);
+
+
     }
 
     public function crearNoticia()
 
     {
-        $this->renderer->render("contenidoForm.mustache");
+        $data["secciones"]=$this->model->getSecciones();
+        $data["ediciones"]=$this->model->getEdiciones();
+        $this->renderer->render("contenidoForm.mustache",$data);
 
     }
 
@@ -34,11 +40,11 @@ class ContenidoController
         $tituloNoticia = $_POST["tituloNoticia"];
         $subtitulo = $_POST["subtituloNoticia"];
         $edicion = $_POST["edicion"];
-        $seccionNoticia = $_POST["seccionNoticia"];
-
+        echo ($edicion);
+        $seccionNoticia = $_POST["seccion"];
         $precioNoticia = $_POST["precioNoticia"];
         $descripcionNoticia = $_POST["contenidoNoticia"];
-//tomamos el archivo file y lo guardo en las variables
+        //tomamos el archivo file y lo guardo en las variables
         $archivo=$_FILES["imagen"]["name"];
         $archivoTemporal=$_FILES["imagen"]["tmp_name"];
         //muevo el archivo temporal a la carpera de destino
@@ -46,11 +52,7 @@ class ContenidoController
 
         $this->model->nuevaNoticia($tituloNoticia, $subtitulo, $edicion, $seccionNoticia, $precioNoticia, $descripcionNoticia, $archivo);
 
-         Redirect::doIt("/");
-    }
-    public function secciones(){
-        $date["secciones"]=$this->model->mostrarSecciones();
-
+         Redirect::doIt("contenido");
     }
 
 }

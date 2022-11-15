@@ -16,7 +16,7 @@ class ValidarUsuarioModel
     public function validarUsuario($codigo){
 
         $resultado = "SELECT * from infonete.contrasenia WHERE contrasenia.clave = '$codigo' ";
-        //$resultado = $this->database->query($sql);
+        $resultado = $this->database->query($resultado);
 
         if(!isset($resultado)||$resultado==NULL){
             Redirect::doIt("/");
