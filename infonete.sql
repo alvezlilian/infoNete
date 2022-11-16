@@ -71,20 +71,23 @@ CREATE TABLE `contenidista` (
 CREATE TABLE `contrasenia` (
   `id` int NOT NULL,
   `clave` text NOT NULL,
-  `idUsuario` int NOT NULL
+  `idUsuario` int NOT NULL,
+  `codigo` int NOT NULL,
+  `validado` BOOLEAN NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `contrasenia`
 --
 
-INSERT INTO `contrasenia` (`id`, `clave`, `idUsuario`) VALUES
-(14, '645545', 28),
-(15, '65565', 29),
-(16, '5555', 30),
-(17, '44545454', 31),
-(18, '1579okoko', 32),
-(19, '1a676730b0c7f54654b0e09184448289', 33);
+INSERT INTO `contrasenia` (`id`, `clave`, `idUsuario`,`codigo`,`validado`) VALUES
+(14, '645545', 28,123212,FALSE),
+(15, '65565', 29,232323,FALSE),
+(16, '5555', 30,111222,FALSE),
+(17, '44545454', 31,445533,FALSE),
+(18, '1579okoko', 32,767898,FALSE),
+(19, '1a676730b0c7f54654b0e09184448289', 33,123456,TRUE);
+
 
 -- --------------------------------------------------------
 
@@ -284,20 +287,22 @@ CREATE TABLE `usuario` (
   `ubicacion` varchar(50) NOT NULL,
   `email` varchar(30) NOT NULL,
   `latitud` varchar(20) NOT NULL,
-  `longitud` varchar(20) NOT NULL
+  `longitud` varchar(20) NOT NULL,
+  `activo` BOOLEAN NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nombre`, `ubicacion`, `email`, `latitud`, `longitud`) VALUES
-(28, 'llil', 'casa1', 'alvezlilian17@gmail.com', '-35', '-59'),
-(29, 'gabriel ', 'casa1', 'alvezmaylen56@gmail.com', '-35', '-59'),
-(30, 'llil', 'casa1', 'alvezlilian17@gmail.com', '-35', '-58.659'),
-(31, 'maria alejandra', 'cssc', 'alvezmaylen56@gmail.com', '-34.8483797', '-58.659'),
-(32, 'llil', 'casa1', 'alvezmaylen56@gmail.com', '-34.8483797', '-58.659'),
-(33, 'llil', 'casa1', 'alvezmaylen56@gmail.com', '-34.8483797', '-58.659');
+INSERT INTO `usuario` (`id`, `nombre`, `ubicacion`, `email`, `latitud`, `longitud`, `activo` ) VALUES
+(19, 'llil', 'casa1', 'alvezlilian17@gmail.com', '-35', '-59',TRUE),
+(29, 'gabriel ', 'casa1', 'alvezmaylen56@gmail.com', '-35', '-59',FALSE),
+(30, 'llil', 'casa1', 'alvezlilian17@gmail.com', '-35', '-58.659',FALSE),
+(31, 'maria alejandra', 'cssc', 'alvezmaylen56@gmail.com', '-34.8483797', '-58.659',FALSE),
+(32, 'llil', 'casa1', 'alvezmaylen56@gmail.com', '-34.8483797', '-58.659',FALSE),
+(33, 'llil', 'casa1', 'alvezmaylen56@gmail.com', '-34.8483797', '-58.659',FALSE),
+(34, 'ADMIN', 'CASA-ADMIN', 'admin@gmail.com', '-34.8483797', '-58.659',FALSE);
 
 --
 -- Índices para tablas volcadas

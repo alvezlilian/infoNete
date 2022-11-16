@@ -20,6 +20,7 @@ class LoginController
     public function validarLogin(){
         $this->renderer->render("loginView.mustache");
     }
+
     public function procesarLogin(){
         $email=$_POST['email'];
         $clave=$_POST['clave'];

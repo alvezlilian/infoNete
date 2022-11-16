@@ -9,9 +9,7 @@ class ValidarUsuarioModel
         $this->database=$database;
     }
 
-    public function generarCodigoVerificacion(){
-        return mt_rand(100000, 999999);
-    }
+
 
     public function validarUsuario($codigo){
 
