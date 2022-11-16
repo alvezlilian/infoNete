@@ -24,13 +24,13 @@ input.error, textarea.error {
     <form method="post" action="/registrarse/procesarAlta" id="form">
         <div class="mb-1">
             <label for="nombre" class="form-label">Nombre </label>
-            <input type="text" class="form-control" id="nombre" aria-describedby="nombre" name="nombre" pattern="[a-zA-Z0-9]+" minlength="3" maxlength="51" required>
+            <input type="text" class="form-control" id="nombre" aria-describedby="nombre" name="nombre" pattern="[a-zA-Z0-9]+" minlength="2" maxlength="51" required>
             <div id="nombre" class="form-text"></div>
         </div>
         <br>
         <div class="mb-">
             <label for="direccion" class="form-label">Direccion </label>
-            <input type="text" class="form-control" id="direccion" aria-describedby="direccion" name="direccion" onchange="getLocation()">
+            <input type="text" class="form-control" id="direccion" aria-describedby="direccion" name="direccion" minlength="2" maxlength="51" onchange="getLocation()">
             <div id="direccion" class="form-text"></div>
         </div>
         <br>
@@ -44,7 +44,7 @@ input.error, textarea.error {
         <br>
         <div class="mb-3">
             <label for="clave" class="form-label">Clave</label>
-            <input type="password" class="form-control" id="clave" name="clave" required>
+            <input type="password" class="form-control" id="clave" name="clave" minlength="2" maxlength="51" required>
         </div>
         <br>
         <input id="latitud" name="latitud" >
@@ -98,15 +98,10 @@ input.error, textarea.error {
                     minlength: "El nombre debe tener al menos 3 caracteres de longitud",
                     maxlength: "El nombre no puede poseer más de 50 caracteres de longitud"
                   },
-                  age: {
-                    required: "Please enter your age",
-                    number: "Please enter your age as a numerical value",
-                    min: "You must be at least 18 years old"
-                  },
                   email: {
+                    required: "Este campo es obligatorio";
                     email: "Por favor, ingrese un email válido de la forma: ejemplo@ejemplo.com"
                   },
-
                 }
               });
 
