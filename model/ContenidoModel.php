@@ -6,7 +6,22 @@ class ContenidoModel {
     public function __construct($database) {
         $this->database = $database;
     }
+public function getSecciones(){
+    $sql = 'SELECT * FROM infonete.seccion';
+    return $this->database->query($sql);
 
+}
+
+    public function getEdiciones(){
+        $sql = 'SELECT * FROM infonete.edicion';
+        return $this->database->query($sql);
+
+    }
+    public function getContenido(){
+        $sql = 'SELECT * FROM infonete.nota';
+        return $this->database->query($sql);
+
+}
 public function nuevaNoticia($tituloNoticia,$subtitulo,$edicion,$seccionNoticia,$precioNoticia,$descripcionNoticia,$archivo){
        $sqlEstado="SELECT `id`FROM infonete.estadodepublicacion WHERE Estado='pendiente'";
        $estado=$this->database->query($sqlEstado);

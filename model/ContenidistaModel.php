@@ -8,9 +8,10 @@ class ContenidistaModel {
     }
 
     public function getPublicaciones() {
-        $sql = 'SELECT * FROM publicacion';
+        $sql = 'SELECT * FROM infonete.publicacion';
         return $this->database->query($sql);
     }
+
     public function alta($nombre,$ruta){
         $sql = "INSERT INTO publicacion(informacion,ruta) VALUES ('$nombre','$ruta')";
         $this->database->execute($sql);
@@ -18,5 +19,6 @@ class ContenidistaModel {
     public function getSecciones(){
         $sql = 'SELECT * FROM seccion';
         return $this->database->query($sql);
+
     }
 }

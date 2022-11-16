@@ -11,6 +11,8 @@
             <label for="tituloNoticia">Titulo</label>
             <input type="text" class="form-control" id="tituloNoticia" placeholder="Titulo" name="tituloNoticia">
         </div>
+
+
         <div class="form-group col-md-6">
             <label for="subtituloNoticia">Subtitulo</label>
             <input type="text" class="form-control" id="subtituloNoticia"  name="subtituloNoticia">
@@ -20,11 +22,24 @@
 
         <div class="form-group col-md-6">
             <label for="inputEdicion">Edicion</label>
-            <input type="text" class="form-control" id="inputEdicion"  name="edicion">
+            <select name="edicion"class="form-control">
+                {{#ediciones}}
+                    <option value="{{id}}" >{{descrip}}</option>
+                {{/ediciones}}
+            </select>
         </div>
+
+
+
         <div class="form-group col-md-6">
-            <label for="seccionNoticia">Seccion de la noticia</label>
-            <input type="text" class="form-control" id="seccionNoticia" name="seccionNoticia">
+            <label for="inputEdicion">Seccion</label>
+
+            <select name="seccion"class="form-control">
+                    {{#secciones}}
+                        <option value="{{id}}" >{{descrip}}</option>
+
+                    {{/secciones}}
+                </select>
         </div>
 
 
@@ -32,7 +47,6 @@
             <label for="precioNoticia">Precio de la Noticia</label>
             <input type="number" class="form-control" id="precioNoticia" name="precioNoticia">
         </div>
-
     </div>
     <div class="form-group">
         <label for="contenidoNoticia">Descripcion de la noticia</label>
@@ -47,9 +61,12 @@
             <label for="link">Link de la noticia</label>
             <input type="text" class="form-control" id="linkNoticia" name="linkNoticia">
         </div>
+
         <div class="form-group">
     <button type="submit"  class="btn btn-dark btn-lg btn-block " name="boton">Guardar</button>
-            </div>
+
+        </div>
+
 </form>
 </div>
 

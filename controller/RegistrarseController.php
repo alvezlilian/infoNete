@@ -6,10 +6,13 @@ class RegistrarseController
     private $renderer;
     private $model;
 
+    private $randon;
+
     public function __construct($render, $model)
     {
         $this->renderer = $render;
         $this->model = $model;
+        $this->randon=mt_rand(100000, 999999);
     }
     public function list(){
         echo "hola";
@@ -42,16 +45,20 @@ class RegistrarseController
         $longitud=$_POST["longitud"];
 
         $claveEncriptada=$this->encriptarClave($clave);
-        $emailValido = $this->is_valid_email($email);
+      //  $emailValido = $this->is_valid_email($email);
 
-        if($this->validarEnvioDatosForm($emailValido)){
+        if ($this->verificarExistencia($email)){
+
+        }
+        if($this->validarEnvioDatosForm($email)){
             $this->model->alta($nombre,$email,$direccion,$claveEncriptada,$latitud,$longitud);
             Redirect::doIt("/");
         }
 
     }
-    public function validarUsuario(){
-        $this->renderer->render("validarUsuarioForm.mustache");
+    public function verificarExistencia($email){
+      return  $this->model->verificarExistencia($email);
     }
+
 
 }
