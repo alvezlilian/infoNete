@@ -1,8 +1,6 @@
 <?php
 
 use  PHPMailer\PHPMailer\PHPMailer;
-use  PHPMailer\PHPMailer\SMTP;
-use  PHPMailer\PHPMailer\Exception;
 
 class RegistrarseModel
 {
@@ -20,7 +18,7 @@ class RegistrarseModel
 
         $sqlContrasenia="INSERT INTO infonete.contrasenia(clave,idUsuario,codigo,validado) VALUES ('$clave','$idUsuario','$codigo',FALSE)";
         $this->database->execute($sqlContrasenia);
-        //$this->envioEmailConfirmacion($email,$clave,$nombre,$codigo); //Al controller
+        $this->envioEmailConfirmacion($email,$nombre,$codigo); //Al controller
 
     }
 
@@ -48,7 +46,7 @@ class RegistrarseModel
         }
     }
 
-    public function envioEmailConfirmacion($email,$clave,$nombre,$codigo)
+    public function envioEmailConfirmacion($email,$nombre,$codigo)
     {
         require 'PHPMailer/src/Exception.php';
         require 'PHPMailer/src/PHPMailer.php';
@@ -65,27 +63,31 @@ class RegistrarseModel
     <h4>Su cuenta fue creada, puede confirmar su email en el link de abajo</h4><br>
     <p>Confirmar tu dirección de correo electrónico nos ayuda a mantener la seguridad de tu cuenta.</p><br>
     <p>Dedica un momento para avisarnos si esta es la dirección correcta: ".$email."</p><br>
-   <a href='localhost/registro/verificacion?email=$email & hash=$clave'> VERIFICA TU MAIL</a>";
+   <a href='localhost/registrarse/procesarAlta'> VERIFICA TU MAIL</a>";
 
 
         //Server settings
-        $mail->SMTPDebug = 0;                      //Enable verbose debug output
+        $mail->SMTPDebug = true;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        //$mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->Host = 'SMTP.Office365.com';
         $mail->SMTPAuth = true;                                   //Enable SMTP authentication
-        $mail->Username = 'infonete.pw@gmail.com';                     //SMTP username
-        $mail->Password = 'Infonete2022';                               //SMTP password
+        //$mail->Username = 'infonete.pw@gmail.com';                     //SMTP username
+        $mail->Username = 'pw2-2022@outlook.com';
+        //$mail->Password = 'Infonete2022';                               //SMTP password
+        $mail->Password = '2022!Pw2';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
         $mail->Port = 587;                                //465    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('infonete.pw@gmail.com', 'Empresa');
+        $mail->setFrom('pw2-2022@outlook.com', 'Infonete Noticias Web');
         $mail->addAddress($email);     //Add a recipient
 
         //Content
-        //$mail->isHTML(true);                                  //Set email format to HTML
+        $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = "Confirmacion Cuenta";
         $mail->Body = $msj;
+        $mail->MsgHTML($msj);
 
         $mail->send();
 
