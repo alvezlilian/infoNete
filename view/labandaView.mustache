@@ -115,42 +115,42 @@ window.addEventListener('load', ()=> {
                 switch(data.weather[0].main){
                     case 'Clear':
                         if(date.getHours()<6||date.getHours()>20){
-                            iconoAnimado.src = '../animated/night.svg'
+                            iconoAnimado.src = '../public/img/animated/night.svg'
                         }else{
-                            iconoAnimado.src = '../animated/day.svg'
+                            iconoAnimado.src = '../public/img/animated/day.svg'
                         }
                         break;
                     case 'Clouds':
                         if(date.getHours()<6||date.getHours()>20){
-                            iconoAnimado.src = '../animated/cloudy-night-1.svg'
+                            iconoAnimado.src = '../public/img/animated/cloudy-night-1.svg'
                         }else{
-                            iconoAnimado.src = '../animated/cloudy-day-1.svg'
+                            iconoAnimado.src = '../public/img/animated/cloudy-day-1.svg'
                         }
                         break;
                     case 'Thunderstorm':
-                        iconoAnimado.src = '../animated/thunder.svg'
+                        iconoAnimado.src = '../public/img/animated/thunder.svg'
                         break;
                     case 'Drizzle':
                         if(date.getHours()<6||date.getHours()>20){
-                            iconoAnimado.src = '../animated/rainy-4.svg'
+                            iconoAnimado.src = '../public/img/animated/rainy-4.svg'
                         }else{
-                            iconoAnimado.src = '../animated/rainy-2.svg'
+                            iconoAnimado.src = '../public/img/animated/rainy-2.svg'
                         }
                         break;
                     case 'Rain':
-                        iconoAnimado.src = "../animated/rainy-7.svg"
+                        iconoAnimado.src = "../public/img/public/img/animated/rainy-7.svg"
                         break;
                     case 'Snow':
-                        iconoAnimado.src = "../animated/snowy-6.svg"
+                        iconoAnimado.src = "../public/img/animated/snowy-6.svg"
                         break;
                     case 'Atmosphere':
-                        iconoAnimado.src = "../animated/weather.svg"
+                        iconoAnimado.src = "../public/img/animated/weather.svg"
                         break;
                     default:
                         if(date.getHours()<6||date.getHours()>20){
-                            iconoAnimado.src = '../animated/cloudy-night-1.svg'
+                            iconoAnimado.src = '../public/img/animated/cloudy-night-1.svg'
                         }else{
-                            iconoAnimado.src = '../animated/cloudy-day-1.svg'
+                            iconoAnimado.src = '../public/img/animated/cloudy-day-1.svg'
                         }
                         break;
                 }
