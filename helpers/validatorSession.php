@@ -26,8 +26,8 @@
         }
 
         public static function cerrarSesion(){
-            if (isset($_SESSION['email'])) {
-                session_destroy();
+            if (isset($_SESSION['rol'])) {
+                session_destroy("Me fui");
             }
             if(!isset($_session['email'])){
                 die("esta vacio");

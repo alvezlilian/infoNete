@@ -18,14 +18,20 @@ class LoginController
     }
 
     public function validarLogin(){
-        $this->renderer->render("loginView.mustache");
+        if (!isset($_SESSION['rol'])){
+            $this->renderer->render("loginView.mustache");
+        }
+        ValidatorSession::routerSession();
     }
 
     public function procesarLogin(){
         $email=$_POST['email'];
         $clave=$_POST['clave'];
-        $data=  $this->model->validarLogin($email,$clave);
+        if ($email == ""|| $clave == ""){
+            Redirect::doIt("/login/validarLogin");
+        }
 
+        $data=  $this->model->validarLogin($email,$clave);
         $this->validarResultado($data);
 
         ValidatorSession::sessionInit($data);
@@ -40,11 +46,11 @@ class LoginController
     }
 
     public function cerrarSesion(){
-        if (isset($_SESSION['email'])) {
-            session_destroy();
+        if (isset($_SESSION['rol'])) {
+            session_destroy("Me fui");
         }
-        if(!isset($_session['email'])){
-            die("esta vacio");
+        if(!isset($_session['rol'])){
+            die("esta vacio, false");
         }
     }
 
