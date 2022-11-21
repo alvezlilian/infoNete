@@ -10,11 +10,26 @@ class ValidarLoginModel
     }
 
     public function validarLogin($email,$clave){
-        $sql = "SELECT nombre,descripcion from usuario JOIN contrasenia on usuario.id = contrasenia.idUsuario join rol on usuario.idRol=rol.id WHERE usuario.email = '$email' AND contrasenia.clave = '$clave'";
-        $resultado = $this->database->queryNum($sql);
+        $resultado = 0;
+        $sql1 = "SELECT clave FROM infonete.contrasenia WHERE idUsuario = (SELECT id FROM infonete.usuario WHERE email = '$email')";
+        $hash = $this->database->query($sql1);
+
+        if ((password_verify($clave, $hash))) {
+            $sql2 = "SELECT id FROM infonete.usuario WHERE email = '$email'";
+            $idTableUser = $this->database->query($sql2);
+
+            $sql3 = "SELECT idUsuario FROM infonete.contrasenia WHERE clave = '$hash'";
+            $idTableContra = $this->database->query($sql3);
+
+            if($idTableUser == $idTableContra){
+                $sql4 = "SELECT nombre,idRol FROM infonete.usuario WHERE email = '$email'";
+                $resultado = $this->database->query($sql4);
+            }
+        }
 
         if(!isset($resultado)||$resultado==NULL){
-             Redirect::doIt("/login/validarLogin");
+            $mensaje['mensaje'] = "Codigo erroneo";
+            Redirect::doIt("/login/validarLogin",$mensaje);
         }
         return $resultado;
     }
@@ -35,10 +50,10 @@ class ValidarLoginModel
     }
 
     public function getIdByMail($email){
-        $sql = "SELECT id from usuario WHERE usuario.email = '$email'";
+        $sql = "SELECT id from infonete.usuario WHERE usuario.email = '$email'";
         return $resultado = $this->database->query($sql);
     }
-    
+
     public function cerrarSesion(){
         session_destroy();
     }

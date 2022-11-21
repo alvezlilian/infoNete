@@ -1,6 +1,59 @@
 {{> header}}
 <!-- The Band Section -->
+<style>
+#contenedorClimaHora{
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+#caja1, #caja2, #caja3, #caja4{
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 25%;
+    width: 250px;
+    height: 250px;
+}
+#caja1{
+    background-color: rgba(0,0,0,0.767);
+    color: azure;
+}
+#caja2{
+    background-color: darkslateblue;
+    color: azure;
+}
+#caja3{
+    background-color: #2ab2ea;
+    color: azure;
+}
+#caja4{
+    background-color: blueviolet;
+    color: azure;
+}
+</style>
 <div class='w3-container w3-content w3-center w3-padding-64' style='max-width:800px' id='band'>
+<div id="contenedorClimaHora">
+        <div id="caja1">
+            <h1 id="temperatura-valor"></h1>
+            <h1 id="temperatura-descripcion"></h1>
+        </div>
+        <div id="caja2">
+            <h1 id="ubicacion"></h1>
+            <img id="icono-animado" src='' alt="" height="128" width="128">
+        </div>
+        <div id="caja3">
+            <h3>Velocidad del viento</h3>
+            <h1 id="viento-velocidad"></h1>
+        </div>
+        <div id="caja4">
+            <h3>Hora</h3>
+            <h1 id="hora"></h1>
+        </div>
+    </div>
     <h2 class='w3-wide'>diario</h2>
     {{mensaje}}
    <button type="button" class="btn btn-outline-primary">Primary</button>
@@ -20,4 +73,109 @@
         </div>
     </div>
 </div>
+
+<script>
+window.addEventListener('load', ()=> {
+    let lon;
+    let lat;
+    let APIKEY = 'a7e81f51e6fcacb7610b8d15924579d7';
+
+    let temperaturaValor = document.getElementById('temperatura-valor');
+    let temperaturaDescripcion = document.getElementById('temperatura-descripcion');
+
+    let ubicacion = document.getElementById('ubicacion');
+    let iconoAnimado = document.getElementById('icono-animado');
+
+    let vientoVelocidad = document.getElementById('viento-velocidad');
+
+    let date = new Date();
+
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition( posicion => {
+        lon = posicion.coords.longitude;
+        lat = posicion.coords.latitude;
+
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKEY}&lang=es&units=metric`
+        console.log(url)
+        fetch(url)
+            .then( response => { return response.json() })
+            .then( data => {
+                console.log(data.main.temp)
+                let temp = Math.round(data.main.temp)
+                temperaturaValor.textContent = `${temp} ° C`;
+
+                let desc = data.weather[0].description
+                temperaturaDescripcion.textContent = desc.toUpperCase();
+
+                ubicacion.textContent = data.name;
+
+				vientoVelocidad.textContent = `${Math.trunc(data.wind.speed*3.6)} km/h`;
+
+                console.log(data.weather[0].main)
+                switch(data.weather[0].main){
+                    case 'Clear':
+                        if(date.getHours()<6||date.getHours()>20){
+                            iconoAnimado.src = '../animated/night.svg'
+                        }else{
+                            iconoAnimado.src = '../animated/day.svg'
+                        }
+                        break;
+                    case 'Clouds':
+                        if(date.getHours()<6||date.getHours()>20){
+                            iconoAnimado.src = '../animated/cloudy-night-1.svg'
+                        }else{
+                            iconoAnimado.src = '../animated/cloudy-day-1.svg'
+                        }
+                        break;
+                    case 'Thunderstorm':
+                        iconoAnimado.src = '../animated/thunder.svg'
+                        break;
+                    case 'Drizzle':
+                        if(date.getHours()<6||date.getHours()>20){
+                            iconoAnimado.src = '../animated/rainy-4.svg'
+                        }else{
+                            iconoAnimado.src = '../animated/rainy-2.svg'
+                        }
+                        break;
+                    case 'Rain':
+                        iconoAnimado.src = "../animated/rainy-7.svg"
+                        break;
+                    case 'Snow':
+                        iconoAnimado.src = "../animated/snowy-6.svg"
+                        break;
+                    case 'Atmosphere':
+                        iconoAnimado.src = "../animated/weather.svg"
+                        break;
+                    default:
+                        if(date.getHours()<6||date.getHours()>20){
+                            iconoAnimado.src = '../animated/cloudy-night-1.svg'
+                        }else{
+                            iconoAnimado.src = '../animated/cloudy-day-1.svg'
+                        }
+                        break;
+                }
+
+            })
+            .catch( error => {
+                console.log(error)
+            })
+        })
+
+    }
+})
+</script>
+<script>
+window.addEventListener('load', ()=> {
+    var tiempo = setInterval(function(){
+        let hora = document.getElementById('hora');
+        let date = new Date();
+        if(date.getMinutes()<10){
+            hora.textContent = date.getHours() + ":0" + date.getMinutes();
+        }else{
+            hora.textContent = date.getHours() + ":" + date.getMinutes();
+        }
+    }, 1000)
+})
+</script>
+
 {{> footer}}

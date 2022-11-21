@@ -23,12 +23,23 @@ class LoginController
         $data['rol'] = ValidatorSession::setSession();
         $this->renderer->render("loginView.mustache", $data);
     }
+
     public function procesarLogin(){
         $email=$_POST['email'];
         $clave=$_POST['clave'];
-        $data=  $this->model->validaLogin($email,$clave);
+        $data=  $this->model->validarLogin($email,$clave);
+
+        $this->validarResultado($data);
+
         ValidatorSession::sessionInit($data);
         ValidatorSession::routerSession();
+    }
+
+    public function validarResultado($data){
+        if(!isset($data)||$data==NULL){
+            $mensaje['mensaje'] = "Clave o Correo Incorrectos";
+            $this->renderer->render("loginView.mustache",$mensaje);
+        }
     }
 
     public function cerrarSesion(){

@@ -33,7 +33,6 @@ class MySQlDatabase {
     public function insert(){
          return $this->conexion->insert_id;
 
-
     }
 
     public function queryNum($sql){

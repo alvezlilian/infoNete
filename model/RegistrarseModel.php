@@ -8,27 +8,41 @@ class RegistrarseModel
     {
         $this->database=$database;
     }
-    public function alta($nombre,$email,$direccion,$clave,$latitud,$longitud){
+    public function alta($nombre,$email,$direccion,$clave,$latitud,$longitud, $codigo){
 
-        $nombreIngresado = $this->sanitizarNombre($nombre);
-        $emailIngresado = $this->sanitizarEmail($email);
-
-        $sql1="INSERT INTO infonete.usuario(nombre,ubicacion,email,latitud,longitud) VALUES ('$nombreIngresado','$direccion', '$emailIngresado','$latitud','$longitud')";
+        $sql1="INSERT INTO infonete.usuario(nombre,ubicacion,email,latitud,longitud,activo,idRol) VALUES ('$nombre','$direccion','$email','$latitud','$longitud',FALSE,1)";
         $this->database->execute($sql1);
         $idUsuario=$this->database->insert();
-        $sqlContrasenia="INSERT INTO infonete.contrasenia(clave,idUsuario) VALUES ('$clave','$idUsuario')";
+
+        $sqlContrasenia="INSERT INTO infonete.contrasenia(clave,idUsuario,codigo,validado) VALUES ('$clave','$idUsuario','$codigo',FALSE)";
         $this->database->execute($sqlContrasenia);
 
-        Redirect::doIt("/login/validarUsuario");
     }
 
-    public function sanitizarNombre($nombre){
-        return $nombre = mysqli_real_escape_string($this->database, $_POST['nombre']);
+    public function verificarEmail($email){
+        $sql="SELECT * FROM infonete.usuario WHERE email = '$email'";
+        $result = $this->database->query($sql);
+        if(empty($result)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
-    public function sanitizarEmail($email){
-        return $email = mysqli_real_escape_string($this->database, filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
+    public function validarCodigoRegistro($codigo){
+        $sql = "SELECT * FROM infonete.contrasenia WHERE codigo = '$codigo'";
+        $result = $this->database->query($sql);
+        if(!(empty($result))){
+            $insert1="UPDATE infonete.contrasenia SET validado=TRUE WHERE codigo='$codigo'";
+            $this->database->execute($insert1);
+            $insert2="UPDATE infonete.usuario SET activo=TRUE WHERE id = (select idUsuario from infonete.contrasenia where codigo = '$codigo');";
+            $this->database->execute($insert2);
+            return true;
+        }else{
+            return false;
+        }
     }
+
 
 
 }
