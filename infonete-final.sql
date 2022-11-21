@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `administrador` (
   `idUsuario` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -43,7 +43,7 @@ CREATE TABLE `articulo` (
   `idEscritor` int NOT NULL,
   `valor` decimal(10,0) NOT NULL,
   `idEstado` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `articulo`
@@ -60,7 +60,7 @@ INSERT INTO `articulo` (`id`, `texto`, `idEscritor`, `valor`, `idEstado`) VALUES
 
 CREATE TABLE `contenidista` (
   `idUsuario` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -74,7 +74,7 @@ CREATE TABLE `contrasenia` (
   `idUsuario` int NOT NULL,
   `codigo` int NOT NULL,
   `validado` BOOLEAN NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `contrasenia`
@@ -100,7 +100,7 @@ CREATE TABLE `edicion` (
   `idPublicacion` int NOT NULL,
   `descrip` varchar(100) NOT NULL,
   `valor` decimal(10,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `edicion`
@@ -121,7 +121,7 @@ CREATE TABLE `edicion_seccion` (
   `idEdicion` int NOT NULL,
   `idSeccion` int NOT NULL,
   `valor` decimal(10,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `edicion_seccion`
@@ -140,7 +140,7 @@ INSERT INTO `edicion_seccion` (`idEdicion`, `idSeccion`, `valor`) VALUES
 
 CREATE TABLE `escritor` (
   `idUsuario` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `escritor`
@@ -158,7 +158,7 @@ INSERT INTO `escritor` (`idUsuario`) VALUES
 CREATE TABLE `estadodepublicacion` (
   `id` int NOT NULL,
   `Estado` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `estadodepublicacion`
@@ -178,7 +178,7 @@ INSERT INTO `estadodepublicacion` (`id`, `Estado`) VALUES
 CREATE TABLE `lector` (
   `idUsuario` int NOT NULL,
   `idSuscripcion` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -189,16 +189,16 @@ CREATE TABLE `lector` (
 CREATE TABLE `nota` (
   `id` int NOT NULL,
   `Titulo` varchar(200) NOT NULL,
-  `Subtitulo` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `Subtitulo` varchar(200) CHARACTER SET utf8mb4 DEFAULT NULL,
   `Imagen` varchar(2000) DEFAULT NULL,
-  `contenido` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `link` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `contenido` varchar(1000) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `link` varchar(300) CHARACTER SET utf8mb4 DEFAULT NULL,
   `audio` int DEFAULT NULL,
   `idSeccion` int DEFAULT NULL,
   `idEdicion` int DEFAULT NULL,
   `precio` float DEFAULT NULL,
   `idEstado` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `nota`
@@ -219,7 +219,7 @@ CREATE TABLE `publicacion` (
   `id` int NOT NULL,
   `informacion` varchar(50) NOT NULL,
   `tipoDePublicacion` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `publicacion`
@@ -239,7 +239,7 @@ INSERT INTO `publicacion` (`id`, `informacion`, `tipoDePublicacion`) VALUES
 CREATE TABLE `rol` (
   `id` int NOT NULL,
   `descripcion` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -250,7 +250,7 @@ CREATE TABLE `rol` (
 CREATE TABLE `seccion` (
   `id` int NOT NULL,
   `descrip` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `seccion`
@@ -273,7 +273,7 @@ CREATE TABLE `suscripcion` (
   `fechaInicio` datetime NOT NULL,
   `fechaFin` datetime NOT NULL,
   `valor` decimal(10,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -289,7 +289,7 @@ CREATE TABLE `usuario` (
   `latitud` varchar(20) NOT NULL,
   `longitud` varchar(20) NOT NULL,
   `activo` BOOLEAN NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuario`
