@@ -76,9 +76,9 @@
 
 <script>
 window.addEventListener('load', ()=> {
-    let lon
-    let lat
-    let APIKEY = 'a7e81f51e6fcacb7610b8d15924579d7'
+    let lon;
+    let lat;
+    let APIKEY = 'a7e81f51e6fcacb7610b8d15924579d7';
 
     let temperaturaValor = document.getElementById('temperatura-valor');
     let temperaturaDescripcion = document.getElementById('temperatura-descripcion');
@@ -92,8 +92,8 @@ window.addEventListener('load', ()=> {
 
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition( posicion => {
-        lon = posicion.coords.longitude
-        lat = posicion.coords.latitude
+        lon = posicion.coords.longitude;
+        lat = posicion.coords.latitude;
 
         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKEY}&lang=es&units=metric`
         console.log(url)
@@ -102,14 +102,14 @@ window.addEventListener('load', ()=> {
             .then( data => {
                 console.log(data.main.temp)
                 let temp = Math.round(data.main.temp)
-                temperaturaValor.textContent = `${temp} ° C`
+                temperaturaValor.textContent = `${temp} ° C`;
 
                 let desc = data.weather[0].description
-                temperaturaDescripcion.textContent = desc.toUpperCase()
+                temperaturaDescripcion.textContent = desc.toUpperCase();
 
-                ubicacion.textContent = data.name
+                ubicacion.textContent = data.name;
 
-				vientoVelocidad.textContent = `${Math.trunc(data.wind.speed*3.6)} km/h`
+				vientoVelocidad.textContent = `${Math.trunc(data.wind.speed*3.6)} km/h`;
 
                 console.log(data.weather[0].main)
                 switch(data.weather[0].main){

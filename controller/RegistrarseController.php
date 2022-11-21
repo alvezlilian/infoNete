@@ -41,7 +41,7 @@ class RegistrarseController
 
         if($this->estaRegistrado($email)){
             $codigo= $this->generarCodigoVerificacion();
-            $this->envioEmailConfirmacion($email,$nombre,$codigo);
+            //$this->envioEmailConfirmacion($email,$nombre,$codigo);
             $this->model->alta($nombre,$email,$direccion,$claveEncriptada,$latitud,$longitud,$codigo);
             $this->renderer->render("validarUsuarioForm.mustache");
         }else{
@@ -86,7 +86,7 @@ class RegistrarseController
 
 
         //Server settings
-        $mail->SMTPDebug = true;                      //Enable verbose debug output
+        $mail->SMTPDebug = false;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
         //$mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->Host = 'SMTP.Office365.com';
@@ -99,7 +99,7 @@ class RegistrarseController
         $mail->Port = 587;                                //465    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('pw2-2022@outlook.com', 'Infonete Noticias Web');
+        $mail->setFrom('pw2-2022@outlook.com', 'Gustavo Gonzalez');
         $mail->addAddress($email);     //Add a recipient
 
         //Content
