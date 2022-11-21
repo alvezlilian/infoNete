@@ -13,11 +13,11 @@ class ContenidistaModel {
     }
 
     public function alta($nombre,$ruta){
-        $sql = "INSERT INTO publicacion(informacion,ruta) VALUES ('$nombre','$ruta')";
+        $sql = "INSERT INTO infonete.publicacion(informacion,ruta) VALUES ('$nombre','$ruta')";
         $this->database->execute($sql);
     }
     public function getSecciones(){
-        $sql = 'SELECT * FROM seccion';
+        $sql = 'SELECT * FROM infonete.seccion';
         return $this->database->query($sql);
 
     }

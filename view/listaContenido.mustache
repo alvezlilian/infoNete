@@ -1,21 +1,43 @@
 {{> header}}
-<!-- The Band Section -->
-<div class='w3-container w3-content w3-center w3-padding-64' style='max-width:800px' id='band'>
-    <h2 class='w3-wide'>Notas</h2>
-    <table class='w3-table'>
-        <tr>
-            <th>Titulo</th>
-            <th>edicion</th>
-            <th>seccion</th>
-        </tr>
-        {{#contenido}}
-           <tr>
-                <td>{{Titulo}}</td>
-                <td>{{idEdicion}}</td>
-                <td>{{idSeccion}}</td>
-            </tr>
-         {{/contenido}}
-    </table>
-    <div><br><a href='/presentaciones/alta'>Nuevo evento</a></div>
+
+
+<div class=' w3-padding-64' >
+    <h2 class='w3-wide' style="text-align: center">Lista de notas </h2>
+    {{#msj}}
+        <p>{{msj}}</p>
+{{/msj}}
+<div class="contenedor" style="width: 100%">
+{{#contenido}}
+
+
+    <div style="width: 40%">
+        <p style="font-size: 10px;text-align: left"> Estado > {{Estado}}</p>
+
+        <h3 style="font-weight: bold;" >{{Titulo}}</h3>
+
+
+        <img  src="../public/Img/{{Imagen}}" style="width: 250px" alt="...">
+
+
+            <h5>{{Subtitulo}}</h5>
+      <a href="editar?id={{idNota}}" style="border-bottom: 1px solid black;texte-decoretion: none;
+
+        ">Ver mas</a>
+        <br>
+
+        <br>
+
+        <a href="editar?id={{idNota}}" style="  border: darkcyan 1px solid; padding :5px"  >
+          <!--  <img src="../public/icon/IconEdit.svg" alt="" class="ico">jnjn-->Editar
+        </a>
+        <a href="eliminar?id={{idNota}}"  style="  border: darkcyan 1px solid; padding :5px; margin-left:8px">Eliminar
+      <!--  <img src="../public/icon/icoDelete.svg" alt="" class="ico">jnjn-->
+    </a>
+
+
+
+    </div>
+
+{{/contenido}}
 </div>
 {{> footer}}

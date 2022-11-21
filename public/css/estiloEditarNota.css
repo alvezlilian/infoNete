@@ -1,0 +1,14 @@
+#botonEditar  {
+    border: bisque 2px solid;
+}
+#botonCancelar{
+    border: bisque 2px solid;
+
+}
+.p{
+    display: inline-block;
+    margin-right: 100px;
+}
+.label{
+    font-weight: bold;
+}
