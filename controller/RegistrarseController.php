@@ -14,11 +14,7 @@ class RegistrarseController
     }
 
     public function list(){
-<<<<<<< HEAD
-        echo "hola";
-=======
         echo "adios";
->>>>>>> a4fd30874abc00a5400a1d40d7f55a01728cdb3f
     }
 
     public function alta(){
@@ -26,13 +22,6 @@ class RegistrarseController
         $this->renderer->render("registrarseForm.mustache", $data);
     }
 
-<<<<<<< HEAD
-    function is_valid_email($str){
-        $matches = null;
-        return (1 === preg_match('/^[A-z0-9\\._-]+@[A-z0-9][A-z0-9-]*(\\.[A-z0-9_-]+)*\\.([A-z]{2,6})$/', $str, $matches));
-    }
-=======
->>>>>>> a4fd30874abc00a5400a1d40d7f55a01728cdb3f
     function encriptarClave($clave){
         return password_hash($clave, PASSWORD_DEFAULT);
     }
@@ -62,11 +51,6 @@ class RegistrarseController
         }
 
     }
-<<<<<<< HEAD
-    public function validarUsuario(){
-        $data['rol'] = $_SESSION['rol'];
-        $this->renderer->render("validarUsuarioForm.mustache",$data);
-=======
 
     public function estaRegistrado($email){
         return $result = $this->model->verificarEmail($email);
@@ -93,14 +77,13 @@ class RegistrarseController
         $mail = new PHPMailer(true);
 
         $msj="<h2>Gracias por registrarse!</h2><br>
-    <p>------------------------</p><br>
-    Username: ".$nombre."<br>
-    Código de Verificación: ".$codigo."<br>
-    ------------------------
-    <p>Su cuenta fue creada exitosamente. Confirme su dirección de correo electrónico clickeando el link o copia la siguiente url en tu navegador:</p><br>
-    <p>http://localhost/registrarse/validarCodigo</p>
-   <a href='http://localhost/registrarse/validarCodigo'> VERIFICA TU MAIL</a>";
-
+        <p>------------------------</p><br>
+        Username: ".$nombre."<br>
+        Código de Verificación: ".$codigo."<br>
+        ------------------------
+        <p>Su cuenta fue creada exitosamente. Confirme su dirección de correo electrónico clickeando el link o copia la siguiente url en tu navegador:</p><br>
+        <p>http://localhost/registrarse/validarCodigo</p>
+        <a href='http://localhost/registrarse/validarCodigo'> VERIFICA TU MAIL</a>";
 
         //Server settings
         $mail->SMTPDebug = false;                      //Enable verbose debug output
@@ -126,8 +109,6 @@ class RegistrarseController
         $mail->MsgHTML($msj);
 
         $mail->send();
-
->>>>>>> a4fd30874abc00a5400a1d40d7f55a01728cdb3f
-    }
+   }
 
 }

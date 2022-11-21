@@ -111,5 +111,4 @@ class Configuration {
     private function getContenidistaModel(){
         return new ContenidistaModel($this->database);
     }
-
 }
