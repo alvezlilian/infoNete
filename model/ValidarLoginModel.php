@@ -42,7 +42,7 @@ class ValidarLoginModel
     }
 
     public function getIdByMail($email){
-        $sql = "SELECT id from usuario WHERE usuario.email = '$email'";
+        $sql = "SELECT id from infonete.usuario WHERE usuario.email = '$email'";
         return $resultado = $this->database->query($sql);
     }
     

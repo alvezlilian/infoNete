@@ -81,7 +81,7 @@ class ContenidoController
         $precioNoticia = $_POST["precioNoticia"];
 
         $descripcionNoticia =$_POST["contenidoNoticia"];
-        $link=$_POST["link"];
+        $link=$_POST["linkNoticia"];
         //tomamos el archivo file y lo guardo en las variables
        $archivo=$_FILES["imagen"]["name"];
 

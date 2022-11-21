@@ -11,7 +11,12 @@
 
 
     <div style="width: 40%">
-        <p style="font-size: 10px;text-align: left"> Estado > {{Estado}}</p>
+
+        <p   style="font-size: 10px; display: inline; margin-right: 20px" >Estado -> {{Estado}} </p>
+        <p  style="font-size: 10px; display: inline ; margin-right: 20px"> Edicion: {{descripEdicion}}</p>
+        <p  style="font-size: 10px; display: inline"> Seccion: {{descripSeccion}}</p>
+
+
 
         <h3 style="font-weight: bold;" >{{Titulo}}</h3>
 
@@ -27,7 +32,7 @@
 
         <br>
 
-        <a href="editar?id={{idNota}}" style="  border: darkcyan 1px solid; padding :5px"  ></a>
+        <a href="editar?id={{idNota}}" style="  border: darkcyan 1px solid; padding :5px"  >Editar</a>
         <a href="eliminar?id={{idNota}}"  style="  border: darkcyan 1px solid; padding :5px; margin-left:8px">Eliminar
     </a>
 
