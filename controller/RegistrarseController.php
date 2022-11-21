@@ -80,14 +80,13 @@ class RegistrarseController
     Username: ".$nombre."<br>
     Código de Verificación: ".$codigo."<br>
     ------------------------
-    <h4>Su cuenta fue creada, puede confirmar su email en el link de abajo</h4><br>
-    <p>Confirma tu dirección de correo electrónico clickeando el link o copia la siguiente url en tu navegador:</p><br>
+    <p>Su cuenta fue creada exitosamente. Confirme su dirección de correo electrónico clickeando el link o copia la siguiente url en tu navegador:</p><br>
     <p>http://localhost/registrarse/validarCodigo</p>
    <a href='http://localhost/registrarse/validarCodigo'> VERIFICA TU MAIL</a>";
 
 
         //Server settings
-        $mail->SMTPDebug = false;                      //Enable verbose debug output
+        $mail->SMTPDebug = true;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
         //$mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->Host = 'SMTP.Office365.com';
