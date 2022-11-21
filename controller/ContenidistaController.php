@@ -17,13 +17,16 @@ class ContenidistaController{
             ValidatorSession::routerSession();
         }
         $data['publicaciones'] = $this->model->getPublicaciones();
+        $data['rol'] = $_SESSION['rol'];
         $this->renderer->render("contenidistaView.mustache",$data);
     }
 
     public function alta(){
-        $data["CONTENIDISTA"]=true; 
+        $data["CONTENIDISTA"]=true;
+        $data['rol'] = $_SESSION['rol'];
         $this->renderer->render("altaPublicacion.mustache",$data);
     }
+
     public function procesarAlta(){
         $path="public/img/publications/";
         $nombre = $_POST["descrip"];
@@ -39,10 +42,12 @@ class ContenidistaController{
 
         Redirect::doIt('/contenidista/home');
     }
+
     public function agregarEdSe(){
         $data['secciones']=$this->model->getSecciones();
         $data['publicaciones'] = $this->model->getPublicaciones();
         $data["CONTENIDISTA"]=true;
+        $data['rol'] = $_SESSION['rol'];
         $this->renderer->render("altaEdicionSeccion.mustache",$data);
     }
 }

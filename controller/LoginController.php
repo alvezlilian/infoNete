@@ -2,7 +2,6 @@
 
 class LoginController
 {
-
     private $renderer;
     private $model;
 
@@ -18,7 +17,11 @@ class LoginController
     }
 
     public function validarLogin(){
-        $this->renderer->render("loginView.mustache");
+        if (isset($_SESSION['rol'])){
+            Redirect::doIt('/');
+        }
+        $data['rol'] = ValidatorSession::setSession();
+        $this->renderer->render("loginView.mustache", $data);
     }
     public function procesarLogin(){
         $email=$_POST['email'];
@@ -29,11 +32,12 @@ class LoginController
     }
 
     public function cerrarSesion(){
-        if (isset($_SESSION['email'])) {
-            session_destroy();
+        if (!isset($_SESSION['rol'])){
+            Redirect::doIt('/');
         }
-        if(!isset($_session['email'])){
-            die("esta vacio");
+        if (isset($_SESSION['rol'])) {
+            session_destroy();
+            Redirect::doIt('/');
         }
     }
 

@@ -20,11 +20,9 @@ class ContenidoController
 
     }
 
-    public function crearNoticia()
-
-    {
-        $this->renderer->render("contenidoForm.mustache");
-
+    public function crearNoticia(){
+        $data['rol'] = $_SESSION['rol'];
+        $this->renderer->render("contenidoForm.mustache", $data);
     }
 
     public function cargarNoticia()
@@ -38,7 +36,7 @@ class ContenidoController
 
         $precioNoticia = $_POST["precioNoticia"];
         $descripcionNoticia = $_POST["contenidoNoticia"];
-//tomamos el archivo file y lo guardo en las variables
+        //tomamos el archivo file y lo guardo en las variables
         $archivo=$_FILES["imagen"]["name"];
         $archivoTemporal=$_FILES["imagen"]["tmp_name"];
         //muevo el archivo temporal a la carpera de destino
@@ -48,9 +46,9 @@ class ContenidoController
 
          Redirect::doIt("/");
     }
+
     public function secciones(){
         $date["secciones"]=$this->model->mostrarSecciones();
-
     }
 
 }

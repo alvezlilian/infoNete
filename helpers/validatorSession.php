@@ -63,6 +63,27 @@
             }
         }
 
-
+        public static function setSession(){
+            if (!isset($_SESSION)){
+                return null;
+            }
+            switch ($_SESSION['rol']){
+                case "ADMINISTRADOR":
+                    return "ADMINISTRADOR";
+                    break;
+                case "CONTENIDISTA":
+                    return "CONTENIDISTA";
+                    break;
+                case "ESCRITOR":
+                    return "ESCRITOR";
+                    break;
+                case "LECTOR":
+                    return "LECTOR";
+                    break;
+                default:
+                    return null;
+                    break;
+            }
+        }
 
     }

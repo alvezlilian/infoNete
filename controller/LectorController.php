@@ -12,7 +12,8 @@ class LectorController
     }
 
     public function index_lector(){
-        $this->renderer->render("lector_index.mustache");
+        $data['rol'] = $_SESSION['rol'];
+        $this->renderer->render("lector_index.mustache", $data);
     }
 
 }
