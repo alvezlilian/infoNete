@@ -1,0 +1,33 @@
+{{> cabecera}}
+
+    <div class="row d-flex justify-content-center align-items-center" style="margin-top:5%;width:100%;">
+          <div  style="margin:0 auto;width:40%;height:auto;">
+                <form method="post" action="/contenidista/procesaAltaSoloEdicionSeccion" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="cars">Publicacion</label>
+                              <select name="publicacion" id="publicacion" onchange="muestraEdiciones(this.value)" class="form-control" style="width:100%;"  >
+                              <option disabled selected>SELECCIONE UNA OPCION</option>
+                               {{#publicaciones}}
+                                    <option value={{id}}>{{informacion}}</option>
+                                {{/publicaciones}}
+                              </select>
+                         </div>
+
+                        <div class="form-group col-md-6">
+                            <label>Edicion</label>
+                            <select class="form-control" name="edicion" onclick="muestraSecciones(this.value)" id="edicion" style="width:100%;">
+                                 <option value=>SELECCIONE UNA PUBLICACION</option>
+                            </select>
+                        </div>
+                        <div id="seccion" class="form-group col-md-6" >
+                              <h4>Secciones a agregar</h4>
+                                   <input type="checkbox" name=seccion[] value="">
+                                   <label> tipo</label>
+                        </div>
+                        <button type="submit"  class="btn btn-dark btn-lg btn-block ">Guardar</button>
+                </div>
+            </form>
+          </div>
+    </div>
+{{> footer}}
