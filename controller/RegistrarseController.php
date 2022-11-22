@@ -42,11 +42,12 @@ class RegistrarseController
 
         if($this->estaRegistrado($email)){
             $codigo= $this->generarCodigoVerificacion();
+            //$this->archivoEnvioMailConfirmacion($email,$nombre,$codigo);
             //$this->envioEmailConfirmacion($email,$nombre,$codigo);
             $this->model->alta($nombre,$email,$direccion,$claveEncriptada,$latitud,$longitud,$codigo);
             $this->renderer->render("validarUsuarioForm.mustache");
         }else{
-            $mensaje['mensaje'] = "Ha ocurrido un error inesperado, reintente en unos minutos";
+            $mensaje['mensaje'] = "El mail ingresado ya está asociado a una cuenta. Intente con un mail distinto";
             $this->renderer->render("registrarseForm.mustache",$mensaje);
         }
 
@@ -62,9 +63,28 @@ class RegistrarseController
         if($codigo){
             $this->renderer->render("loginView.mustache");
         }else{
-            $mensaje['mensaje'] = "Codigo erroneo";
+            $mensaje['mensaje'] = "Código Incorrecto";
             $this->renderer->render("validarUsuarioForm.mustache",$mensaje);
         }
+    }
+
+    public function archivoEnvioMailConfirmacion($email, $nombre, $codigo){
+        $fh = fopen("mailConfirmacion.txt", 'w') or die("Se produjo un error al crear el archivo");
+
+        $texto = <<<_END
+        <h2>Gracias por registrarse!</h2><br>
+        <p>------------------------</p><br>
+        Username: ".$nombre."<br>
+        Código de Verificación: ".$codigo."<br>
+        ------------------------
+        <p>Su cuenta fue creada exitosamente. Confirme su dirección de correo electrónico clickeando el link o copia la siguiente url en tu navegador:</p><br>
+        <p>http://localhost/registrarse/validarCodigo</p>
+        <a href='http://localhost/registrarse/validarCodigo'> VERIFICA TU MAIL</a>
+        _END;
+
+        fwrite($fh, $texto) or die("No se pudo escribir en el archivo");
+
+        fclose($fh);
     }
 
     public function envioEmailConfirmacion($email,$nombre,$codigo)
@@ -92,14 +112,14 @@ class RegistrarseController
         $mail->Host = 'SMTP.Office365.com';
         $mail->SMTPAuth = true;                                   //Enable SMTP authentication
         //$mail->Username = 'infonete.pw@gmail.com';                     //SMTP username
-        $mail->Username = 'pw2-2022@outlook.com';
+        $mail->Username = 'grupo4web@outlook.com';
         //$mail->Password = 'Infonete2022';                               //SMTP password
-        $mail->Password = '2022!Pw2';
+        $mail->Password = '!Infonete2022';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
         $mail->Port = 587;                                //465    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('pw2-2022@outlook.com', 'Gustavo Gonzalez');
+        $mail->setFrom('pw2-2022@outlook.com', 'Gustavo Antonio González');
         $mail->addAddress($email);     //Add a recipient
 
         //Content
