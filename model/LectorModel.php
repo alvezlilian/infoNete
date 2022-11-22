@@ -8,6 +8,14 @@ class LectorModel
     {
         $this->database = $database;
     }
-
+    //Consultas
+    public function getPublicaciones() {
+        $sql = 'SELECT * FROM publicacion';
+        return $this->database->query($sql);
+    }
+    public function getEdicionesxId($idPublicacion){
+        $sql = "SELECT * FROM edicion where idPublicacion='$idPublicacion'";
+        return $this->database->query($sql);
+    }
 
 }

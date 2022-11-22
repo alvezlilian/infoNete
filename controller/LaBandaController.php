@@ -9,6 +9,9 @@ class LaBandaController {
     }
 
     public function list() {
+        if(isset($_SESSION['rol']))
+        ValidatorSession::routerSession();
+        else
         $this->view->render('labandaView.mustache');
     }
 }

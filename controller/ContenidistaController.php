@@ -10,11 +10,12 @@ class ContenidistaController{
     }
 
     public function list(){
-    }
-    public function home(){   
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
         }
+    }
+    public function home(){   
+
         $data['publicaciones'] = $this->model->getPublicaciones();
         $data['rol'] = $_SESSION['rol'];
         $this->renderer->render("contenidistaView.mustache",$data);
