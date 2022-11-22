@@ -22,8 +22,8 @@ class ContenidistaController{
 
     public function alta(){
         $data["CONTENIDISTA"]=true;
-        $data['rol'] = $_SESSION['rol'];
-        $this->renderer->render("altaPublicacion.mustache",$data);
+        $data['alta'] = true;
+        $this->renderer->render("publicacion.mustache",$data);
     }
 
     public function procesarAlta(){
@@ -85,7 +85,7 @@ class ContenidistaController{
     public function obtenerPublicaciones(){
         $ediciones = $this->model->getEdiciones($_POST['publicacion']);
         foreach ($ediciones as $i){
-            echo "<option value = '". $i['id']."'>" . $i['num'] . "</option>";
+            echo "<option value = '". $i['id']."'>" . $i['descrip'] . "</option>";
         }
     }
     public function obtenerSecciones(){

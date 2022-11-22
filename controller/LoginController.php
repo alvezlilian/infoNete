@@ -13,7 +13,6 @@ class LoginController
     }
 
     public function list(){
-        die("hola");
     }
 
     public function validarLogin(){

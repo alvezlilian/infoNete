@@ -35,7 +35,7 @@ class RegistrarseModel
         if(!(empty($result))){
             $insert1="UPDATE contrasenia SET validado=TRUE WHERE codigo='$codigo'";
             $this->database->execute($insert1);
-            $insert2="UPDATE usuario SET activo=TRUE WHERE id = (select idUsuario from infonete.contrasenia where codigo = '$codigo');";
+            $insert2="UPDATE usuario SET activo=TRUE WHERE id = (select idUsuario from contrasenia where codigo = '$codigo');";
             $this->database->execute($insert2);
             return true;
         }else{

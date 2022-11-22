@@ -32,7 +32,7 @@ class ContenidistaModel {
         return $this->database->query($sql);
     }
     public function altaEdicion($idPublicacion,$numeroEdicion,$valor){
-        $sql = "INSERT INTO edicion (idPublicacion,num,valor) VALUES ('$idPublicacion','$numeroEdicion','$valor')";
+        $sql = "INSERT INTO edicion (idPublicacion,descrip,valor) VALUES ('$idPublicacion','$numeroEdicion','$valor')";
         $this->database->execute($sql);
         return $this->database->insert();
     }
@@ -45,7 +45,7 @@ class ContenidistaModel {
         $this->database->execute($sql);
     }
     public function buscarEdicionxNum($numEdicion,$idPublicacion){
-        $sql = "SELECT * FROM edicion where num='$numEdicion' and idPublicacion='$idPublicacion'";
+        $sql = "SELECT * FROM edicion where descrip='$numEdicion' and idPublicacion='$idPublicacion'";
         if($this->database->query($sql))
             return true;
         else

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2022 a las 01:46:05
--- Versión del servidor: 10.4.25-MariaDB
--- Versión de PHP: 8.1.10
+-- Tiempo de generación: 22-11-2022 a las 15:40:08
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `infonete`
+-- Base de datos: `infonete-final`
 --
+CREATE DATABASE IF NOT EXISTS `infonete-final` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `infonete-final`;
 
 -- --------------------------------------------------------
 
@@ -75,7 +77,9 @@ CREATE TABLE `contrasenia` (
 
 INSERT INTO `contrasenia` (`id`, `clave`, `idUsuario`, `codigo`, `validado`) VALUES
                                                                                  (20, '$2y$10$dK6OgUC5Lae9aDnQTccMJ.ywCrmYGpUCS0EgTsKlqYp2LplYQYvh.', 37, 468771, 1),
-                                                                                 (21, '$2y$10$3Yq3lvSjnGH40/jJ0tF3Tu5ohvFRxNOL/7PT3doD7Bu03udt9t8hq', 38, 659843, 1);
+                                                                                 (21, '$2y$10$3Yq3lvSjnGH40/jJ0tF3Tu5ohvFRxNOL/7PT3doD7Bu03udt9t8hq', 38, 659843, 1),
+                                                                                 (22, '$2y$10$/DBfaHOwc6gFfN44dakdiO0hFziK1nAluWUyW7p9wY1dcOmDoHzdq', 39, 593592, 1),
+                                                                                 (23, '$2y$10$xxyNrOnSZn4rkcGLCkFhouZGjhle62W.C/vVQ/YxcWooMJ0iJNUiW', 40, 713797, 1);
 
 -- --------------------------------------------------------
 
@@ -89,15 +93,6 @@ CREATE TABLE `edicion` (
                            `descrip` varchar(100) NOT NULL,
                            `valor` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `edicion`
---
-
-INSERT INTO `edicion` (`id`, `idPublicacion`, `descrip`, `valor`) VALUES
-                                                                      (2, 1, 'UNO', '500'),
-                                                                      (3, 2, 'DOS', '600'),
-                                                                      (4, 3, 'TRES', '700');
 
 -- --------------------------------------------------------
 
@@ -115,9 +110,9 @@ CREATE TABLE `edicion_seccion` (
 --
 
 INSERT INTO `edicion_seccion` (`idEdicion`, `idSeccion`) VALUES
-                                                             (1, 1),
-                                                             (2, 2),
-                                                             (3, 3);
+                                                             (6, 2),
+                                                             (6, 3),
+                                                             (6, 4);
 
 -- --------------------------------------------------------
 
@@ -180,15 +175,6 @@ CREATE TABLE `nota` (
                         `idEstado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `nota`
---
-
-INSERT INTO `nota` (`id`, `Titulo`, `Subtitulo`, `Imagen`, `contenido`, `link`, `audio`, `idSeccion`, `idEdicion`, `precio`, `idEstado`) VALUES
-                                                                                                                                             (65, 'fdsf', 'kjnj', 'pagoReversa.jpg', 'fdfdf', NULL, NULL, 2, 2, 44, 1),
-                                                                                                                                             (66, 'fdfdf', 'ftftf', 'pagoReversa.jpg', ',nkjnjn', NULL, NULL, 1, 2, 54, 1),
-                                                                                                                                             (67, 'jnjnjn', 'dsd', 'otro.jpg', 'lj', NULL, NULL, 1, 3, 454, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -197,17 +183,16 @@ INSERT INTO `nota` (`id`, `Titulo`, `Subtitulo`, `Imagen`, `contenido`, `link`, 
 
 CREATE TABLE `publicacion` (
                                `id` int(11) NOT NULL,
-                               `informacion` varchar(50) NOT NULL
+                               `informacion` varchar(50) NOT NULL,
+                               `ruta` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `publicacion`
 --
 
-INSERT INTO `publicacion` (`id`, `informacion`) VALUES
-                                                    (1, 'Clarin'),
-                                                    (2, 'La Nacion'),
-                                                    (3, '365');
+INSERT INTO `publicacion` (`id`, `informacion`, `ruta`) VALUES
+    (5, 'Clarin', 'public/img/publications/clarin.png');
 
 -- --------------------------------------------------------
 
@@ -287,7 +272,9 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `nombre`, `ubicacion`, `email`, `latitud`, `longitud`, `activo`, `idRol`) VALUES
                                                                                                            (37, 'Agustin', 'Direccion', 'test@test.com', '-34.6882825', '-58.6118834', 1, 1),
-                                                                                                           (38, 'Joni', 'Direccion', 'asd@asd', '-34.6882672', '-58.6118902', 1, 1);
+                                                                                                           (38, 'Joni', 'Direccion', 'asd@asd', '-34.6882672', '-58.6118902', 1, 4),
+                                                                                                           (39, 'enrique', 'calle falsa 123', 'enrique@enrique', '-34.7612', '-58.3856', 1, 3),
+                                                                                                           (40, 'julian', 'calle falsa 456', 'julian@julian', '-34.7612', '-58.3856', 1, 2);
 
 --
 -- Índices para tablas volcadas
@@ -399,13 +386,13 @@ ALTER TABLE `articulo`
 -- AUTO_INCREMENT de la tabla `contrasenia`
 --
 ALTER TABLE `contrasenia`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `edicion`
 --
 ALTER TABLE `edicion`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `estadodepublicacion`
@@ -423,7 +410,7 @@ ALTER TABLE `nota`
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -447,7 +434,7 @@ ALTER TABLE `suscripcion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Restricciones para tablas volcadas
