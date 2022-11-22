@@ -9,9 +9,8 @@ class ContenidistaController{
         $this->model = $model;
     }
 
-    public function list(){       
+    public function list(){
     }
-
     public function home(){   
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
@@ -35,19 +34,101 @@ class ContenidistaController{
         $archivoTemporal=$_FILES["imagen"]["tmp_name"];
 
         $path_complete=$path.$name_img;
-
         move_uploaded_file($archivoTemporal,$path_complete);
-
-        $this->model->alta($nombre,$path_complete);
+        if(isset($_POST['idPublicacion']))
+            $this->model->updatePublicacion($_POST['idPublicacion'],$nombre,$path_complete);
+        else
+            $this->model->altaPublicacion($nombre,$path_complete);
 
         Redirect::doIt('/contenidista/home');
     }
 
-    public function agregarEdSe(){
+    public function altaEdicion(){
         $data['secciones']=$this->model->getSecciones();
         $data['publicaciones'] = $this->model->getPublicaciones();
         $data["CONTENIDISTA"]=true;
         $data['rol'] = $_SESSION['rol'];
         $this->renderer->render("altaEdicionSeccion.mustache",$data);
     }
+    public function procesarAltaEdicionSeccion()
+    {
+        $numEdicion = $_POST["edicion"];
+        $valor = $_POST["valor"];
+        $idPublicacion = (int)$_POST["publicacion"];
+        $flag=$this->model->buscarEdicionxNum($numEdicion,$idPublicacion);
+        $seccion =[];
+        if($flag==false) {
+            if(isset($_POST['seccion'])){
+                foreach ($_POST['seccion'] as $i) {
+                    array_push($seccion, (int)$i);
+                }
+                $idEdicion = $this->model->altaEdicion($idPublicacion, $numEdicion, $valor);
+                foreach ($seccion as $i) {
+                    $this->model->altaEdicionSeccion($idEdicion, $i);
+                }
+            }
+            else{
+                $idEdicion = $this->model->altaEdicion($idPublicacion, $numEdicion, $valor);
+            }
+            Redirect::doIt('/contenidista/home');
+        }
+        else {
+            Redirect::doIt('/contenidista/altaEdicion');
+        }
+    }
+    public function agregarSeccion(){
+        $data['secciones'] = $this->model->getSecciones();
+        $data['publicaciones'] = $this->model->getPublicaciones();
+        $data["CONTENIDISTA"] = true;
+        $this->renderer->render("agregarSeccion.mustache", $data);
+    }
+    public function obtenerPublicaciones(){
+        $ediciones = $this->model->getEdiciones($_POST['publicacion']);
+        foreach ($ediciones as $i){
+            echo "<option value = '". $i['id']."'>" . $i['num'] . "</option>";
+        }
+    }
+    public function obtenerSecciones(){
+        $idEdicion = $_POST['edicion'];
+        $seccionesInexistentes= $this->model->getSeccionesInexistenes($idEdicion);
+        $seccionesExistentes = $this->model->getSeccionesExistenes($idEdicion);
+        if($seccionesExistentes){
+            echo"<h4>Secciones a agregar</h4>";
+            foreach($seccionesExistentes as $seccion){
+                echo "<input type='checkbox' checked=true name=seccion[] value='".$seccion['id']."'disabled>";
+                echo "<label style='margin-right: 2%'>".$seccion['descrip']."</label>";
+            }
+            foreach($seccionesInexistentes as $seccion){
+                echo "<input type='checkbox' name=seccion[] value='".$seccion['id']."'>";
+                echo "<label style='margin-right: 2%'>".$seccion['descrip']."</label>";
+            }
+        }
+        else{
+            $totalSecciones = $this->model->getSecciones();
+            foreach($totalSecciones as $seccion){
+                echo "<input type='checkbox' name=seccion[] value='".$seccion['id']."'>";
+                echo "<label style='margin-right: 2%'>".$seccion['descrip']."</label>";
+            }
+        }
+
+    }
+    public function procesaAltaSoloEdicionSeccion(){
+        $idEdicion = $_POST["edicion"];
+        foreach ($_POST["seccion"] as $i) {
+            $this->model->altaEdicionSeccion($idEdicion, $i);
+        }
+        redirect::doIt('/contenidista/home');
+    }
+    public function modificarPublicacion(){
+        $data["CONTENIDISTA"]=true;
+        $data['modificar'] = $this->model->getPublicacionxId($_POST['modificar']);
+        $this->renderer->render("/publicacion.mustache",$data);
+    }
+    public function procesaEliminarPublicacion(){
+        $this->model->deleteEdicionxPublicacion($_POST['eliminar']);
+        $this->model->deletePublicacion($_POST['eliminar']);
+        redirect::doIt("/contenidista/home");
+    }
 }
+
+

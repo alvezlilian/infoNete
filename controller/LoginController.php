@@ -35,6 +35,7 @@ class LoginController
         $rolDescripcion = $this->model->getDescripcionById($data["idRol"]);
         $nombre = $data["nombre"];
         $descripcion = $rolDescripcion['descripcion'];
+
         $this->validarResultado($data);
         ValidatorSession::sessionInit($nombre, $descripcion);
         ValidatorSession::routerSession();
@@ -48,13 +49,7 @@ class LoginController
     }
 
     public function cerrarSesion(){
-        if (!isset($_SESSION['rol'])){
-            Redirect::doIt('/');
-        }
-        if (isset($_SESSION['rol'])) {
-            session_destroy();
-            Redirect::doIt('/');
-        }
+       ValidatorSession::cerrarSesion();
     }
 
 
