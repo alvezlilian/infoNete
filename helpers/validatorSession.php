@@ -17,7 +17,7 @@
                     Redirect::doIt("https://www.youtube.com/");
                     break;
                 case "LECTOR":
-                    Redirect::doIt("https://www.netflix.com/");
+                    Redirect::doIt("/");
                     break;
                 default:
                     die(var_dump($_SESSION));

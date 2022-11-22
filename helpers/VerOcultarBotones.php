@@ -7,19 +7,16 @@ class VerOcultarBotones{
         }
         switch ($_SESSION['rol']){
             case "ADMINISTRADOR":
-                return true;
+                return "OKEY";
                 break;
             case "CONTENIDISTA":
-                return true;
+                return "OKEY";
                 break;
             case "ESCRITOR":
-                return true;
+                return "OKEY";
                 break;
             case "LECTOR":
-                return true;
-                break;
-            default:
-                return false;
+                return "OKEY";
                 break;
         }
     }

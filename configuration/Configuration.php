@@ -6,6 +6,7 @@ include_once('helpers/MustacheRenderer.php');
 include_once('helpers/Logger.php');
 include_once('helpers/Router.php');
 include_once('helpers/ValidatorSession.php');
+include_once ('helpers/VerOcultarBotones.php');
 
 /* Models */
 include_once('model/CancionesModel.php');

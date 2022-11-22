@@ -20,7 +20,7 @@ class LoginController
         if (isset($_SESSION['rol'])){
             Redirect::doIt('/');
         }
-        $data['ver'] = VerOcultarBotones::verOcultar();
+        $data = VerOcultarBotones::verOcultar();
         $this->renderer->render("loginView.mustache",$data);
     }
 
@@ -32,7 +32,6 @@ class LoginController
             Redirect::doIt('/login/validarLogin');
         }
         $data = $this->model->validarLogin($email,$clave);
-        //die(var_dump($data["nombre"]));
         $rolDescripcion = $this->model->getDescripcionById($data["idRol"]);
         $nombre = $data["nombre"];
         $descripcion = $rolDescripcion['descripcion'];
