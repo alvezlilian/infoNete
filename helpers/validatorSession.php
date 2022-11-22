@@ -26,10 +26,13 @@
         }
 
         public static function cerrarSesion(){
-            if(!isset($_session['email'])){
+            if (isset($_SESSION['rol'])) {
+                session_destroy();
+                Redirect::doIt('/');
+            }
+            if(!isset($_session['rol'])){
                 die("esta vacio");
             }
-            Redirect::doIt('/');
         }
 
         public static function sessionInit($nombre, $descripcion){

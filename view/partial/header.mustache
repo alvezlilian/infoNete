@@ -25,10 +25,10 @@
 </div>
 
 <div style="float: right">
-    {{^data}}
     <a href='/login/validarLogin' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Iniciar Sesión</a>
-    {{/data}}
     <a href='/login/cerrarSesion' class='w3-bar-item w3-button w3-padding-large'>Cerrar Sesión</a>
+    {{#data}}
+    {{/data}}
 
 
 </div>
