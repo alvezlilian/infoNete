@@ -8,19 +8,19 @@
             }
             switch ($_SESSION['rol']){
                 case "ADMINISTRADOR":
-                    Redirect::doIt("/");
+                    Redirect::doIt("https://www.google.com.ar/?hl=es-419");
                     break;
                 case "CONTENIDISTA":
                     Redirect::doIt("/contenidista/home");
                     break;
                 case "ESCRITOR":
-                    Redirect::doIt("/");
+                    Redirect::doIt("https://www.youtube.com/");
                     break;
                 case "LECTOR":
-                    Redirect::doIt("/");
+                    Redirect::doIt("https://www.netflix.com/");
                     break;
                 default:
-                    Redirect::doIt("/");
+                    die(var_dump($_SESSION));
                     break;
             }
         }
@@ -34,10 +34,10 @@
             }
         }
 
-        public static function sessionInit($userData){
+        public static function sessionInit($nombre, $descripcion){
             session_start();
-            $_SESSION['rol'] = $userData['descripcion'];
-            $_SESSION['name'] = $userData['nombre'];
+            $_SESSION['rol'] = $descripcion;
+            $_SESSION['name'] = $nombre;
         }
 
         public static function tienePermiso($rol){

@@ -28,20 +28,20 @@ class LoginModel
 
             if($idTableUser == $idTableContra){
                 $sql4 = "SELECT nombre,idRol FROM infonete.usuario WHERE email = '$email'";
-                $resultado = $this->database->query($sql4);
+                $resultado = $this->database->queryNum($sql4);
             }
         }
-
-
         return $resultado;
     }
-
-
 
     public function getIdByMail($email){
         $sql = "SELECT id from infonete.usuario WHERE usuario.email = '$email'";
         return $resultado = $this->database->query($sql);
     }
 
+    public function getDescripcionById($idRol){
+        $sql = "SELECT descripcion FROM infonete.rol WHERE id = '$idRol'";
+        return $resultado = $this->database->queryNum($sql);
+    }
 
 }
