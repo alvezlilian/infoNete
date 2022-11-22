@@ -32,6 +32,7 @@ class LoginController
         }
         $data = $this->model->validarLogin($email,$clave);
         $rolDescripcion = $this->model->getDescripcionById($data["idRol"]);
+
         $nombre = $data["nombre"];
         $descripcion = $rolDescripcion['descripcion'];
 
