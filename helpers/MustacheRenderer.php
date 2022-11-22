@@ -15,6 +15,22 @@ class MustacheRenderer {
     }
 
     public function render($viewName, $datos = []) {
+        if(isset($datos['rol'])){
+            switch ($datos['rol']){
+                case "ADMINISTRADOR":
+                    $datos["ADMINISTRADOR"]= true;
+                    break;
+                case "CONTENIDISTA":
+                    $datos["CONTENIDISTA"]= true;
+                    break;
+                case "ESCRITOR":
+                    $datos["ESCRITOR"]= true;
+                    break;
+                case "LECTOR":
+                    $datos["LECTOR"]= true;
+                    break;
+            }
+        }
         $contentAsString =  file_get_contents($this->viewFolder . $viewName);
         echo  $this->mustache->render($contentAsString, $datos);
     }

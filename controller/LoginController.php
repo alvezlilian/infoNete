@@ -2,7 +2,6 @@
 
 class LoginController
 {
-
     private $renderer;
     private $model;
 
@@ -14,28 +13,42 @@ class LoginController
     }
 
     public function list(){
-        die("hola");
     }
 
     public function validarLogin(){
-        $this->renderer->render("loginView.mustache");
+        if (isset($_SESSION['rol'])){
+            Redirect::doIt('/');
+        }
+        $data = VerOcultarBotones::verOcultar();
+        $this->renderer->render("loginView.mustache",$data);
     }
 
     public function procesarLogin(){
-        $email=$_POST['email'];
-        $clave=$_POST['clave'];
-        $data=  $this->model->validaLogin($email,$clave);
-        ValidatorSession::sessionInit($data);
+        $email= $_POST['email'];
+        $clave= $_POST['clave'];
+
+        if ($clave == "" || $email == ""){
+            Redirect::doIt('/login/validarLogin');
+        }
+        $data = $this->model->validarLogin($email,$clave);
+        $rolDescripcion = $this->model->getDescripcionById($data["idRol"]);
+        $nombre = $data["nombre"];
+        $descripcion = $rolDescripcion['descripcion'];
+
+        $this->validarResultado($data);
+        ValidatorSession::sessionInit($nombre, $descripcion);
         ValidatorSession::routerSession();
     }
 
+    public function validarResultado($data){
+        if(!isset($data)||$data==NULL){
+            $mensaje['mensaje'] = "Clave o Correo Incorrectos";
+            $this->renderer->render("loginView.mustache",$mensaje);
+        }
+    }
+
     public function cerrarSesion(){
-        if (isset($_SESSION['email'])) {
-            session_destroy();
-        }
-        if(!isset($_session['email'])){
-            die("esta vacio");
-        }
+       ValidatorSession::cerrarSesion();
     }
 
 

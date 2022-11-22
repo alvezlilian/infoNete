@@ -16,8 +16,9 @@ input.error, textarea.error {
 }
 </style>
    <div class='w3-container w3-content w3-center w3-padding-64' style='max-width:800px' id='band'>
-       <h2 class='w3-wide'>Iniciar Sesión</h2>
 
+       <h2 class='w3-wide'>Iniciar Sesión</h2>
+        <h3>{{#mensaje}}{{mensaje}}{{/mensaje}} </h3>
        <form method="post" action="/login/procesarLogin">
            <div>
                <label>Email:</label>
@@ -27,7 +28,7 @@ input.error, textarea.error {
                <label>password:</label>
                <input type='password' id="clave" name='clave'>
            </div>
-           <button type="submit">Enviar</button>
+           <button type="submit" >Enviar</button>
 
 
        </form>

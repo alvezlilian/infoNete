@@ -1,29 +1,45 @@
+
+
 {{> cabecera}}
 
-        <div class="row d-flex justify-content-center align-items-center" style="margin-top:5%;vertical-align:top">
-            <form method="post" action="#" enctype="multipart/form-data">
+    <div class="row d-flex justify-content-center align-items-center" style="margin-top:5%;width:100%;">
+          <div  style="margin:0 auto;width:40%;height:auto;">
+             <form method="post" action="/contenidista/procesarAltaEdicionSeccion" enctype="multipart/form-data">
                 <div class="form-row">
                     <div class="form-group col-md-6" style="max-width: 50%;margin-top:1%;float:left;">
                         <label for="cars">Publicacion</label>
-                          <select name="publicacion" id="cars" style="width:100%;" >
+                          <select name="publicacion"  class="form-control" style="width:100%;" >
                             {{#publicaciones}}
-                            <option value={{informacion}}>{{informacion}}</option>
+                                <option value={{id}}>{{informacion}}</option>
                             {{/publicaciones}}
                           </select>
                     </div>
                     <div class="form-group col-md-6"style="max-width: 50%">
                         <label for="inputnombre">Numero Edicion</label>
-                        <input type="text" class="form-control" id="inputnombre" placeholder="Nombre" name="descrip">
+                        <input type="text" class="form-control" id="inputnombre" name="edicion">
                     </div>
                     <div class="form-group col-md-6"style="max-width: 50%">
                           <h3>Secciones a agregar</h3>
                           {{#secciones}}
-                              <input type="checkbox" name={{descrip}} value={{descrip}}>
-                              <label for={{descrip}}> {{descrip}}</label>
+                              <input type="checkbox" name=seccion[] value={{id}}>
+                              <label>{{descrip}}</label>
                           {{/secciones}}
                     </div>
+                    <div class="form-group col-md-6">
+                        <label >Valor de la edicion</label>
+                        <input type="number" name="valor" class="form-control" placeholder="$9999"
+                         ondrop="return false" onkeypress="return event.charCode>=48 && event.charCode<=57">
+                    </div>
                     <button type="submit"  class="btn btn-dark btn-lg btn-block ">Guardar</button>
+                    {{#error}}
+                        <div style="border: 1px solid black; width=100%; text-align:center; margin:0 auto; margin-top: 2%;" class="form-group col-md-6">
+                            <h4>Error !!</h4>
+                              <span style="color: red;"> Ya existe el numero de edicion que desea crear </span>
+                        </div>
+                    {{/error}}
                 </div>
-            </form>
-        </div>
+             </form>
+          </div>
+    </div>
+
 {{> footer}}

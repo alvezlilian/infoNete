@@ -1,0 +1,38 @@
+{{> cabecera}}
+    {{#modificar}}
+        <div class="row d-flex justify-content-center align-items-center" style="margin-top:5%;">
+            <form method="post" action="/contenidista/procesarAlta" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-md-6" style="max-width: 100%;">
+                        <label >Edite el nombre de la publicacion</label>
+                        <input type="hidden" class="form-control"  name="idPublicacion" value="{{id}}">
+                        <input type="text" class="form-control"  name="descrip" value="{{informacion}}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="imagen">Imagen</label>
+                        <input type="file" class="form-control" name="imagen" accept="image/png, image/jpeg">
+                    </div>
+                </div>
+                <button type="submit"  class="btn btn-dark btn-lg btn-block ">Modificar</button>
+            </form>
+        </div>
+    {{/modificar}}
+    {{#alta}}
+        <div class="row d-flex justify-content-center align-items-center" style="margin-top:5%;">
+            <form method="post" action="/contenidista/procesarAlta" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-md-6" style="max-width: 100%;">
+                        <label for="inputnombre">Nombre publicacion</label>
+                        <input type="text" class="form-control" id="inputnombre" placeholder="Nombre" name="descrip">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="imagen">Imagen</label>
+                        <input type="file" class="form-control" name="imagen" accept="image/png, image/jpeg">
+                    </div>
+                </div>
+                <button type="submit"  class="btn btn-dark btn-lg btn-block ">Guardar</button>
+            </form>
+        </div>
+    {{/alta}}
+
+{{> footer}}
