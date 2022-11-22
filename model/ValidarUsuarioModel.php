@@ -13,7 +13,7 @@ class ValidarUsuarioModel
 
     public function validarUsuario($codigo){
 
-        $resultado = "SELECT * from infonete.contrasenia WHERE contrasenia.clave = '$codigo' ";
+        $resultado = "SELECT * from contrasenia WHERE contrasenia.clave = '$codigo' ";
         //$resultado = $this->database->query($sql);
 
         if(!isset($resultado)||$resultado==NULL){

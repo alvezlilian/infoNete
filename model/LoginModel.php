@@ -10,7 +10,7 @@ class LoginModel
 
     public function validarLogin($email,$clave){
         $resultado = 0;
-        $sql1 = "SELECT clave FROM infonete.contrasenia WHERE idUsuario = (SELECT id FROM infonete.usuario WHERE email = '$email')";
+        $sql1 = "SELECT clave FROM contrasenia WHERE idUsuario = (SELECT id FROM usuario WHERE email = '$email')";
         $resHash = $this->database->queryNum($sql1);
         $parseHash = implode($resHash);
         $hash = substr($parseHash, 0, 60);
@@ -18,16 +18,16 @@ class LoginModel
         $validarHash = (password_verify($clave, $hash));
 
         if ($validarHash) {
-            $sql2 = "SELECT id FROM infonete.usuario WHERE email = '$email'";
+            $sql2 = "SELECT id FROM usuario WHERE email = '$email'";
             $resIdTableUser = $this->database->queryNum($sql2);
             $idTableUser = implode($resIdTableUser);
 
-            $sql3 = "SELECT idUsuario FROM infonete.contrasenia WHERE clave = '$hash'";
+            $sql3 = "SELECT idUsuario FROM contrasenia WHERE clave = '$hash'";
             $resIdTableContra = $this->database->queryNum($sql3);
             $idTableContra = implode($resIdTableContra);
 
             if($idTableUser == $idTableContra){
-                $sql4 = "SELECT nombre,idRol FROM infonete.usuario WHERE email = '$email'";
+                $sql4 = "SELECT nombre,idRol FROM usuario WHERE email = '$email'";
                 $resultado = $this->database->queryNum($sql4);
             }
         }
@@ -35,12 +35,12 @@ class LoginModel
     }
 
     public function getIdByMail($email){
-        $sql = "SELECT id from infonete.usuario WHERE usuario.email = '$email'";
+        $sql = "SELECT id from usuario WHERE usuario.email = '$email'";
         return $resultado = $this->database->query($sql);
     }
 
     public function getDescripcionById($idRol){
-        $sql = "SELECT descripcion FROM infonete.rol WHERE id = '$idRol'";
+        $sql = "SELECT descripcion FROM rol WHERE id = '$idRol'";
         return $resultado = $this->database->queryNum($sql);
     }
 

@@ -11,18 +11,18 @@ class ValidarLoginModel
 
     public function validarLogin($email,$clave){
         $resultado = 0;
-        $sql1 = "SELECT clave FROM infonete.contrasenia WHERE idUsuario = (SELECT id FROM infonete.usuario WHERE email = '$email')";
+        $sql1 = "SELECT clave FROM contrasenia WHERE idUsuario = (SELECT id FROM usuario WHERE email = '$email')";
         $hash = $this->database->query($sql1);
 
         if ((password_verify($clave, $hash))) {
-            $sql2 = "SELECT id FROM infonete.usuario WHERE email = '$email'";
+            $sql2 = "SELECT id FROM usuario WHERE email = '$email'";
             $idTableUser = $this->database->query($sql2);
 
-            $sql3 = "SELECT idUsuario FROM infonete.contrasenia WHERE clave = '$hash'";
+            $sql3 = "SELECT idUsuario FROM contrasenia WHERE clave = '$hash'";
             $idTableContra = $this->database->query($sql3);
 
             if($idTableUser == $idTableContra){
-                $sql4 = "SELECT nombre,idRol FROM infonete.usuario WHERE email = '$email'";
+                $sql4 = "SELECT nombre,idRol FROM usuario WHERE email = '$email'";
                 $resultado = $this->database->query($sql4);
             }
         }
@@ -50,7 +50,7 @@ class ValidarLoginModel
     }
 
     public function getIdByMail($email){
-        $sql = "SELECT id from infonete.usuario WHERE usuario.email = '$email'";
+        $sql = "SELECT id from usuario WHERE usuario.email = '$email'";
         return $resultado = $this->database->query($sql);
     }
 

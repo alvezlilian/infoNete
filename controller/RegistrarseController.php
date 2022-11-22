@@ -60,7 +60,7 @@ class RegistrarseController
     public function validarCodigo(){
         $codigo = $this->model->validarCodigoRegistro($_POST['codigo']);
         if($codigo){
-            $this->renderer->render("login.mustache");
+            $this->renderer->render("loginView.mustache");
         }else{
             $mensaje['mensaje'] = "Codigo erroneo";
             $this->renderer->render("validarUsuarioForm.mustache",$mensaje);
