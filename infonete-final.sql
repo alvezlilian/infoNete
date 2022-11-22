@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2022 a las 23:33:52
+-- Tiempo de generación: 22-11-2022 a las 01:46:05
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -68,6 +68,14 @@ CREATE TABLE `contrasenia` (
                                `codigo` int(11) NOT NULL,
                                `validado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `contrasenia`
+--
+
+INSERT INTO `contrasenia` (`id`, `clave`, `idUsuario`, `codigo`, `validado`) VALUES
+                                                                                 (20, '$2y$10$dK6OgUC5Lae9aDnQTccMJ.ywCrmYGpUCS0EgTsKlqYp2LplYQYvh.', 37, 468771, 1),
+                                                                                 (21, '$2y$10$3Yq3lvSjnGH40/jJ0tF3Tu5ohvFRxNOL/7PT3doD7Bu03udt9t8hq', 38, 659843, 1);
 
 -- --------------------------------------------------------
 
@@ -212,6 +220,16 @@ CREATE TABLE `rol` (
                        `descripcion` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`id`, `descripcion`) VALUES
+                                            (1, 'LECTOR'),
+                                            (2, 'ADMINISTRADOR'),
+                                            (3, 'ESCRITOR'),
+                                            (4, 'CONTENIDISTA');
+
 -- --------------------------------------------------------
 
 --
@@ -262,6 +280,14 @@ CREATE TABLE `usuario` (
                            `activo` tinyint(1) NOT NULL,
                            `idRol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nombre`, `ubicacion`, `email`, `latitud`, `longitud`, `activo`, `idRol`) VALUES
+                                                                                                           (37, 'Agustin', 'Direccion', 'test@test.com', '-34.6882825', '-58.6118834', 1, 1),
+                                                                                                           (38, 'Joni', 'Direccion', 'asd@asd', '-34.6882672', '-58.6118902', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -373,7 +399,7 @@ ALTER TABLE `articulo`
 -- AUTO_INCREMENT de la tabla `contrasenia`
 --
 ALTER TABLE `contrasenia`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `edicion`
@@ -403,7 +429,7 @@ ALTER TABLE `publicacion`
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `seccion`
@@ -421,7 +447,7 @@ ALTER TABLE `suscripcion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Restricciones para tablas volcadas
