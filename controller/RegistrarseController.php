@@ -42,7 +42,7 @@ class RegistrarseController
 
         if($this->estaRegistrado($email)){
             $codigo= $this->generarCodigoVerificacion();
-            //$this->archivoEnvioMailConfirmacion($email,$nombre,$codigo);
+            $this->archivoEnvioMailConfirmacion($email,$nombre,$codigo);
             //$this->envioEmailConfirmacion($email,$nombre,$codigo);
             $this->model->alta($nombre,$email,$direccion,$claveEncriptada,$latitud,$longitud,$codigo);
             $this->renderer->render("validarUsuarioForm.mustache");
@@ -68,10 +68,12 @@ class RegistrarseController
         }
     }
 
+
+
     public function archivoEnvioMailConfirmacion($email, $nombre, $codigo){
         $fh = fopen("mailConfirmacion.txt", 'w') or die("Se produjo un error al crear el archivo");
 
-        $texto = <<<_END
+        $texto = "
         <h2>Gracias por registrarse!</h2><br>
         <p>------------------------</p><br>
         Username: ".$nombre."<br>
@@ -80,7 +82,7 @@ class RegistrarseController
         <p>Su cuenta fue creada exitosamente. Confirme su dirección de correo electrónico clickeando el link o copia la siguiente url en tu navegador:</p><br>
         <p>http://localhost/registrarse/validarCodigo</p>
         <a href='http://localhost/registrarse/validarCodigo'> VERIFICA TU MAIL</a>
-        _END;
+        ";
 
         fwrite($fh, $texto) or die("No se pudo escribir en el archivo");
 
