@@ -46,12 +46,7 @@ class LoginController
     }
 
     public function cerrarSesion(){
-        if (isset($_SESSION['rol'])) {
-            session_destroy("Me fui");
-        }
-        if(!isset($_session['rol'])){
-            die("esta vacio, false");
-        }
+       ValidatorSession::cerrarSesion();
     }
 
 
