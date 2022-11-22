@@ -1,7 +1,8 @@
-{{> cabecera}}
+{{>cabecera}}
 <!-- The Band Section -->
+<div class='w3-content' style='width: 95%;margin-top:46px;'>
 <div style="margin-top: 50px">
-<button id="botonEditar"  onclick="MostrarformParaEditar()" style="margin-top: 30px">editar</button><br>
+<button id="botonEditar"  onclick="MostrarformParaEditar()" >editar</button><br>
 <button id="botonCancelar" onclick="MostrarformParaEditar()" style="visibility: hidden;border: bisque 2px solid;
 ">Cancelar</button>
 
@@ -64,6 +65,7 @@
 {{/nota}}
     </form>
 </div>
+
 
 <script >
     function MostrarformParaEditar(){

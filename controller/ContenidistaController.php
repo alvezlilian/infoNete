@@ -21,12 +21,19 @@ class ContenidistaController{
     }
 
     public function alta(){
+        if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+            ValidatorSession::routerSession();
+        }
         $data["CONTENIDISTA"]=true;
         $data['alta'] = true;
         $this->renderer->render("publicacion.mustache",$data);
     }
 
     public function procesarAlta(){
+
+        if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+            ValidatorSession::routerSession();
+        }
         $path="public/img/publications/";
         $nombre = $_POST["descrip"];
 
@@ -44,6 +51,9 @@ class ContenidistaController{
     }
 
     public function altaEdicion(){
+        if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+            ValidatorSession::routerSession();
+        }
         $data['secciones']=$this->model->getSecciones();
         $data['publicaciones'] = $this->model->getPublicaciones();
         $data["CONTENIDISTA"]=true;
@@ -52,6 +62,9 @@ class ContenidistaController{
     }
     public function procesarAltaEdicionSeccion()
     {
+        if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+            ValidatorSession::routerSession();
+        }
         $numEdicion = $_POST["edicion"];
         $valor = $_POST["valor"];
         $idPublicacion = (int)$_POST["publicacion"];
@@ -77,6 +90,9 @@ class ContenidistaController{
         }
     }
     public function agregarSeccion(){
+        if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+            ValidatorSession::routerSession();
+        }
         $data['secciones'] = $this->model->getSecciones();
         $data['publicaciones'] = $this->model->getPublicaciones();
         $data["CONTENIDISTA"] = true;
@@ -89,6 +105,9 @@ class ContenidistaController{
         }
     }
     public function obtenerSecciones(){
+        if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+            ValidatorSession::routerSession();
+        }
         $idEdicion = $_POST['edicion'];
         $seccionesInexistentes= $this->model->getSeccionesInexistenes($idEdicion);
         $seccionesExistentes = $this->model->getSeccionesExistenes($idEdicion);
@@ -113,6 +132,9 @@ class ContenidistaController{
 
     }
     public function procesaAltaSoloEdicionSeccion(){
+        if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+            ValidatorSession::routerSession();
+        }
         $idEdicion = $_POST["edicion"];
         foreach ($_POST["seccion"] as $i) {
             $this->model->altaEdicionSeccion($idEdicion, $i);

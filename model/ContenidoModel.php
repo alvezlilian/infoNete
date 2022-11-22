@@ -37,7 +37,7 @@ public function nuevaNoticia($tituloNoticia, $subtitulo, $edicion, $seccionNotic
 
     }
     public function EditNota($id){
-        $sql = "SELECT nota.* ,edicion.descrip as descripEdicion,seccion.descrip as descripSeccion,estadodepublicacion.Estado as estado FROM nota 
+        $sql = "SELECT nota.* ,edicion.descrip as descripEdicion,seccion.descrip as descripSeccion,estadodepublicacion.Estado as Estado FROM nota 
                  JOIN seccion ON nota.idSeccion=seccion.id 
                 JOIN edicion on nota.idEdicion=edicion.id 
                  join estadodepublicacion on estadodepublicacion.id = nota.idEstado 

@@ -20,18 +20,23 @@ class ContenidoController
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
         }
-
-
-
-
     }
+
+
     public function home(){
+
+        if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+            ValidatorSession::routerSession();
+        }
         $data['rol'] = $_SESSION['rol'];
         $data['contenido']=$this->model->getContenido();
         $this->renderer->render('listaContenido.mustache', $data);
 
     }
     public function editar(){
+        if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+            ValidatorSession::routerSession();
+        }
         $data['rol'] = $_SESSION['rol'];
 
         $id=$_GET["id"];
@@ -42,7 +47,10 @@ class ContenidoController
 
     public function crearNoticia()
 
-    {
+    {   if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+        ValidatorSession::routerSession();
+    }
+
         $data['rol'] = $_SESSION['rol'];
         $data["secciones"]=$this->model->getSecciones();
         $data["ediciones"]=$this->model->getEdiciones();
@@ -50,7 +58,9 @@ class ContenidoController
 
     }
     public function actualizar(){
-
+        if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+            ValidatorSession::routerSession();
+        }
         $data['rol'] = $_SESSION['rol'];
 
         $carpeta="public/img/";
@@ -70,6 +80,9 @@ class ContenidoController
         $this->home();
     }
     public function eliminar(){
+        if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+            ValidatorSession::routerSession();
+        }
         $data['rol'] = $_SESSION['rol'];
         $id=$_GET["id"];
       $fueEliminado=  $this->model->eliminarNota($id);
@@ -83,6 +96,9 @@ class ContenidoController
 
     public function cargarNoticia()
     {
+        if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+            ValidatorSession::routerSession();
+        }
         $data['rol'] = $_SESSION['rol'];
 
         $carpeta="public/img/";
