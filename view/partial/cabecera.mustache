@@ -35,9 +35,18 @@
 {{/CONTENIDISTA}}
 
 {{#ESCRITOR}}
-         
-             <h1>jjjjjjjjjjjjjj</h1>
-{{/ESCRITOR}}
+
+    <div class='w3-top'>
+        <div class='w3-bar w3-black w3-card'>
+            <a class='w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right'
+               href='javascript:void(0)' onclick='myFunction()' title='Toggle Navigation Menu'><i
+                    class='fa fa-bars'></i></a>
+            <a href='/contenido/home' class='w3-bar-item w3-button w3-padding-large'>Inicio</a>
+            <a href='/contenido/crearNoticia' class='w3-bar-item w3-button w3-padding-large'>Crear Noticia</a>
+
+        </div>
+        {{> logoutButtonView}}
+    </div>{{/ESCRITOR}}
 
 {{#LECTOR}}
             <!-- Divider -->

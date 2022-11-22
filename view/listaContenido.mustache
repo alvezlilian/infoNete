@@ -1,11 +1,8 @@
-{{> header}}
+{{> cabecera}}
 
 
 <div class=' w3-padding-64' >
     <h2 class='w3-wide' style="text-align: center">Lista de notas </h2>
-    {{#msj}}
-        <p>{{msj}}</p>
-{{/msj}}
 <div class="contenedor" style="width: 100%">
 {{#contenido}}
 
@@ -13,8 +10,8 @@
     <div style="width: 40%">
 
         <p   style="font-size: 10px; display: inline; margin-right: 20px" >Estado -> {{Estado}} </p>
-        <p  style="font-size: 10px; display: inline ; margin-right: 20px"> Edicion: {{descripEdicion}}</p>
-        <p  style="font-size: 10px; display: inline"> Seccion: {{descripSeccion}}</p>
+        <p  style="font-size: 10px; display: inline ; margin-right: 20px"> Edicion: {{descrip}}</p>
+        <p  style="font-size: 10px; display: inline"> Seccion: {{descrip}}</p>
 
 
 
@@ -25,15 +22,15 @@
 
 
             <h5>{{Subtitulo}}</h5>
-      <a href="editar?id={{idNota}}" style="border-bottom: 1px solid black;texte-decoretion: none;
+      <a href="editar?id={{id}}" style="border-bottom: 1px solid black;texte-decoretion: none;
 
         ">Ver mas</a>
         <br>
 
         <br>
 
-        <a href="editar?id={{idNota}}" style="  border: darkcyan 1px solid; padding :5px"  >Editar</a>
-        <a href="eliminar?id={{idNota}}"  style="  border: darkcyan 1px solid; padding :5px; margin-left:8px">Eliminar
+        <a href="editar?id={{id}}" style="  border: darkcyan 1px solid; padding :5px"  >Editar</a>
+        <a href="eliminar?id={{id}}"  style="  border: darkcyan 1px solid; padding :5px; margin-left:8px">Eliminar
     </a>
 
 

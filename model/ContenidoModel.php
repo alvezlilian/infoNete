@@ -7,20 +7,22 @@ class ContenidoModel {
         $this->database = $database;
     }
 public function getSecciones(){
-    $sql = 'SELECT * FROM infonete.seccion';
+    $sql = 'SELECT * FROM seccion';
     return $this->database->query($sql);
 
 }
 
     public function getEdiciones(){
-        $sql = 'SELECT * FROM infonete.edicion';
+        $sql = 'SELECT * FROM edicion';
         return $this->database->query($sql);
 
     }
     public function getContenido(){
-        $sql = 'SELECT * FROM infonete.nota JOIN infonete.seccion ON nota.idSeccion=seccion.id 
-                                            JOIN infonete.edicion on nota.idEdicion=edicion.id 
-                                            join infonete.estadodepublicacion on estadodepublicacion.id = nota.idEstado';
+        $sql = "SELECT nota.* ,edicion.descrip as descripEdicion,seccion.descrip as descripSeccion,estadodepublicacion.Estado as estado 
+                FROM nota JOIN seccion ON nota.idSeccion=seccion.id 
+                JOIN edicion on nota.idEdicion=edicion.id 
+             join estadodepublicacion on estadodepublicacion.id = nota.idEstado";
+
         return $this->database->query($sql);
 
 }
@@ -28,28 +30,29 @@ public function nuevaNoticia($tituloNoticia, $subtitulo, $edicion, $seccionNotic
 
        $valor=1;
 
-        $sql="INSERT INTO infonete.nota( Titulo, Subtitulo, contenido, idSeccion, idEdicion,precio,Imagen,idEstado,link)
+        $sql="INSERT INTO nota( Titulo, Subtitulo, contenido, idSeccion, idEdicion,precio,Imagen,idEstado,link)
                     VALUES ('$tituloNoticia','$subtitulo','$descripcionNoticia','$seccionNoticia','$edicion','$precioNoticia','$archivo','$valor','$link')";
                    $this->database->execute($sql);
 
 
     }
     public function EditNota($id){
-        $sql = "SELECT * FROM infonete.nota JOIN infonete.seccion ON nota.idSeccion=seccion.id 
-                                            JOIN infonete.edicion on nota.idEdicion=edicion.id 
-                                            join infonete.estadodepublicacion on estadodepublicacion.id = nota.idEstado
-                                            WHERE nota.idNota='$id'";
+        $sql = "SELECT nota.* ,edicion.descrip as descripEdicion,seccion.descrip as descripSeccion,estadodepublicacion.Estado as estado FROM nota 
+                 JOIN seccion ON nota.idSeccion=seccion.id 
+                JOIN edicion on nota.idEdicion=edicion.id 
+                 join estadodepublicacion on estadodepublicacion.id = nota.idEstado 
+                  WHERE nota.id='$id'";
         return $this->database->query($sql);
     }
     public function actualizarNota($id,$tituloNoticia, $subtitulo, $precioNoticia, $descripcionNoticia, $archivo,$link){
-        $sql="UPDATE infonete.nota 
+        $sql="UPDATE nota 
               SET Titulo='$tituloNoticia',Subtitulo='$subtitulo',Imagen='$archivo',`contenido`='$descripcionNoticia',`link`='$link',`precio`='$precioNoticia'
-              WHERE idNota='$id'";
+              WHERE id='$id'";
         return $this->database->execute($sql);
     }
 
     public function eliminarNota($id){
-        $sql="DELETE FROM infonete.nota WHERE idNota=$id";
+        $sql="DELETE FROM nota WHERE id=$id";
       return  $this->database->execute($sql);
     }
 

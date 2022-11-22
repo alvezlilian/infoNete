@@ -1,13 +1,5 @@
 
-{{> header}}
-
-
-
-<!-- The Band Section -->
-
-
-
-
+{{>cabecera}}
 
 <div class="row d-flex justify-content-center align-items-center mt-500" >
 
@@ -34,7 +26,7 @@
             <label for="inputEdicion">Edicion</label>
             <select name="edicion"class="form-control">
                {{#ediciones}}
-                    <option value="{{id}}" >{{descripEdicion}}</option>
+                    <option value="{{id}}" >{{descrip}}</option>
                 {{/ediciones}}
             </select>
         </div>
@@ -46,7 +38,7 @@
 
             <select name="seccion"class="form-control">
                     {{#secciones}}
-                        <option value="{{id}}" >{{descripSeccion}}</option>
+                        <option value="{{id}}" >{{descrip}}</option>
 
                     {{/secciones}}
                 </select>

@@ -17,14 +17,23 @@ class ContenidoController
 
     public function list()
     {
+        if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+            ValidatorSession::routerSession();
+        }
 
-    $data['contenido']=$this->model->getContenido();
-  //  $data['msj']=$msj;
-        $this->renderer->render('listaContenido.mustache', $data);
+
 
 
     }
+    public function home(){
+        $data['rol'] = $_SESSION['rol'];
+        $data['contenido']=$this->model->getContenido();
+        $this->renderer->render('listaContenido.mustache', $data);
+
+    }
     public function editar(){
+        $data['rol'] = $_SESSION['rol'];
+
         $id=$_GET["id"];
         $date["nota"]=$this->model->EditNota($id);
         $this->renderer->render("edit.mustache",$date);
@@ -34,6 +43,7 @@ class ContenidoController
     public function crearNoticia()
 
     {
+        $data['rol'] = $_SESSION['rol'];
         $data["secciones"]=$this->model->getSecciones();
         $data["ediciones"]=$this->model->getEdiciones();
         $this->renderer->render("contenidoForm.mustache",$data);
@@ -41,6 +51,7 @@ class ContenidoController
     }
     public function actualizar(){
 
+        $data['rol'] = $_SESSION['rol'];
 
         $carpeta="public/img/";
         $id=$_POST["id"];
@@ -56,10 +67,10 @@ class ContenidoController
         move_uploaded_file($archivoTemporal,$carpeta.$archivo);
        $link=$_POST["linkNoticia"];
         $this->model->actualizarNota($id,$tituloNoticia, $subtitulo, $precioNoticia, $descripcionNoticia, $archivo,$link);
-        $this->list();
+        $this->home();
     }
     public function eliminar(){
-      $msj="";
+        $data['rol'] = $_SESSION['rol'];
         $id=$_GET["id"];
       $fueEliminado=  $this->model->eliminarNota($id);
       if ($fueEliminado){
@@ -72,6 +83,8 @@ class ContenidoController
 
     public function cargarNoticia()
     {
+        $data['rol'] = $_SESSION['rol'];
+
         $carpeta="public/img/";
         $tituloNoticia = $_POST["tituloNoticia"];
         $subtitulo = $_POST["subtituloNoticia"];
@@ -93,7 +106,7 @@ class ContenidoController
 
         $this->model->nuevaNoticia($tituloNoticia, $subtitulo, $edicion, $seccionNoticia, $precioNoticia, $descripcionNoticia, $archivo,$link);
 
-       Redirect::doIt("contenido");
+       Redirect::doIt("home");
     }
 
 

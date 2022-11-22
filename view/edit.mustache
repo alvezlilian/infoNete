@@ -1,4 +1,4 @@
-{{> header}}
+{{> cabecera}}
 <!-- The Band Section -->
 <div style="margin-top: 50px">
 <button id="botonEditar"  onclick="MostrarformParaEditar()" style="margin-top: 30px">editar</button><br>
@@ -27,7 +27,7 @@
     <div class="form-row">
         <labe class="label">Titulo noticia</labe>
         <textarea id="tituloNoticia"  class="form-control"name="tituloNoticia"  rows="3"onkeyup="myFunction()">{{Titulo}}</textarea>
-        <input type="number" name="id" style="display: none" value="{{idNota}}" id="id">
+        <input type="number" name="id" style="display: none" value="{{id}}" id="id">
     </div>
 
     <div class="form-group">

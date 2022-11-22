@@ -14,7 +14,7 @@
                     Redirect::doIt("/contenidista/home");
                     break;
                 case "ESCRITOR":
-                    Redirect::doIt("https://www.youtube.com/");
+                    Redirect::doIt("/contenido/home");
                     break;
                 case "LECTOR":
                     Redirect::doIt("/lector/home");
