@@ -1,60 +1,77 @@
 
-{{> header}}
-<!-- The Band Section -->
+{{>cabecera}}
 
-<div class="row d-flex justify-content-center align-items-center h-100">
-    <form method="post" action="/contenido/cargarNoticia" enctype="multipart/form-data">
+<div class="row d-flex justify-content-center align-items-center mt-500" >
+
+
+
+    <form method="post" action="/contenido/cargarNoticia" enctype="multipart/form-data" class="w3-padding-64">
 
     <div class="form-row">
 
         <div class="form-group col-md-6">
             <label for="tituloNoticia">Titulo</label>
-            <input type="text" class="form-control" id="tituloNoticia" placeholder="Titulo" name="tituloNoticia">
+            <input type="text" class="form-control" id="tituloNoticia" placeholder="Titulo" name="tituloNoticia" required>
         </div>
+
+
         <div class="form-group col-md-6">
             <label for="subtituloNoticia">Subtitulo</label>
-            <input type="text" class="form-control" id="subtituloNoticia"  name="subtituloNoticia">
+            <input type="text" class="form-control" id="subtituloNoticia"  name="subtituloNoticia" required>
         </div>
 
 
 
         <div class="form-group col-md-6">
             <label for="inputEdicion">Edicion</label>
-            <input type="text" class="form-control" id="inputEdicion"  name="edicion">
+            <select name="edicion"class="form-control">
+               {{#ediciones}}
+                    <option value="{{id}}" >{{descrip}}</option>
+                {{/ediciones}}
+            </select>
         </div>
+
+
+
         <div class="form-group col-md-6">
-            <label for="seccionNoticia">Seccion de la noticia</label>
-            <input type="text" class="form-control" id="seccionNoticia" name="seccionNoticia">
+            <label for="inputEdicion">Seccion</label>
+
+            <select name="seccion"class="form-control">
+                    {{#secciones}}
+                        <option value="{{id}}" >{{descrip}}</option>
+
+                    {{/secciones}}
+                </select>
         </div>
 
 
         <div class="form-group col-md-6">
             <label for="precioNoticia">Precio de la Noticia</label>
-            <input type="number" class="form-control" id="precioNoticia" name="precioNoticia">
+            <input type="number" class="form-control" id="precioNoticia" name="precioNoticia" required>
         </div>
-
     </div>
     <div class="form-group">
         <label for="contenidoNoticia">Descripcion de la noticia</label>
-        <textarea class="form-control" id="contenidoNoticia" rows="5" name="contenidoNoticia"></textarea>
+        <textarea class="form-control" id="contenidoNoticia" rows="5" name="contenidoNoticia" required></textarea>
     </div>
         <div class="form-group col-md-6">
         <label for="imagen">imagenes </label>
-        <input type="file" class="form-control-file" id="imagen" name="imagen">
+        <input type="file" class="form-control-file" id="imagen" name="imagen" >
     </div>
 
         <div class="form-group col-md-6">
             <label for="link">Link de la noticia</label>
             <input type="text" class="form-control" id="linkNoticia" name="linkNoticia">
         </div>
+
         <div class="form-group">
     <button type="submit"  class="btn btn-dark btn-lg btn-block " name="boton">Guardar</button>
-            </div>
+
+        </div>
+
 </form>
-</div>
 
 </div>
-
 
 {{> footer}}
-<script type="text/javascript" src="../public/js/validarDatos.js"></script>
+

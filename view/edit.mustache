@@ -1,0 +1,92 @@
+{{>cabecera}}
+<!-- The Band Section -->
+<div class='w3-content' style='width: 95%;margin-top:46px;'>
+<div style="margin-top: 50px">
+<button id="botonEditar"  onclick="MostrarformParaEditar()" >editar</button><br>
+<button id="botonCancelar" onclick="MostrarformParaEditar()" style="visibility: hidden;border: bisque 2px solid;
+">Cancelar</button>
+
+
+
+
+     <div id="textoOcultar">{{#nota}}
+<p  class="p">Estado -> {{Estado}} </p> <p class="p" > Edicion: {{descripEdicion}}</p>
+         <p class="p" > Seccion: {{descripSeccion}}</p>
+            <h1 style="font-weight: bold">{{Titulo}}</h1>
+         <h3 style="text-align: left">{{Subtitulo}}</h3>
+
+            <img src="../public/Img/{{Imagen}}" alt="" style="margin-bottom: 15px">
+               <div>{{contenido}}</div>
+
+         {{/nota}}
+     </div>
+<form action="actualizar" method="post" style="display: none" enctype="multipart/form-data" id="FormEdicionMostrar" >
+{{#nota}}
+    <p  class="p">Estado -> {{Estado}} </p> <p class="p" > Edicion: {{descripEdicion}}</p><p class="p" > Seccion: {{descripSeccion}}</p>
+
+
+    <div class="form-row">
+        <labe class="label">Titulo noticia</labe>
+        <textarea id="tituloNoticia"  class="form-control"name="tituloNoticia"  rows="3"onkeyup="myFunction()">{{Titulo}}</textarea>
+        <input type="number" name="id" style="display: none" value="{{id}}" id="id">
+    </div>
+
+    <div class="form-group">
+        <label for="subtitulo" class="label">Subtitulo de la noticia</label>
+        <textarea class="form-control"  onkeyup="myFunction()" rows="5" name="subtituloNoticia">{{Subtitulo}}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="contenidoNoticia" class="label">Descripcion de la noticia</label>
+        <textarea class="form-control" id="contenidoNoticia" onkeyup="myFunction()" rows="20" name="contenidoNoticia">{{contenido}}</textarea>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="precioNoticia" class="label">Precio de la Noticia</label>
+        <input type="number" id="precioNoticia" name="precioNoticia" onkeyup="myFunction()" value="{{precio}}">
+
+    </div>
+
+    <div class="form-group col-md-6">
+        <img src="../public/Img/{{Imagen}}" alt="">
+        <label for="imagen" class="label">Seleccionar si deseas cambiar imagen </label>
+        <input type="file" class="form-control-file"  id="imagen" name="imagen">
+    </div>
+
+    <div class="form-group col-md-6">
+        <label for="link" class="label">Link de la noticia</label>
+        <input type="text" class="form-control" id="linkNoticia" value="{{link}}" name="linkNoticia">
+    </div>
+
+    <div class="form-group">
+        <button type="submit"  class="btn btn-dark btn-lg btn-block " name="boton">Guardar</button>
+
+    </div>
+
+{{/nota}}
+    </form>
+</div>
+
+
+<script >
+    function MostrarformParaEditar(){
+        console.log(document.getElementById("id"))
+        if (document.getElementById("textoOcultar").style.display !="none" ) {
+            document.getElementById("textoOcultar").style.display ="none"
+            document.getElementById("FormEdicionMostrar").style.display="block";
+            document.getElementById("botonEditar").style.visibility="hidden";
+            document.getElementById("botonCancelar").style.visibility="visible";
+
+        } else {
+            console.log(document.getElementById("FormEdicionMostrar").style.visibility=="visible")
+
+            document.getElementById("textoOcultar").style.display="block"
+            document.getElementById("FormEdicionMostrar").style.display="none";
+            document.getElementById("botonEditar").style.visibility="visible";
+            document.getElementById("botonCancelar").style.visibility="hidden";
+        }
+
+    }
+
+
+</script>
+{{> footer}}

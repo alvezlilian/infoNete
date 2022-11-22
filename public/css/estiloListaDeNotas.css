@@ -1,0 +1,28 @@
+.contenedor {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+
+
+}
+.titulo{
+text-align: center
+}
+.contenedor div {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+    margin: 5px;
+}
+.contenedor button {
+    background-color: coral;
+    height: 70px;
+    padding: 8px;
+    margin: 10px;
+
+}
+.ico {
+    width: 30px;
+}

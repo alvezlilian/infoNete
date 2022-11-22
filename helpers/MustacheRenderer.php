@@ -34,4 +34,5 @@ class MustacheRenderer {
         $contentAsString =  file_get_contents($this->viewFolder . $viewName);
         echo  $this->mustache->render($contentAsString, $datos);
     }
+
 }
