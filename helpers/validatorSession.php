@@ -8,7 +8,7 @@
             }
             switch ($_SESSION['rol']){
                 case "ADMINISTRADOR":
-                    Redirect::doIt("https://www.google.com.ar/?hl=es-419");
+                    Redirect::doIt("/AbmAdministrador/home");
                     break;
                 case "CONTENIDISTA":
                     Redirect::doIt("/contenidista/home");

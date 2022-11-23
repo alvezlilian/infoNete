@@ -35,18 +35,39 @@ function muestraSecciones(idEdicion) {
         }
     });
 }
-/*function obtenerIdPublicacion(idPublicacion) {
+function muestraEdicionesANotas(idPublicacion) {
     var parametros = {
-        "idPublicacion" : idPublicacion
+        "publicacion" : idPublicacion
     };
     $.ajax({
         data:  parametros,
-        url:   '/lector/verEdiciones',
+        url:   '/contenido/obtenerPublicaciones',
         type:  'POST',
-        success:  function (data) {
+        beforeSend: function () {
+        },
+        success:  function (response) {
+            $("#edicion").html(response);
         },
         error: function (){
             alert("error");
         }
     });
-}*/
+}
+function muestraSeccionesANotas(idEdicion) {
+    var parametros = {
+        "edicion" : idEdicion
+    };
+    $.ajax({
+        data:  parametros,
+        url:   '/contenido/obtenerSecciones',
+        type:  'POST',
+        beforeSend: function () {
+        },
+        success:  function (response) {
+            $("#seccion").html(response);
+        },
+        error: function (){
+            alert("error");
+        }
+    });
+}

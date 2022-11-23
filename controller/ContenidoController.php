@@ -28,6 +28,7 @@ class ContenidoController
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
         }
+
         $data['rol'] = $_SESSION['rol'];
         $data['contenido']=$this->model->getContenido();
         $this->renderer->render('listaContenido.mustache', $data);
@@ -37,7 +38,7 @@ class ContenidoController
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
         }
-        $data['rol'] = $_SESSION['rol'];
+        $date['rol'] = $_SESSION['rol'];
 
         $id=$_GET["id"];
         $date["nota"]=$this->model->EditNota($id);
@@ -52,8 +53,8 @@ class ContenidoController
     }
 
         $data['rol'] = $_SESSION['rol'];
-        $data["secciones"]=$this->model->getSecciones();
-        $data["ediciones"]=$this->model->getEdiciones();
+
+        $data["publicaciones"]=$this->model->getPublicaciones();
         $this->renderer->render("contenidoForm.mustache",$data);
 
     }
@@ -91,7 +92,7 @@ class ContenidoController
       }else{
           $msj="hubo problemas al eliminar la nota";
       }
-      $this->list();
+      $this->home();
     }
 
     public function cargarNoticia()
@@ -125,5 +126,24 @@ class ContenidoController
        Redirect::doIt("home");
     }
 
+
+    public function obtenerSecciones(){
+
+        $idEdicion = $_POST['edicion'];
+        echo ($idEdicion);
+        $seccionesDeLaEdicion = $this->model->getSeccionesDeLaEdicion($idEdicion);
+
+        foreach ($seccionesDeLaEdicion as $seccion){
+            echo "<option value = '". $seccion['id']."'>" . $seccion['descrip'] . "</option>";
+        }
+
+
+    }
+    public function obtenerPublicaciones(){
+        $ediciones = $this->model->getEdiciones($_POST['publicacion']);
+        foreach ($ediciones as $i){
+            echo "<option value = '". $i['id']."'>" . $i['descrip'] . "</option>";
+        }
+    }
 
 }

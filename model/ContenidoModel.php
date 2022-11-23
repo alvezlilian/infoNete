@@ -6,11 +6,23 @@ class ContenidoModel {
     public function __construct($database) {
         $this->database = $database;
     }
+    public function getSeccionesInexistenes($idEdicion){
+        $sql= "SELECT * FROM seccion where id not in(select idSeccion from edicion_seccion where idEdicion='$idEdicion')";
+        return $this->database->query($sql);
+    }
+    public function getSeccionesDeLaEdicion($idEdicion){
+        $sql= "SELECT * FROM seccion where id in(select idSeccion from edicion_seccion where idEdicion='$idEdicion')";
+        return $this->database->query($sql);
+    }
 public function getSecciones(){
     $sql = 'SELECT * FROM seccion';
     return $this->database->query($sql);
 
 }
+    public function getPublicaciones() {
+        $sql = 'SELECT * FROM publicacion';
+        return $this->database->query($sql);
+    }
 
     public function getEdiciones(){
         $sql = 'SELECT * FROM edicion';

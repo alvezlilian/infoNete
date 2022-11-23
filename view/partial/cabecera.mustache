@@ -18,12 +18,23 @@
 {{#ADMINISTRADOR}}
 
 
-        <h1>YYYYYYYYYYYYYYYY</h1>
+    <!-- The Band Section -->
+    <div class='w3-top'>
+        <div class='w3-bar w3-black w3-card'>
+            <a class='w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right'
+               href='javascript:void(0)' onclick='myFunction()' title='Toggle Navigation Menu'><i
+                    class='fa fa-bars'></i></a>
+            <a href='/AbmAdministrador/home' class='w3-bar-item w3-button w3-padding-large'>Inicio</a>
+            <a href='/AbmAdministrador/IniciarAltaDeUsuario' class='w3-bar-item w3-button w3-padding-large'>Alta de usuario</a>
+
+        </div>
+        {{> logoutButtonView}}
+    </div>
 {{/ADMINISTRADOR}}
 
 {{#CONTENIDISTA}}
         <!-- The Band Section -->
-        <div class='w3-top'>
+        <div class='w3-top' >
             <div class='w3-bar w3-black w3-card'>
                 <a class='w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right'
                   href='javascript:void(0)' onclick='myFunction()' title='Toggle Navigation Menu'><i
@@ -39,7 +50,7 @@
 
 {{#ESCRITOR}}
 
-    <div class='w3-top'>
+    <div class='w3-top' style="height: 30px">
         <div class='w3-bar w3-black w3-card'>
             <a class='w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right'
                href='javascript:void(0)' onclick='myFunction()' title='Toggle Navigation Menu'><i

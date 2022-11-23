@@ -28,7 +28,7 @@ class LoginController
         $clave= $_POST['clave'];
 
         if ($clave == "" || $email == ""){
-            Redirect::doIt('/login/validarLogin');
+            Redirect::doIt('validarLogin');
         }
         $data = $this->model->validarLogin($email,$clave);
         $rolDescripcion = $this->model->getDescripcionById($data["idRol"]);
