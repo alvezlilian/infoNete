@@ -5,7 +5,7 @@
 
 
 
-    <form method="post" action="/contenido/cargarNoticia" enctype="multipart/form-data" class="w3-padding-64" >
+    <form method="post" id="formContenido" action="/contenido/cargarNoticia" enctype="multipart/form-data" class="w3-padding-64" >
 
     <div class="form-row">
 
@@ -46,24 +46,29 @@
         </div>
 
 
-
-
-
-
-
         <div class="form-group col-md-6">
-            <label for="precioNoticia">Precio de la Noticia</label>
-            <input type="number" class="form-control" id="precioNoticia" name="precioNoticia" required>
+            <label for="imagen">Elegir imagen de portada </label>
+            <input type="file" class="form-control-file" id="imagen" name="imagen" >
         </div>
-    </div>
-    <div class="form-group">
-        <label for="contenidoNoticia">Descripcion de la noticia</label>
-        <textarea class="form-control" id="contenidoNoticia" rows="5" name="contenidoNoticia" required></textarea>
-    </div>
+
+
+
+
+
+
+        <!-- editor d etexto -->
+        <div class="form-group col-md-12">
+
+        <textarea id="contenidoNoticia" ></textarea>
+            <spa id="msj"></spa>
+
+        <!-- editor d etexto -->
+        <input type="text" hidden id="prueba" name="contenidoNoticia">
+        </div>
         <div class="form-group col-md-6">
-        <label for="imagen">imagenes </label>
-        <input type="file" class="form-control-file" id="imagen" name="imagen" >
-    </div>
+            <label for="precioNoticia" >Precio de la Noticia</label>
+            <input type="number" onkeyup="guardarContenido()" class="form-control" onchange="guardarContenido()" id="precioNoticia" name="precioNoticia" required>
+        </div>
 
         <div class="form-group col-md-6">
             <label for="link">Link de la noticia</label>
@@ -71,10 +76,10 @@
         </div>
 
         <div class="form-group">
-    <button type="submit"  class="btn btn-dark btn-lg btn-block " name="boton">Guardar</button>
+    <button type="submit"  class="btn btn-dark btn-lg btn-block " name="boton"  onclick="pararEnvio()">Guardar</button>
 
         </div>
-
+</div>
 
 </form>
 </div>

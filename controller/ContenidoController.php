@@ -71,9 +71,9 @@ class ContenidoController
       $precioNoticia = $_POST["precioNoticia"];
         $descripcionNoticia =$_POST["contenidoNoticia"];
         //tomamos el archivo file y lo guardo en las variables
-        $archivo=$_FILES["imagen"]["name"];
+        $archivo=$_FILES["imagenNueva"]["name"];
 
-        $archivoTemporal=$_FILES["imagen"]["tmp_name"];
+        $archivoTemporal=$_FILES["imagenNueva"]["tmp_name"];
         //muevo el archivo temporal a la carpera de destino
         move_uploaded_file($archivoTemporal,$carpeta.$archivo);
        $link=$_POST["linkNoticia"];

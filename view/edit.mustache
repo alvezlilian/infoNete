@@ -16,11 +16,11 @@
          <h3 style="text-align: left">{{Subtitulo}}</h3>
 
             <img src="../public/Img/{{Imagen}}" alt="" style="margin-bottom: 15px">
-               <div>{{contenido}}</div>
+               <div>{{{contenido}}}</div>
 
          {{/nota}}
      </div>
-<form action="actualizar" method="post" style="display: none" enctype="multipart/form-data" id="FormEdicionMostrar" >
+<form action="actualizar" method="post" style="display: none" enctype="multipart/form-data" id="formContenido" >
 {{#nota}}
     <p  class="p">Estado -> {{Estado}} </p> <p class="p" > Edicion: {{descripEdicion}}</p><p class="p" > Seccion: {{descripSeccion}}</p>
 
@@ -39,7 +39,12 @@
     <div class="form-group">
         <label for="contenidoNoticia" class="label">Descripcion de la noticia</label>
         <textarea class="form-control" id="contenidoNoticia" onkeyup="myFunction()" rows="20" name="contenidoNoticia">{{contenido}}</textarea>
+        <spa id="msj"></spa>
+
+        <input type="text" hidden id="prueba" name="contenidoNoticia">
     </div>
+
+
     <div class="form-group col-md-6">
         <label for="precioNoticia" class="label">Precio de la Noticia</label>
         <input type="number" id="precioNoticia" name="precioNoticia" onkeyup="myFunction()" value="{{precio}}">
@@ -49,7 +54,10 @@
     <div class="form-group col-md-6">
         <img src="../public/Img/{{Imagen}}" alt="">
         <label for="imagen" class="label">Seleccionar si deseas cambiar imagen </label>
-        <input type="file" class="form-control-file"  id="imagen" name="imagen">
+        <input type="file" class="form-control-file" id="imagenRecibida" name="imagenNueva" value="{{Imagen}}">
+
+
+
     </div>
 
     <div class="form-group col-md-6">
@@ -58,7 +66,7 @@
     </div>
 
     <div class="form-group">
-        <button type="submit"  class="btn btn-dark btn-lg btn-block " name="boton">Guardar</button>
+        <button type="submit"  class="btn btn-dark btn-lg btn-block " name="boton" onclick="pararEnvio()">Guardar</button>
 
     </div>
 
@@ -72,15 +80,15 @@
         console.log(document.getElementById("id"))
         if (document.getElementById("textoOcultar").style.display !="none" ) {
             document.getElementById("textoOcultar").style.display ="none"
-            document.getElementById("FormEdicionMostrar").style.display="block";
+            document.getElementById("formContenido").style.display="block";
             document.getElementById("botonEditar").style.visibility="hidden";
             document.getElementById("botonCancelar").style.visibility="visible";
 
         } else {
-            console.log(document.getElementById("FormEdicionMostrar").style.visibility=="visible")
+            console.log(document.getElementById("formContenido").style.visibility=="visible")
 
             document.getElementById("textoOcultar").style.display="block"
-            document.getElementById("FormEdicionMostrar").style.display="none";
+            document.getElementById("formContenido").style.display="none";
             document.getElementById("botonEditar").style.visibility="visible";
             document.getElementById("botonCancelar").style.visibility="hidden";
         }
