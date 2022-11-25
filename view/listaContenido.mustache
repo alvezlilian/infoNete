@@ -2,26 +2,27 @@
 
 
 <div class='w3-content' style='width: 90%'>
-    <h2 class='w3-wide' style="text-align: center">Lista de notas </h2>
+    <h2 class='w3-wide' style="text-align: center">Tu lista de notas </h2>
 <div class="contenedor" style="width: 100%">
 {{#contenido}}
 
 
     <div style="width: 40%">
 
-        <p   style="font-size: 10px; display: inline; margin-right: 20px" >Estado -> {{estado}} </p>
-        <p  style="font-size: 10px; display: inline ; margin-right: 20px"> Edicion: {{descripEdicion}}</p>
-        <p  style="font-size: 10px; display: inline"> Seccion: {{descripSeccion}}</p>
+        <p   style="font-size: 10px; display: inline; margin-right: 20px" >Estado | {{estado}} </p>
+        <p  style="font-size: 10px; display: inline ; margin-right: 20px"> Edicion | {{descripEdicion}}</p>
+        <p  style="font-size: 10px; display: inline"> Seccion | {{descripSeccion}}</p>
 
 
 
-        <h3 style="font-weight: bold;" >{{Titulo}}</h3>
+        <h3 style="font-weight: bold;"class="text-truncate">{{Titulo}}</h3>
+
+        <figure class="figure">
+            <img  src="../public/Img/notas/{{Imagen}}"class="figure-img img-fluid rounded img-fluid" alt="{{Imagen}}">
+        </figure>
 
 
-        <img  src="../public/Img/notas/{{Imagen}}" style="width: 250px" alt="...">
-
-
-            <h5>{{Subtitulo}}</h5>
+            <h5 class="text-truncate">{{Subtitulo}}</h5>
       <a href="editar?id={{id}}" style="border-bottom: 1px solid black;texte-decoretion: none;
 
         ">Ver mas</a>

@@ -54,15 +54,15 @@ class ContenidoController
 
         $data['rol'] = $_SESSION['rol'];
 
-        $data["publicaciones"]=$this->model->getPublicaciones();
+        $data["publicaciones"]=$this->model->getContenido();
         $this->renderer->render("contenidoForm.mustache",$data);
 
     }
     public function actualizar(){
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
-        }
-        $data['rol'] = $_SESSION['rol'];
+        }        $data['rol'] = $_SESSION['rol'];
+
         $carpeta="public/img/notas/";
         $id=$_POST["id"];
         $tituloNoticia = $_POST["tituloNoticia"];
@@ -111,9 +111,10 @@ else{
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
         }
-        $data['rol'] = $_SESSION['rol'];
+        //$data['rol'] = $_SESSION['rol'];
+        $idUsuario['id']=$_SESSION['id'];
 
-        $carpeta="public/img/";
+        $carpeta="public/img/notas/";
         $tituloNoticia = $_POST["tituloNoticia"];
         $subtitulo = $_POST["subtituloNoticia"];
         $edicion = $_POST["edicion"];
@@ -129,7 +130,7 @@ else{
           $archivoTemporal=$_FILES["imagen"]["tmp_name"];
           //muevo el archivo temporal a la carpera de destino
           move_uploaded_file($archivoTemporal,$carpeta.$archivo);
-          $this->model->nuevaNoticia($tituloNoticia, $subtitulo, $edicion, $seccionNoticia, $precioNoticia, $descripcionNoticia, $archivo,$link);
+          $this->model->nuevaNoticia($tituloNoticia, $subtitulo, $edicion, $seccionNoticia, $precioNoticia, $descripcionNoticia, $archivo,$link,$idUsuario['id']);
 
 
 
