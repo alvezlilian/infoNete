@@ -32,10 +32,11 @@
             }
         }
 
-        public static function sessionInit($nombre, $descripcion){
+        public static function sessionInit($nombre, $descripcion,$id){
             session_start();
             $_SESSION['rol'] = $descripcion;
             $_SESSION['name'] = $nombre;
+            $_SESSION['id']=$id;
         }
 
         public static function tienePermiso($rol){

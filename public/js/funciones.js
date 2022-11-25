@@ -91,22 +91,21 @@ function muestraSeccionesANotas(idEdicion) {
     console.log(x)
 }
 
-function pararEnvio(){
+function pararEnvio() {
 
-       document.getElementById("formContenido").addEventListener("click", function(event){
+    document.getElementById("formContenido").addEventListener("click", function(event){
         event.preventDefault() });
-        var x = tinymce.get("contenidoNoticia").getContent();
-      var y=document.getElementById("prueba").value=x;
-        if (document.getElementById("prueba").value!= "" ){
+    var x = tinymce.get("contenidoNoticia").getContent();
+    var y = document.getElementById("prueba").value = x;
+    if (document.getElementById("prueba").value != "") {
+        document.getElementById("formContenido").submit();
+        alert("se creo la noticia")
 
-      document.getElementById("formContenido").submit()   ;
-            alert("se creo la noticia")
-
-    }else{
-    document.getElementById("msj").innerHTML="El contenido es obligatorio"
+    } else {
+       document.getElementById("msj").innerHTML = "El contenido es obligatorio"
+ console.log(document.getElementById("imagenVieja").value)
     }
 
 
 }
-
 

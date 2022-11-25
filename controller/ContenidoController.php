@@ -63,22 +63,33 @@ class ContenidoController
             ValidatorSession::routerSession();
         }
         $data['rol'] = $_SESSION['rol'];
-
-        $carpeta="public/img/";
+        $carpeta="public/img/notas/";
         $id=$_POST["id"];
         $tituloNoticia = $_POST["tituloNoticia"];
         $subtitulo = $_POST["subtituloNoticia"];
       $precioNoticia = $_POST["precioNoticia"];
         $descripcionNoticia =$_POST["contenidoNoticia"];
         //tomamos el archivo file y lo guardo en las variables
-        $archivo=$_FILES["imagenNueva"]["name"];
+        $archivo=$_FILES["imagen"]["name"];
+        $link=$_POST["linkNoticia"];
 
-        $archivoTemporal=$_FILES["imagenNueva"]["tmp_name"];
-        //muevo el archivo temporal a la carpera de destino
-        move_uploaded_file($archivoTemporal,$carpeta.$archivo);
-       $link=$_POST["linkNoticia"];
-        $this->model->actualizarNota($id,$tituloNoticia, $subtitulo, $precioNoticia, $descripcionNoticia, $archivo,$link);
-        $this->home();
+        if($archivo==""){
+      $archivoViejo=$_POST["imagenVieja"];
+
+    $this->model->actualizarNota($id,$tituloNoticia, $subtitulo, $precioNoticia, $descripcionNoticia, $archivoViejo,$link);
+    $this->home();
+}
+else{
+
+    $archivoTemporal=$_FILES["imagen"]["tmp_name"];
+    //muevo el archivo temporal a la carpera de destino
+    move_uploaded_file($archivoTemporal,$carpeta.$archivo);
+    echo ($carpeta.$archivoTemporal);
+    $this->model->actualizarNota($id,$tituloNoticia, $subtitulo, $precioNoticia, $descripcionNoticia, $archivo,$link);
+    $this->home();
+}
+
+
     }
     public function eliminar(){
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
@@ -113,15 +124,21 @@ class ContenidoController
         $descripcionNoticia =$_POST["contenidoNoticia"];
         $link=$_POST["linkNoticia"];
         //tomamos el archivo file y lo guardo en las variables
-       $archivo=$_FILES["imagen"]["name"];
+        $archivo=$_FILES["imagen"]["name"];
+
+          $archivoTemporal=$_FILES["imagen"]["tmp_name"];
+          //muevo el archivo temporal a la carpera de destino
+          move_uploaded_file($archivoTemporal,$carpeta.$archivo);
+          $this->model->nuevaNoticia($tituloNoticia, $subtitulo, $edicion, $seccionNoticia, $precioNoticia, $descripcionNoticia, $archivo,$link);
 
 
-        $archivoTemporal=$_FILES["imagen"]["tmp_name"];
-        //muevo el archivo temporal a la carpera de destino
-        move_uploaded_file($archivoTemporal,$carpeta.$archivo);
 
 
-        $this->model->nuevaNoticia($tituloNoticia, $subtitulo, $edicion, $seccionNoticia, $precioNoticia, $descripcionNoticia, $archivo,$link);
+
+
+
+
+
 
        Redirect::doIt("home");
     }
