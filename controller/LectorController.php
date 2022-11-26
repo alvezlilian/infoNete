@@ -16,6 +16,19 @@ class LectorController
         }
 
     }
+    public function home(){
+        $data['notas']=$this->model->getNotas();
+        $data['rol'] = $_SESSION['rol'];
+        $this->renderer->render('lectorView.mustache', $data);
+
+    }
+    public function notaCompleta(){
+        $idNota=$_GET["idNota"];
+        $data['rol'] = $_SESSION['rol'];
+        $data["nota"]=$this->model->getNotaCompletaxIdNota($idNota);
+        $this->renderer->render("lectorViewNotaCompleta.mustache",$data);
+
+    }
     public function verPublicaciones(){
         $data['publicaciones'] = $this->model->getPublicaciones();
         $data['rol'] = $_SESSION['rol'];
@@ -27,5 +40,10 @@ class LectorController
         $data['ediciones'] = $this->model->getEdicionesxId($idPublicacion);
         $this->renderer->render("lectorEdicionesView.mustache",$data);
     }
-
+    public function verNotasxEdicion(){
+        $idEdicion = $_GET['idEdicion'];
+        $data['notasEdicion'] = $this->model->getNotasxEdicion($idEdicion);
+        $data['rol'] = $_SESSION['rol'];
+        $this->renderer->render("lectorNotasView.mustache", $data);
+    }
 }

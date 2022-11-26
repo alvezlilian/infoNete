@@ -1,0 +1,28 @@
+{{>cabecera}}
+<!-- The Band Section -->
+<style>
+    .p{
+        margin-right: 9%;
+    }
+</style>
+<div class='w3-content' style='width: 95%;margin-top:5%;'>
+    <div style="margin-top: 50px">
+
+        <div id="textoOcultar">{{#nota}}
+
+            <p class="p">Autor: Acá_va_el_autor </p>
+            <p class="p" > Publicacion: {{publicacion}}</p>
+            <p class="p" > Edicion: {{descripEdicion}}</p>
+            <p class="p" > Seccion: {{descripSeccion}}</p>
+            <h1 style="font-weight: bold">{{Titulo}}</h1>
+            <h3 style="text-align: left">{{Subtitulo}}</h3>
+            <div style="width: 100%;height: 100%;">
+                <img src="../public/Img/{{Imagen}}" alt="" style="margin-bottom: 15px;width: 88%;height: 90%;">
+            </div>
+            <div>{{contenido}}</div>
+
+        {{/nota}}
+        </div>
+    </div>
+</div>
+ {{> footer}}

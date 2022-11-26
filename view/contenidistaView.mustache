@@ -7,10 +7,10 @@
             {{#publicaciones}}
                 <div class='w3-third' style=" height: 23%;">
                     <h3><p>{{informacion}}</p></h3>
-                    <div>
-                      <img src='../{{ruta}}' class='w3-round w3-margin-bottom' style='width:70%;height: 25%;'>
+                    <div style="width: 100%;height: 80px;">
+                      <img src='../{{ruta}}' class='w3-round w3-margin-bottom' style='width:90%;height: 80%;'>
                     </div>
-                    <div style="width: 50%;float:left;padding: 2%;" >
+                    <div style="width: 50%;float:left;padding: 2%;margin-top: 0px;" >
                         <form method="post" action="/contenidista/modificarPublicacion">
                              <button type="submit" name="modificar"
                             class="btn btn-outline-primary" value={{id}}>Modificar</button>

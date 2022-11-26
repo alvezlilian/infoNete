@@ -17,7 +17,7 @@
                     Redirect::doIt("/contenido/home");
                     break;
                 case "LECTOR":
-                    Redirect::doIt("/lector/verPublicaciones");
+                    Redirect::doIt("/lector/home");
                     break;
             }
         }
