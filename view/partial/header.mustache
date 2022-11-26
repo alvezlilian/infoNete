@@ -6,7 +6,8 @@
 <!-- Bootstrap CSS <script src="https:ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <!--//<script type="text/javascript" src="../public/js/jquery-3.6.1.min"> </script>-->
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 <!--<script  src="https:maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -20,39 +21,53 @@ Include the Quill library quill js <script src="../public/js/jquery.richtext.js"
 
 
 <link rel="stylesheet" href="https:maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/public/css/style.scss">
 <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>
+<link rel="stylesheet" href="/public/css/style.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 
 
 <body>
-<!-- Navbar -->
-<php
-<div class='w3-top'>
-    <div class='w3-bar w3-black w3-card'>
-       <a href='/' class='w3-bar-item w3-button w3-padding-large'>Inicio</a>
-       <!--<a href='/canciones' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Canciones</a>-->
-       <!--<a href='/presentaciones' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Presentaciones</a>-->
-       <!--<a href='/quieroserparte/alta' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Quiero Ser Parte</a>-->
-       <!-- //TODO: carga de noticias, redactor -->
-       <!--<a href='/contenido/crearNoticia' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Ingresar una noticia</a>-->
-       <a href='/registrarse/alta' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Quiero Registrarme</a>
-       <!--<a href='/login/validarLogin' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Iniciar Sesión</a>-->
-</div>
+    <!-- Navbar -->
+    <div class='w3-top'>
+        <div class='w3-bar w3-black w3-card'>
+            <a href='/' class='w3-bar-item w3-button w3-padding-large'>Inicio</a>
+            <!--<a href='/canciones' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Canciones</a>-->
+            <!--<a href='/presentaciones' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Presentaciones</a>-->
+            <!--<a href='/quieroserparte/alta' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Quiero Ser Parte</a>-->
+            <!-- //TODO: carga de noticias, redactor -->
+            <!--<a href='/contenido/crearNoticia' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Ingresar una noticia</a>-->
+            <a href='/registrarse/alta' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Quiero
+                Registrarme</a>
+            <!--<a href='/login/validarLogin' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Iniciar Sesión</a>-->
+        </div>
 
+        {{#ADMINISTRADOR}}
+            <div class='w3-top'>
+                <div class='w3-bar w3-black w3-card'>
+                    <a class='w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right'
+                       href='javascript:void(0)' onclick='myFunction()' title='Toggle Navigation Menu'><i
+                            class='fa fa-bars'></i></a>
+                    <a href='/administrador/home' class='w3-bar-item w3-button w3-padding-large'>Inicio</a>
+                    <a href='/contenidista/alta' class='w3-bar-item w3-button w3-padding-large'>Crear publicacion</a>
+                    <a href='/contenidista/altaEdicion' class='w3-bar-item w3-button w3-padding-large'>Agregar Edicion</a>
+                    <a href='/contenidista/agregarSeccion' class='w3-bar-item w3-button w3-padding-large'>Agregar Seccion</a>
+                </div>
+                {{> logoutButtonView}}
+            </div>
+        {{/ADMINISTRADOR}}
 
 
 
 
     </div>
 
-<div style="float: right">
-    <a href='/login/validarLogin' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Iniciar Sesión</a>
-</div>
+    <div style="float: right">
+        <a href='/login/validarLogin' class='w3-bar-item w3-button w3-padding-large w3-hide-small'>Iniciar Sesión</a>
+    </div>
 
 
 
 
-<!-- Page content -->
+    <!-- Page content -->
     <div class='w3-content' style='max-width:2000px;margin-top:46px;'>

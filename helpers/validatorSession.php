@@ -3,12 +3,12 @@
     class ValidatorSession{
 
         public static function routerSession(){
-            if (!isset($_SESSION)){
+            if (!isset($_SESSION['rol'])){
                 Redirect::doIt("/");
             }
             switch ($_SESSION['rol']){
                 case "ADMINISTRADOR":
-                    Redirect::doIt("https://www.google.com.ar/?hl=es-419");
+                    Redirect::doIt("/administrador/home");
                     break;
                 case "CONTENIDISTA":
                     Redirect::doIt("/contenidista/home");
@@ -18,9 +18,6 @@
                     break;
                 case "LECTOR":
                     Redirect::doIt("/lector/home");
-                    break;
-                default:
-                    die(var_dump($_SESSION));
                     break;
             }
         }
@@ -42,10 +39,10 @@
         }
 
         public static function tienePermiso($rol){
-            if (is_null($rol)){
+            if (is_null($rol['rol'])){
                 Redirect::doIt('/login/validarLogin');
             }
-            switch ($rol){
+            switch ($rol['rol']){
                 case "ADMINISTRADOR":
                     return true;
                     break;
@@ -87,4 +84,7 @@
             }
         }
 
+        public static function getSession(){
+            return $_SESSION['rol'];
+        }
     }
