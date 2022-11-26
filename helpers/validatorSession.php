@@ -17,10 +17,7 @@
                     Redirect::doIt("/contenido/home");
                     break;
                 case "LECTOR":
-                    Redirect::doIt("/lector/home");
-                    break;
-                default:
-                    die(var_dump($_SESSION));
+                    Redirect::doIt("/lector/verPublicaciones");
                     break;
             }
         }

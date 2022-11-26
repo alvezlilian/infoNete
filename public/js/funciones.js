@@ -35,19 +35,15 @@ function muestraSecciones(idEdicion) {
         }
     });
 }
-/*function obtenerIdPublicacion(idPublicacion,funcion) {
-    controller='/contenidista/'
+/*function obtenerIdPublicacion(idPublicacion) {
     var parametros = {
-        "idPublicacion" : idPublicacion,
-        "funcion": controller+funcion+"Publicacion"
+        "idPublicacion" : idPublicacion
     };
     $.ajax({
         data:  parametros,
-        url:   parametros["funcion"],
+        url:   '/lector/verEdiciones',
         type:  'POST',
-        beforeSend: function () {
-        },
-        success:  function () {
+        success:  function (data) {
         },
         error: function (){
             alert("error");
