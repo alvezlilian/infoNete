@@ -14,9 +14,9 @@
     display: inline-block;
     text-align: center;
     vertical-align: middle;
-    padding-top: 25%;
-    width: 250px;
-    height: 250px;
+    padding-top: 15%;
+    width: 200px;
+    height: 200px;
 }
 #caja1{
     background-color: rgba(0,0,0,0.767);
@@ -40,16 +40,16 @@
     <h2 class='w3-wide'>Infonete</h2>
 <div id="contenedorClimaHora">
         <div id="caja1">
-            <h1 id="temperatura-valor"></h1>
-            <h1 id="temperatura-descripcion"></h1>
+            <h2 id="temperatura-valor"></h2>
+            <h2 id="temperatura-descripcion"></h2>
         </div>
         <div id="caja2">
-            <h1 id="ubicacion"></h1>
+            <h3 id="ubicacion"></h3>
             <img id="icono-animado" src='' alt="" height="128" width="128">
         </div>
         <div id="caja3">
             <h3>Velocidad del viento</h3>
-            <h1 id="viento-velocidad"></h1>
+            <h2 id="viento-velocidad"></h2>
         </div>
         <div id="caja4">
             <h3>Hora</h3>
@@ -99,14 +99,14 @@ window.addEventListener('load', ()=> {
                 console.log(data.weather[0].main)
                 switch(data.weather[0].main){
                     case 'Clear':
-                        if(date.getHours()<6||date.getHours()>20){
+                        if(date.getHours()<6||date.getHours()>=19){
                             iconoAnimado.src = '../public/img/animated/night.svg'
                         }else{
                             iconoAnimado.src = '../public/img/animated/day.svg'
                         }
                         break;
                     case 'Clouds':
-                        if(date.getHours()<6||date.getHours()>20){
+                        if(date.getHours()<6||date.getHours()>=19){
                             iconoAnimado.src = '../public/img/animated/cloudy-night-1.svg'
                         }else{
                             iconoAnimado.src = '../public/img/animated/cloudy-day-1.svg'
@@ -116,7 +116,7 @@ window.addEventListener('load', ()=> {
                         iconoAnimado.src = '../public/img/animated/thunder.svg'
                         break;
                     case 'Drizzle':
-                        if(date.getHours()<6||date.getHours()>20){
+                        if(date.getHours()<6||date.getHours()>=19){
                             iconoAnimado.src = '../public/img/animated/rainy-4.svg'
                         }else{
                             iconoAnimado.src = '../public/img/animated/rainy-2.svg'
@@ -132,7 +132,7 @@ window.addEventListener('load', ()=> {
                         iconoAnimado.src = "../public/img/animated/weather.svg"
                         break;
                     default:
-                        if(date.getHours()<6||date.getHours()>20){
+                        if(date.getHours()<6||date.getHours()>=19){
                             iconoAnimado.src = '../public/img/animated/cloudy-night-1.svg'
                         }else{
                             iconoAnimado.src = '../public/img/animated/cloudy-day-1.svg'
