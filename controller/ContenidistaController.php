@@ -14,6 +14,7 @@ class ContenidistaController{
             ValidatorSession::routerSession();
         }
     }
+
     public function home(){
 
         $data['publicaciones'] = $this->model->getPublicaciones();

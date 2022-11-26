@@ -66,7 +66,4 @@ class AdministradorController{
     public function estaRegistrado($email){
         return $result = $this->model->verificarEmail($email);
     }
-
-
-
 }
