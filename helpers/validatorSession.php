@@ -3,12 +3,12 @@
 class ValidatorSession{
 
     public static function routerSession(){
-        if (!isset($_SESSION)){
+        if (!isset($_SESSION['rol'])){
             Redirect::doIt("/");
         }
         switch ($_SESSION['rol']){
             case "ADMINISTRADOR":
-                Redirect::doIt("https://www.google.com.ar/?hl=es-419");
+                Redirect::doIt("/administrador/home");
                 break;
             case "CONTENIDISTA":
                 Redirect::doIt("/contenidista/home");
