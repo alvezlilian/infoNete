@@ -6,11 +6,23 @@ class ContenidoModel {
     public function __construct($database) {
         $this->database = $database;
     }
+    public function getSeccionesInexistenes($idEdicion){
+        $sql= "SELECT * FROM seccion where id not in(select idSeccion from edicion_seccion where idEdicion='$idEdicion')";
+        return $this->database->query($sql);
+    }
+    public function getSeccionesDeLaEdicion($idEdicion){
+        $sql= "SELECT * FROM seccion where id in(select idSeccion from edicion_seccion where idEdicion='$idEdicion')";
+        return $this->database->query($sql);
+    }
 public function getSecciones(){
     $sql = 'SELECT * FROM seccion';
     return $this->database->query($sql);
 
 }
+    public function getPublicaciones() {
+        $sql = 'SELECT * FROM publicacion';
+        return $this->database->query($sql);
+    }
 
     public function getEdiciones(){
         $sql = 'SELECT * FROM edicion';
@@ -20,18 +32,19 @@ public function getSecciones(){
     public function getContenido(){
         $sql = "SELECT nota.* ,edicion.descrip as descripEdicion,seccion.descrip as descripSeccion,estadodepublicacion.Estado as estado 
                 FROM nota JOIN seccion ON nota.idSeccion=seccion.id 
-                JOIN edicion on nota.idEdicion=edicion.id 
-             join estadodepublicacion on estadodepublicacion.id = nota.idEstado";
+                    JOIN edicion on nota.idEdicion=edicion.id
+                    join estadodepublicacion on estadodepublicacion.id = nota.idEstado 
+                WHERE nota.idUsuario=39 and estadodepublicacion.Estado='pendiente'";
 
         return $this->database->query($sql);
 
 }
-public function nuevaNoticia($tituloNoticia, $subtitulo, $edicion, $seccionNoticia, $precioNoticia, $descripcionNoticia, $archivo,$link){
+public function nuevaNoticia($tituloNoticia, $subtitulo, $edicion, $seccionNoticia, $precioNoticia, $descripcionNoticia, $archivo,$link,$idUsuario){
 
        $valor=1;
 
-        $sql="INSERT INTO nota( Titulo, Subtitulo, contenido, idSeccion, idEdicion,precio,Imagen,idEstado,link)
-                    VALUES ('$tituloNoticia','$subtitulo','$descripcionNoticia','$seccionNoticia','$edicion','$precioNoticia','$archivo','$valor','$link')";
+        $sql="INSERT INTO nota( Titulo, Subtitulo, contenido, idSeccion, idEdicion,precio,Imagen,idEstado,link,idUsuario)
+                    VALUES ('$tituloNoticia','$subtitulo','$descripcionNoticia','$seccionNoticia','$edicion','$precioNoticia','$archivo','$valor','$link',$idUsuario)";
                    $this->database->execute($sql);
 
 

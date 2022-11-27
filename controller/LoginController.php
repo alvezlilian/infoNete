@@ -28,16 +28,23 @@ class LoginController
         $clave= $_POST['clave'];
 
         if ($clave == "" || $email == ""){
-            Redirect::doIt('/login/validarLogin');
+            Redirect::doIt('validarLogin');
         }
         $data = $this->model->validarLogin($email,$clave);
         $rolDescripcion = $this->model->getDescripcionById($data["idRol"]);
 
+        $idUsuario=$this->model->getIdByMail($email);
+
         $nombre = $data["nombre"];
+
         $descripcion = $rolDescripcion['descripcion'];
 
+
+        $id=$idUsuario['id'];
+
+
         $this->validarResultado($data);
-        ValidatorSession::sessionInit($nombre, $descripcion);
+        ValidatorSession::sessionInit($nombre, $descripcion,$id);
         ValidatorSession::routerSession();
     }
 

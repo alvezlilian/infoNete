@@ -1,13 +1,38 @@
 
-{{>cabecera}}
+{{> cabecera}}
 
-<div class="row d-flex justify-content-center align-items-center mt-500" >
+<div style="width: 90%;margin-left: 5em"  >
 
 
 
-    <form method="post" action="/contenido/cargarNoticia" enctype="multipart/form-data" class="w3-padding-64">
+    <form method="post" id="formContenido" action="/contenido/cargarNoticia" enctype="multipart/form-data" class="w3-padding-64" >
 
     <div class="form-row">
+
+
+        <!---parte del ajax pincipio-->
+        <div class="form-group col-md-6">
+            <label for="cars">Publicacion</label>
+            <select name="publicacion" id="publicacion" onchange="muestraEdicionesANotas(this.value)" class="form-control" style="width:100%;"  >
+                <option disabled selected>SELECCIONE UNA OPCION</option>
+                {{#publicaciones}}
+                    <option value={{id}}>{{informacion}}</option>
+                {{/publicaciones}}
+            </select>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>Edicion</label>
+            <select class="form-control" name="edicion" onclick="muestraSeccionesANotas(this.value)" id="edicion" style="width:100%;">
+                <option disabled selected>SELECCIONE UNA OPCION</option>
+            </select>
+        </div>
+        <div class="form-group col-md-12">
+            <select name="seccion" id="seccion" style="width:100%">
+                <option disabled selected>SELECCIONE UNA OPCION</option>
+            </select>
+        </div>
+        <!---parte del ajax fin-->
 
         <div class="form-group col-md-6">
             <label for="tituloNoticia">Titulo</label>
@@ -21,43 +46,29 @@
         </div>
 
 
-
         <div class="form-group col-md-6">
-            <label for="inputEdicion">Edicion</label>
-            <select name="edicion"class="form-control">
-               {{#ediciones}}
-                    <option value="{{id}}" >{{descrip}}</option>
-                {{/ediciones}}
-            </select>
+            <label for="imagen">Elegir imagen de portada </label>
+            <input type="file" class="form-control-file" id="imagen" name="imagen" >
         </div>
 
 
 
-        <div class="form-group col-md-6">
-            <label for="inputEdicion">Seccion</label>
 
-            <select name="seccion"class="form-control">
-                    {{#secciones}}
-                        <option value="{{id}}" >{{descrip}}</option>
 
-                    {{/secciones}}
-                </select>
+
+        <!-- editor d etexto -->
+        <div class="form-group col-md-12">
+
+        <textarea id="contenidoNoticia" ></textarea>
+            <spa id="msj"></spa>
+
+        <!-- editor d etexto -->
+        <input type="text" hidden id="prueba" name="contenidoNoticia">
         </div>
-
-
         <div class="form-group col-md-6">
-            <label for="precioNoticia">Precio de la Noticia</label>
-            <input type="number" class="form-control" id="precioNoticia" name="precioNoticia" required>
+            <label for="precioNoticia" >Precio de la Noticia</label>
+            <input type="number" onkeyup="guardarContenido()" class="form-control" onchange="guardarContenido()" id="precioNoticia" name="precioNoticia" required>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="contenidoNoticia">Descripcion de la noticia</label>
-        <textarea class="form-control" id="contenidoNoticia" rows="5" name="contenidoNoticia" required></textarea>
-    </div>
-        <div class="form-group col-md-6">
-        <label for="imagen">imagenes </label>
-        <input type="file" class="form-control-file" id="imagen" name="imagen" >
-    </div>
 
         <div class="form-group col-md-6">
             <label for="link">Link de la noticia</label>
@@ -65,13 +76,48 @@
         </div>
 
         <div class="form-group">
-    <button type="submit"  class="btn btn-dark btn-lg btn-block " name="boton">Guardar</button>
+    <button type="submit"  class="btn btn-dark btn-lg btn-block " name="boton"  onclick="pararEnvio()">Guardar</button>
 
         </div>
-
-</form>
-
 </div>
 
+</form>
+</div>
+
+<!--<div class="row d-flex justify-content-center align-items-center" style="margin-top:5%;width:100%;">
+    <div  style="margin:0 auto;width:40%;height:auto;">
+        <form method="post" action="/contenidista/procesaAltaSoloEdicionSeccion" enctype="multipart/form-data">
+            <div class="form-row">
+-parte del ajax pincipio-
+                <div class="form-group col-md-6">
+                    <label for="cars">Publicacion</label>
+                    <select name="publicacion" id="publicacion" onchange="muestraEdicionesANotas(this.value)" class="form-control" style="width:100%;"  >
+                        <option disabled selected>SELECCIONE UNA OPCION</option>
+                        {{#publicaciones}}
+                            <option value={{id}}>{{informacion}}</option>
+                        {{/publicaciones}}
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label>Edicion</label>
+                    <select class="form-control" name="edicion" onclick="muestraSeccionesANotas(this.value)" id="edicion" style="width:100%;">
+                        <option disabled selected>SELECCIONE UNA OPCION</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-12">
+                    <select name="seccion" id="seccion" style="width:100%">
+                      <option disabled selected>SELECCIONE UNA OPCION</option>
+                    </select>
+                </div>
+                -parte del ajax fin--
+
+                <button type="submit"  class="btn btn-dark btn-lg btn-block ">Guardar</button>
+            </div>
+
+
+        </form>
+    </div>
+</div>-->
 {{> footer}}
 

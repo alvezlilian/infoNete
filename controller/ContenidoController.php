@@ -28,6 +28,7 @@ class ContenidoController
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
         }
+
         $data['rol'] = $_SESSION['rol'];
         $data['contenido']=$this->model->getContenido();
         $this->renderer->render('listaContenido.mustache', $data);
@@ -37,7 +38,7 @@ class ContenidoController
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
         }
-        $data['rol'] = $_SESSION['rol'];
+        $date['rol'] = $_SESSION['rol'];
 
         $id=$_GET["id"];
         $date["nota"]=$this->model->EditNota($id);
@@ -52,18 +53,17 @@ class ContenidoController
     }
 
         $data['rol'] = $_SESSION['rol'];
-        $data["secciones"]=$this->model->getSecciones();
-        $data["ediciones"]=$this->model->getEdiciones();
+
+        $data["publicaciones"]=$this->model->getContenido();
         $this->renderer->render("contenidoForm.mustache",$data);
 
     }
     public function actualizar(){
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
-        }
-        $data['rol'] = $_SESSION['rol'];
+        }        $data['rol'] = $_SESSION['rol'];
 
-        $carpeta="public/img/";
+        $carpeta="public/img/notas/";
         $id=$_POST["id"];
         $tituloNoticia = $_POST["tituloNoticia"];
         $subtitulo = $_POST["subtituloNoticia"];
@@ -71,13 +71,25 @@ class ContenidoController
         $descripcionNoticia =$_POST["contenidoNoticia"];
         //tomamos el archivo file y lo guardo en las variables
         $archivo=$_FILES["imagen"]["name"];
+        $link=$_POST["linkNoticia"];
 
-        $archivoTemporal=$_FILES["imagen"]["tmp_name"];
-        //muevo el archivo temporal a la carpera de destino
-        move_uploaded_file($archivoTemporal,$carpeta.$archivo);
-       $link=$_POST["linkNoticia"];
-        $this->model->actualizarNota($id,$tituloNoticia, $subtitulo, $precioNoticia, $descripcionNoticia, $archivo,$link);
-        $this->home();
+        if($archivo==""){
+      $archivoViejo=$_POST["imagenVieja"];
+
+    $this->model->actualizarNota($id,$tituloNoticia, $subtitulo, $precioNoticia, $descripcionNoticia, $archivoViejo,$link);
+    $this->home();
+}
+else{
+
+    $archivoTemporal=$_FILES["imagen"]["tmp_name"];
+    //muevo el archivo temporal a la carpera de destino
+    move_uploaded_file($archivoTemporal,$carpeta.$archivo);
+    echo ($carpeta.$archivoTemporal);
+    $this->model->actualizarNota($id,$tituloNoticia, $subtitulo, $precioNoticia, $descripcionNoticia, $archivo,$link);
+    $this->home();
+}
+
+
     }
     public function eliminar(){
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
@@ -91,7 +103,7 @@ class ContenidoController
       }else{
           $msj="hubo problemas al eliminar la nota";
       }
-      $this->list();
+      $this->home();
     }
 
     public function cargarNoticia()
@@ -99,9 +111,10 @@ class ContenidoController
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
         }
-        $data['rol'] = $_SESSION['rol'];
+        //$data['rol'] = $_SESSION['rol'];
+        $idUsuario['id']=$_SESSION['id'];
 
-        $carpeta="public/img/";
+        $carpeta="public/img/notas/";
         $tituloNoticia = $_POST["tituloNoticia"];
         $subtitulo = $_POST["subtituloNoticia"];
         $edicion = $_POST["edicion"];
@@ -112,18 +125,43 @@ class ContenidoController
         $descripcionNoticia =$_POST["contenidoNoticia"];
         $link=$_POST["linkNoticia"];
         //tomamos el archivo file y lo guardo en las variables
-       $archivo=$_FILES["imagen"]["name"];
+        $archivo=$_FILES["imagen"]["name"];
+
+          $archivoTemporal=$_FILES["imagen"]["tmp_name"];
+          //muevo el archivo temporal a la carpera de destino
+          move_uploaded_file($archivoTemporal,$carpeta.$archivo);
+          $this->model->nuevaNoticia($tituloNoticia, $subtitulo, $edicion, $seccionNoticia, $precioNoticia, $descripcionNoticia, $archivo,$link,$idUsuario['id']);
 
 
-        $archivoTemporal=$_FILES["imagen"]["tmp_name"];
-        //muevo el archivo temporal a la carpera de destino
-        move_uploaded_file($archivoTemporal,$carpeta.$archivo);
 
 
-        $this->model->nuevaNoticia($tituloNoticia, $subtitulo, $edicion, $seccionNoticia, $precioNoticia, $descripcionNoticia, $archivo,$link);
+
+
+
+
+
 
        Redirect::doIt("home");
     }
 
+
+    public function obtenerSecciones(){
+
+        $idEdicion = $_POST['edicion'];
+        echo ($idEdicion);
+        $seccionesDeLaEdicion = $this->model->getSeccionesDeLaEdicion($idEdicion);
+
+        foreach ($seccionesDeLaEdicion as $seccion){
+            echo "<option value = '". $seccion['id']."'>" . $seccion['descrip'] . "</option>";
+        }
+
+
+    }
+    public function obtenerPublicaciones(){
+        $ediciones = $this->model->getEdiciones($_POST['publicacion']);
+        foreach ($ediciones as $i){
+            echo "<option value = '". $i['id']."'>" . $i['descrip'] . "</option>";
+        }
+    }
 
 }
