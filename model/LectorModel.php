@@ -49,11 +49,27 @@ class LectorModel
     }
     public function comprarNota($idNota, $precioNota,$idUsuario){
 
-        $sql1 = "SELECT * FROM compra WHERE idNoticia = '$idNota' AND idUsuario = '$idUsuario'";
+        $sql1 = "SELECT * FROM compraNoticia WHERE idNoticia = '$idNota' AND idUsuario = '$idUsuario'";
         $res1 = $this->database->Query($sql1);
 
         if(!$res1){
-            $sql2 = "INSERT INTO compra (idUsuario, idNoticia) VALUES ('$idUsuario', '$idNota')";
+            $sql2 = "INSERT INTO compraNoticia (idUsuario, idNoticia, precio) VALUES ('$idUsuario', '$idNota', '$precioNota')";
+            $this->database->execute($sql2);
+            $respuesta = true;
+        }else{
+            $respuesta = false;
+        }
+
+        return $respuesta;
+    }
+
+    public function comprarEdicion($idEdicion, $precioEdicion,$idUsuario){
+
+        $sql1 = "SELECT * FROM compraEdicion WHERE idEdicion = '$idEdicion' AND idUsuario = '$idUsuario'";
+        $res1 = $this->database->Query($sql1);
+
+        if(!$res1){
+            $sql2 = "INSERT INTO compraEdicion (idUsuario, idEdicion, precio) VALUES ('$idUsuario', '$idEdicion', '$precioEdicion')";
             $this->database->execute($sql2);
             $respuesta = true;
         }else{

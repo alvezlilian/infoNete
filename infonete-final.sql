@@ -241,18 +241,37 @@ INSERT INTO `seccion` (`id`, `descrip`) VALUES
 --
 -- Estructura de tabla para la tabla `compra`
 --
-create table `compra` (
-                          `id` int(11) NOT NULL primary key auto_increment,
-                          `idUsuario` int(11) NOT NULL,
-                          `idNoticia` int(11) NOT NULL
+create table `compraNoticias` (
+                                  `id` int(11) NOT NULL primary key auto_increment,
+                                  `idUsuario` int(11) NOT NULL,
+                                  `idNoticia` int(11) NOT NULL,
+                                  `precio` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE `compra`
+create table `compraEdicion` (
+                                 `id` int(11) NOT NULL primary key auto_increment,
+                                 `idUsuario` int(11) NOT NULL,
+                                 `idEdicion` int(11) NOT NULL,
+                                 `precio` decimal(10,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+ALTER TABLE `compraNoticias`
+    -- ADD COLUMN `precio` decimal(10,0) NOT NULL,
     ADD KEY `fk_id_usuario` (`idUsuario`),
     ADD KEY `fk_id_noticia` (`idNoticia`),
 	ADD CONSTRAINT `fk_id_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`),
     ADD CONSTRAINT `fk_id_noticia` FOREIGN KEY (`idNoticia`) REFERENCES `nota` (`id`);
+
+
+ALTER TABLE `compraEdicion`
+    -- ADD COLUMN `precio` decimal(10,0) NOT NULL,
+    ADD KEY `fk_id_usuarioEdicion` (`idUsuario`),
+	ADD KEY `fk_id_edicion` (`idEdicion`),
+	ADD CONSTRAINT `fk_id_usuarioEdicion` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`),
+    ADD CONSTRAINT `fk_id_edicion` FOREIGN KEY (`idEdicion`) REFERENCES `edicion` (`id`);
+--
+-- AUTO_INCREMENT de las tablas volcadas
+-- drop table `compraEdicion`;
 --
 --
 -- Estructura de tabla para la tabla `suscripcion`

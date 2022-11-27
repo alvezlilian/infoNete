@@ -54,6 +54,7 @@ class LectorController
         $precioNota=$_GET["precio"];
         $idUsuario = (int)$data['id'];
         //die(var_dump($idUsuario));
+        //TODO: Completar pantalla de confirmacion de compra (form validarCompra)
 
         $resultadoCompra = $this->model->comprarNota($idNota, $precioNota, $idUsuario);
         if($resultadoCompra){
@@ -64,5 +65,23 @@ class LectorController
             $this->verPublicaciones();
         }
 
+    }
+    public function comprarEdicion(){
+        $data['rol'] = $_SESSION['rol'];
+        $data['id'] = $_SESSION['id'];
+
+        $idEdicion=$_GET["idEdicion"];
+        $precioNota=$_GET["precio"];
+        $idUsuario = (int)$data['id'];
+        //die(var_dump($idUsuario));
+
+        $resultadoCompra = $this->model->comprarEdicion($idEdicion, $precioNota, $idUsuario);
+        if($resultadoCompra){
+            $respuesta = "Compra Exitosa";
+            $this->renderer->render("respuestaCompra.mustache",$respuesta);
+        }else{
+            $respuesta = "No es posible realizar nuevamente esta compra";
+            $this->verPublicaciones();
+        }
     }
 }
