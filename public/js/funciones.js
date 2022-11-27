@@ -105,7 +105,43 @@ function pararEnvio() {
        document.getElementById("msj").innerHTML = "El contenido es obligatorio"
  console.log(document.getElementById("imagenVieja").value)
     }
+    }
 
-
+function muestraSeccionesContenidista(idEdicion) {
+    var parametros = {
+        "edicion" : idEdicion
+    };
+    $.ajax({
+        data:  parametros,
+        url:   '/contenidista/obtenerSeccionesContenidista',
+        type:  'POST',
+        beforeSend: function () {
+        },
+        success:  function (response) {
+            $("#seccion").html(response);
+        },
+        error: function (){
+            alert("error");
+        }
+    });
 }
+function muestraNotas(idSeccion){
+    var parametros = {
+        "seccion" : idSeccion
+    };
+    $.ajax({
+        data:  parametros,
+        url:   '/contenidista/obtenerNotas',
+        type:  'POST',
+        beforeSend: function () {
+        },
+        success:  function (response) {
+            $("#notas").html(response);
+        },
+        error: function (){
+            alert("error");
+        }
+    });
+}
+
 

@@ -37,7 +37,7 @@
 
 {{#CONTENIDISTA}}
         <!-- The Band Section -->
-        <div class='w3-top' >
+        <div class='w3-top' style="height: 30px" >
             <div class='w3-bar w3-black w3-card'>
                 <a class='w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right'
                   href='javascript:void(0)' onclick='myFunction()' title='Toggle Navigation Menu'><i
@@ -46,7 +46,10 @@
                                 <a href='/contenidista/alta' class='w3-bar-item w3-button w3-padding-large'>Crear publicacion</a>
                                 <a href='/contenidista/altaEdicion' class='w3-bar-item w3-button w3-padding-large'>Agregar Edicion</a>
                                 <a href='/contenidista/agregarSeccion' class='w3-bar-item w3-button w3-padding-large'>Agregar Seccion</a>
-              </div>
+                <a href='/contenidista/publicacionesPendientes' class='w3-bar-item w3-button w3-padding-large'>Publicacione Pendiente</a>
+
+                <a href='/contenidista/publicacionesPublicadas' class='w3-bar-item w3-button w3-padding-large'>Publicaciones publicadas</a>
+            </div>
             {{> logoutButtonView}}
         </div>
 {{/CONTENIDISTA}}
