@@ -35,8 +35,8 @@ class LoginModel
     }
 
     public function getIdByMail($email){
-        $sql = "SELECT id from usuario WHERE usuario.email = '$email'";
-        return $resultado = $this->database->query($sql);
+        $sql = "SELECT id from usuario WHERE email = '$email'";
+        return $resultado = $this->database->queryNum($sql);
     }
 
     public function getDescripcionById($idRol){

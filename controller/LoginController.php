@@ -32,14 +32,13 @@ class LoginController
         }
         $data = $this->model->validarLogin($email,$clave);
         $rolDescripcion = $this->model->getDescripcionById($data["idRol"]);
-        $buscarId = $this->model->getIdByMail($email);
+        $id = $this->model->getIdByMail($email);
 
         $nombre = $data["nombre"];
         $descripcion = $rolDescripcion['descripcion'];
-        $id = $buscarId;
 
         $this->validarResultado($data);
-        ValidatorSession::sessionInit($nombre, $descripcion, $id);
+        ValidatorSession::sessionInit($nombre, $descripcion, $id['id']);
         ValidatorSession::routerSession();
     }
 

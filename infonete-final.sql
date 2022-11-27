@@ -239,6 +239,22 @@ INSERT INTO `seccion` (`id`, `descrip`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `compra`
+--
+create table `compra` (
+                          `id` int(11) NOT NULL primary key auto_increment,
+                          `idUsuario` int(11) NOT NULL,
+                          `idNoticia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `compra`
+
+    ADD KEY `fk_id_usuario` (`idUsuario`),
+    ADD KEY `fk_id_noticia` (`idNoticia`),
+	ADD CONSTRAINT `fk_id_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`),
+    ADD CONSTRAINT `fk_id_noticia` FOREIGN KEY (`idNoticia`) REFERENCES `nota` (`id`);
+--
+--
 -- Estructura de tabla para la tabla `suscripcion`
 --
 
@@ -496,3 +512,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

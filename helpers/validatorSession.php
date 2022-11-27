@@ -37,6 +37,8 @@
             $_SESSION['rol'] = $descripcion;
             $_SESSION['name'] = $nombre;
             $_SESSION['id'] = $id;
+            //die(var_dump($id));
+            //die(var_dump($_SESSION['id']));
         }
 
         public static function tienePermiso($rol){

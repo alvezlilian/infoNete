@@ -51,8 +51,7 @@ class LectorModel
 
         $sql1 = "SELECT * FROM compra WHERE idNoticia = '$idNota' AND idUsuario = '$idUsuario'";
         $res1 = $this->database->Query($sql1);
-        var_dump($idUsuario );
-        die();
+
         if(!$res1){
             $sql2 = "INSERT INTO compra (idUsuario, idNoticia) VALUES ('$idUsuario', '$idNota')";
             $this->database->execute($sql2);
@@ -60,10 +59,7 @@ class LectorModel
         }else{
             $respuesta = false;
         }
-        /*
-        var_dump($respuesta);
-        die();
-        */
+
         return $respuesta;
     }
 }
