@@ -53,7 +53,7 @@ class LectorController
         $idNota=$_GET["idNota"];
         $precioNota=$_GET["precio"];
         $idUsuario = $data['id'];
-
+        die(var_dump($precioNota));
         $resultadoCompra = $this->model->comprarNota($idNota, $precioNota, $idUsuario);
         if($resultadoCompra){
             $respuesta = "Compra Exitosa";
