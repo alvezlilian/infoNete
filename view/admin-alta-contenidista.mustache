@@ -1,0 +1,79 @@
+{{> cabecera}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<style>
+    label.error {
+        color: red;
+        font-size: 1rem;
+        display: block;
+        margin-top: 5px;
+    }
+
+    input.error, textarea.error {
+        border: 1px dashed red;
+        font-weight: 300;
+        color: red;
+    }
+</style>
+<div class='w3-container w3-content w3-center w3-padding-64' style='max-width:50%'   id='band'>
+    <h2 class='w3-wide'>Alta Contenidista</h2>
+    <br>
+    <h3>{{#mensaje}}{{mensaje}}{{/mensaje}} </h3>
+    <form method="post" action="/administrador/nuevo_contenidista" id="form">
+        <div class="mb-1">
+            <label for="nombre" class="form-label">Nombre </label>
+            <input type="text" class="form-control" id="nombre" aria-describedby="nombre" name="nombre" pattern="[a-zA-Z0-9]+" minlength="2" maxlength="51" required>
+            <div id="nombre" class="form-text"></div>
+        </div>
+        <br>
+        <div class="mb-">
+            <label for="direccion" class="form-label">Direccion </label>
+            <input type="text" class="form-control" id="direccion" aria-describedby="direccion" name="direccion" minlength="2" maxlength="51" onchange="getLocation()">
+            <div id="direccion" class="form-text"></div>
+        </div>
+        <br>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email </label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" required>
+
+
+            <div id="emailHelp" class="form-text"></div>
+        </div>
+        <br>
+        <div class="mb-3">
+            <label for="clave" class="form-label">Clave</label>
+            <input type="password" class="form-control" id="clave" name="clave" minlength="2" maxlength="51" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+
+        <script>
+            $("#form").validate({
+                rules: {
+                    nombre : {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 50,
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                    },
+
+                },
+                messages : {
+                    nombre: {
+                        required: "Este campo es obligatorio",
+                        minlength: "El nombre debe tener al menos 3 caracteres de longitud",
+                        maxlength: "El nombre no puede poseer más de 50 caracteres de longitud"
+                    },
+                    email: {
+                        required: "Este campo es obligatorio";
+                        email: "Por favor, ingrese un email válido de la forma: ejemplo@ejemplo.com"
+                    },
+                }
+            });
+
+        </script>
+{{> footer}}
