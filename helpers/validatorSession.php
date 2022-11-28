@@ -23,10 +23,11 @@ class ValidatorSession{
     }
 
     public static function sessionInit($nombre, $descripcion,$id){
-          session_start();
-          $_SESSION['rol'] = $descripcion;
-          $_SESSION['name'] = $nombre;
-          $_SESSION['id']=$id;
+        session_start();
+        $_SESSION['rol'] = $descripcion;
+        $_SESSION['name'] = $nombre;
+        $_SESSION['id'] = $id;
+    }
     public static function cerrarSesion(){
           if (isset($_SESSION['rol'])) {
               session_destroy();
