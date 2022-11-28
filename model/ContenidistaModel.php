@@ -69,5 +69,48 @@ class ContenidistaModel {
         $sql = "DELETE FROM edicion WHERE idPublicacion='$idPublicacion'";
         $this->database->execute($sql);
     }
+public function  verNotasPendientes(){
+    $sql = "SELECT nota.* ,edicion.descrip as descripEdicion,seccion.descrip as descripSeccion,estadodepublicacion.Estado as estado,publicacion.informacion
+                FROM nota JOIN seccion ON nota.idSeccion=seccion.id 
+                    JOIN edicion on nota.idEdicion=edicion.id
+                    join estadodepublicacion on estadodepublicacion.id = nota.idEstado
+                join publicacion on edicion.idPublicacion=publicacion.id
+                WHERE  estadodepublicacion.Estado='pendiente'";
+    return $this->database->query($sql);
+}
+public function cambiarNotaAPublicado($id){
+
+        $sql="UPDATE nota SET idEstado=(SELECT estadodepublicacion.id FROM estadodepublicacion WHERE estadodepublicacion.Estado='publicado') WHERE nota.id='$id'";
+        $this->database->execute($sql);
+
+    }
+    public function verMasNota($id){
+        $sql = "SELECT nota.* ,edicion.descrip as descripEdicion,seccion.descrip as descripSeccion,estadodepublicacion.Estado as Estado, publicacion.informacion FROM nota 
+                 JOIN seccion ON nota.idSeccion=seccion.id 
+                JOIN edicion on nota.idEdicion=edicion.id 
+                 join estadodepublicacion on estadodepublicacion.id = nota.idEstado 
+                                 join publicacion on edicion.idPublicacion=publicacion.id
+
+                  WHERE nota.id='$id'";
+        return $this->database->query($sql);
+    }
+    public function getNotas($id){
+        $sql="SELECT nota.*,estadodepublicacion.estado from nota 
+JOIN estadodepublicacion on estadodepublicacion.id=nota.idEstado  WHERE nota.idSeccion in (SELECT edicion_seccion.idSeccion FROM edicion_seccion 
+  JOIN edicion on edicion_seccion.idEdicion=edicion.id
+  JOIN publicacion ON edicion.idPublicacion=edicion.idPublicacion
+ JOIN seccion on edicion_seccion.idSeccion=seccion.id
+ WHERE seccion.id='$id')and estadodepublicacion.Estado='publicado'";
+        return $this->database->query($sql);
+
+
+
+    }
+    public function darDeBajaPublicacion($id){
+
+        $sql="UPDATE nota SET idEstado=(SELECT estadodepublicacion.id FROM estadodepublicacion WHERE estadodepublicacion.Estado='baja') WHERE nota.id='$id'";
+       $this->database->execute($sql);
+
+    }
 
 }

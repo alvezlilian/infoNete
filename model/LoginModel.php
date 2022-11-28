@@ -35,7 +35,9 @@ class LoginModel
     }
 
     public function getIdByMail($email){
+
         $sql = "SELECT id from usuario WHERE email = '$email'";
+
         return $resultado = $this->database->queryNum($sql);
     }
 
@@ -45,3 +47,4 @@ class LoginModel
     }
 
 }
+

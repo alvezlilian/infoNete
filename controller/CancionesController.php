@@ -16,8 +16,7 @@ class CancionesController
     {
     }
 
-    public function verVista()
-    {
+    public function verVista(){
         if(isset($_SESSION)) {
             $this->renderer->render("cancionesView.mustache");
         }else{

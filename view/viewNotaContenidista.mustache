@@ -1,0 +1,24 @@
+{{>cabecera}}
+<!-- The Band Section -->
+<div class='w3-content' style='width: 95%;margin-top:70px;height: 100%'>
+<div style="margin-top: 50px">{{#nota}}
+<a id="" href="publicar?id={{id}}"class="btn btn-outline-primary"  style="display: inline">Publicar Nota</a>
+
+
+
+
+    <div id="textoOcultar" style="height: 50%">
+        <h1 style="text-align: center">{{informacion}}</h1>
+        <p   style="font-size: 10px; display: inline; margin-right: 20px" >Estado | {{Estado}} </p>
+        <p  style="font-size: 10px; display: inline ; margin-right: 20px"> Edicion | {{descripEdicion}}</p>
+        <p  style="font-size: 10px; display: inline"> Seccion | {{descripSeccion}}</p>
+            <h1 style="font-weight: bold">{{Titulo}}</h1>
+         <h3 style="text-align: left">{{Subtitulo}}</h3>
+
+            <img src="../public/Img/notas/{{Imagen}}" alt="" style="margin-bottom: 15px">
+               <div>{{{contenido}}}</div>
+
+         {{/nota}}
+     </div>
+</div>
+{{> footer}}
