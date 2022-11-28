@@ -79,7 +79,6 @@ class Configuration {
     public function getContenidistaController(){
         return new ContenidistaController($this->view,$this->getContenidistaModel());
     }
-
     public function getAdministradorController(){
         return new AdministradorController($this->view,$this->getAdministradorModel());
     }

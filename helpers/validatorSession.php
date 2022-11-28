@@ -22,20 +22,19 @@ class ValidatorSession{
         }
     }
 
+    public static function sessionInit($nombre, $descripcion,$id){
+          session_start();
+          $_SESSION['rol'] = $descripcion;
+          $_SESSION['name'] = $nombre;
+          $_SESSION['id']=$id;
     public static function cerrarSesion(){
-        if (isset($_SESSION['rol'])) {
-            session_destroy();
-            Redirect::doIt('/');
-        }
-        if(!isset($_session['rol'])){
-            die("esta vacio");
-        }
-    }
-
-    public static function sessionInit($nombre, $descripcion){
-        session_start();
-        $_SESSION['rol'] = $descripcion;
-        $_SESSION['name'] = $nombre;
+          if (isset($_SESSION['rol'])) {
+              session_destroy();
+              Redirect::doIt('/');
+          }
+          if(!isset($_session['rol'])){
+              die("esta vacio");
+          }
     }
 
     public static function tienePermiso($rol){
