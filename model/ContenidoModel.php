@@ -30,9 +30,11 @@ public function getSecciones(){
 
     }
     public function getContenido($idEscritor){
-        $sql = "SELECT nota.* ,edicion.descrip as descripEdicion,seccion.descrip as descripSeccion,estadodepublicacion.Estado as estado 
+        $sql = "SELECT nota.* ,edicion.descrip as descripEdicion,seccion.descrip 
+        as descripSeccion,estadodepublicacion.Estado as estado, publicacion.informacion AS publicacion
                 FROM nota JOIN seccion ON nota.idSeccion=seccion.id 
                     JOIN edicion on nota.idEdicion=edicion.id
+                    JOIN publicacion on edicion.idPublicacion=publicacion.id
                     join estadodepublicacion on estadodepublicacion.id = nota.idEstado 
                 WHERE nota.idEscritor='$idEscritor' and estadodepublicacion.Estado='pendiente'";
 
