@@ -47,20 +47,22 @@ class LectorModel
                 WHERE estadodepublicacion.id=1 AND nota.idEdicion='$idEdicion'";
         return $this->database->Query($sql);
     }
+
+    public function buscarNota($idNota, $idUsuario){
+        $sql = "SELECT * FROM compraNoticias WHERE idNoticia = '$idNota' AND idUsuario = '$idUsuario'";
+        $res = $this->database->Query($sql);
+        if($res){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function comprarNota($idNota, $precioNota,$idUsuario){
 
-        $sql1 = "SELECT * FROM compraNoticia WHERE idNoticia = '$idNota' AND idUsuario = '$idUsuario'";
-        $res1 = $this->database->Query($sql1);
-
-        if(!$res1){
-            $sql2 = "INSERT INTO compraNoticia (idUsuario, idNoticia, precio) VALUES ('$idUsuario', '$idNota', '$precioNota')";
+            $sql2 = "INSERT INTO compraNoticias (idUsuario, idNoticia, precio) VALUES ('$idUsuario', '$idNota', '$precioNota')";
             $this->database->execute($sql2);
-            $respuesta = true;
-        }else{
-            $respuesta = false;
-        }
 
-        return $respuesta;
     }
 
     public function comprarEdicion($idEdicion, $precioEdicion,$idUsuario){
