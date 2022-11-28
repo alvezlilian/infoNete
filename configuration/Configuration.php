@@ -18,7 +18,7 @@ include_once ("model/ContenidoModel.php");
 include_once ("model/ValidarLoginModel.php");
 include_once("model/LectorModel.php");
 include_once("model/ContenidistaModel.php");
-include_once ("model/AbmAdministradorModel.php");
+include_once("model/AdministradorModel.php");
 
 /* Controlers */
 include_once('controller/PresentacionesController.php');
@@ -30,7 +30,7 @@ include_once('controller/LoginController.php');
 include_once('controller/ContenidoController.php');
 include_once('controller/LectorController.php');
 include_once('controller/ContenidistaController.php');
-include_once ("controller/AbmAdministradorController.php");
+include_once('controller/AdministradorController.php');
 
 /* Dependencies */
 include_once ('dependencies/mustache/src/Mustache/Autoloader.php');
@@ -79,11 +79,8 @@ class Configuration {
     public function getContenidistaController(){
         return new ContenidistaController($this->view,$this->getContenidistaModel());
     }
-    public function getAbmAdministrador(){
-        return new AbmAdministrador($this->view,$this->getAbmAdministradorModel());
-    }
-    public function getAbmAdministradorModel(){
-        return new AbmAdministrador($this->database);
+    public function getAdministradorController(){
+        return new AdministradorController($this->view,$this->getAdministradorModel());
     }
 
     private function createCancionesModel(): CancionesModel {
@@ -112,12 +109,17 @@ class Configuration {
 
     private function getContenidoModel(){
         return new ContenidoModel($this->database);
-
     }
+
     private function getLectorModel(){
         return new LectorModel($this->database);
     }
+
     private function getContenidistaModel(){
         return new ContenidistaModel($this->database);
+    }
+
+    private function getAdministradorModel(){
+        return new AdministradorModel($this->database);
     }
 }
