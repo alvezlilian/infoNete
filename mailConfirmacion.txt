@@ -1,0 +1,10 @@
+
+        <h2>Gracias por registrarse!</h2><br>
+        <p>------------------------</p><br>
+        Username: Agustis Caceres<br>
+        Código de Verificación: 835027<br>
+        ------------------------
+        <p>Su cuenta fue creada exitosamente. Confirme su dirección de correo electrónico clickeando el link o copia la siguiente url en tu navegador:</p><br>
+        <p>http://localhost/registrarse/validarCodigo</p>
+        <a href='http://localhost/registrarse/validarCodigo'> VERIFICA TU MAIL</a>
+        

@@ -20,7 +20,7 @@ class AdministradorController{
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
         }
-        $data = ValidatorSession::setSession();
+        $data['rol'] = ValidatorSession::setSession();
         $this->renderer->render("adminViewHome.mustache", $data);
     }
 
@@ -32,7 +32,7 @@ class AdministradorController{
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
         }
-        $data = ValidatorSession::setSession();
+        $data['rol'] = ValidatorSession::setSession();
         $this->renderer->render("usuarios-action.mustache",$data);
     }
 
@@ -40,7 +40,7 @@ class AdministradorController{
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
         }
-        $data = ValidatorSession::setSession();
+        $data['rol'] = ValidatorSession::setSession();
         $this->renderer->render("admin-alta-usuario.mustache",$data);
     }
 
@@ -48,7 +48,7 @@ class AdministradorController{
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
         }
-        $data = ValidatorSession::setSession();
+        $data['rol'] = ValidatorSession::setSession();
         $email = $_POST['email'];
 
         if($this->estaRegistrado($email)){
@@ -62,7 +62,7 @@ class AdministradorController{
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
         }
-        $data = ValidatorSession::setSession();
+        $data['rol'] = ValidatorSession::setSession();
         $usuarios['usuarios'] = $this->model->getUsuarios();
         $this->renderer->render("admin-eliminar-usuario.mustache",$usuarios);
     }

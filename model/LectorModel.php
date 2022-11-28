@@ -24,7 +24,7 @@ class LectorModel
                 JOIN edicion on nota.idEdicion=edicion.id 
                 JOIN estadodepublicacion on estadodepublicacion.id=nota.idEstado
          		JOIN publicacion on publicacion.id=edicion.idPublicacion
-                WHERE estadodepublicacion.id=1";
+                WHERE estadodepublicacion.id=2";
         $result = $this->database->Query($sql);
         shuffle($result);
         return $result;
@@ -37,7 +37,7 @@ class LectorModel
                 JOIN estadodepublicacion on estadodepublicacion.id=nota.idEstado
          		JOIN publicacion on publicacion.id=edicion.idPublicacion
                 JOIN usuario on nota.idEscritor=usuario.id
-                WHERE estadodepublicacion.id=1 AND nota.id='$idNota'";
+                WHERE estadodepublicacion.id=2 AND nota.id='$idNota'";
         return $this->database->Query($sql);
     }
     public function getNotasxEdicion($idEdicion){
@@ -46,7 +46,7 @@ class LectorModel
                 JOIN edicion on nota.idEdicion=edicion.id 
                 JOIN estadodepublicacion on estadodepublicacion.id=nota.idEstado
          		JOIN publicacion on publicacion.id=edicion.idPublicacion
-                WHERE estadodepublicacion.id=1 AND nota.idEdicion='$idEdicion'";
+                WHERE estadodepublicacion.id=2 AND nota.idEdicion='$idEdicion'";
         return $this->database->Query($sql);
     }
     public function getContenidista(){
