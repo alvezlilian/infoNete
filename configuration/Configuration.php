@@ -7,6 +7,7 @@ include_once('helpers/Logger.php');
 include_once('helpers/Router.php');
 include_once('helpers/ValidatorSession.php');
 include_once ('helpers/VerOcultarBotones.php');
+include_once ('helpers/domPDF.php');
 
 /* Models */
 include_once('model/CancionesModel.php');
@@ -19,6 +20,7 @@ include_once ("model/ValidarLoginModel.php");
 include_once("model/LectorModel.php");
 include_once("model/ContenidistaModel.php");
 include_once("model/AdministradorModel.php");
+
 
 /* Controlers */
 include_once('controller/PresentacionesController.php');
@@ -34,6 +36,7 @@ include_once('controller/AdministradorController.php');
 
 /* Dependencies */
 include_once ('dependencies/mustache/src/Mustache/Autoloader.php');
+include_once ('dependencies/dompdf/autoload.inc.php');
 
 class Configuration {
     private $database;
@@ -80,7 +83,8 @@ class Configuration {
         return new ContenidistaController($this->view,$this->getContenidistaModel());
     }
     public function getAdministradorController(){
-        return new AdministradorController($this->view,$this->getAdministradorModel());
+        $domPDF = $this->getDomPdf();
+        return new AdministradorController($this->view,$this->getAdministradorModel(),$domPDF);
     }
 
     private function createCancionesModel(): CancionesModel {
@@ -121,5 +125,9 @@ class Configuration {
 
     private function getAdministradorModel(){
         return new AdministradorModel($this->database);
+    }
+
+    public function getDomPdf(){
+        return new domPDF();
     }
 }

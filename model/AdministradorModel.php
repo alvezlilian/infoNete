@@ -62,5 +62,28 @@ class AdministradorModel{
         $sql="DELETE FROM publicacion WHERE id = '$id'";
         $this->database->execute($sql);
     }
+    public function listaDeContenidista(){
+        $sql="SELECT  usuario.*, rol.descripcion FROM usuario join rol on usuario.idRol= rol.id WHERE rol.descripcion='CONTENIDISTA'";
+        return $this->database->query($sql);
+
+    }
+    public function listaDeLectores(){
+        $sql="SELECT usuario.*, nota.id as notaId,nota.Titulo, seccion.descrip as descripSeccion, edicion.descrip as descripEdicion,publicacion.informacion FROM usuario 
+              JOIN compranoticias ON usuario.id=compranoticias.idUsuario join nota on nota.id=compranoticias.idNoticia 
+              JOIN seccion on seccion.id=nota.idSeccion JOIN edicion on edicion.id=nota.idEdicion 
+              JOIN publicacion on publicacion.id=edicion.idPublicacion";
+        return $this->database->query($sql);
+
+    }public function ContarNotasVendidas(){
+        $sql="SELECT nota.id, COUNT(*) as cantidad FROM nota JOIN compranoticias ON compranoticias.idNoticia=nota.id GROUP BY nota.id";
+    return $this->database->query($sql);
+
+
+    }
+    public function  contarEdicionesVendidas(){
+        $sql="SELECT edicion.descrip AS descripEdicion, COUNT(*) as cantidad FROM edicion JOIN compraedicion ON compraedicion.idEdicion=edicion.id GROUP BY edicion.descrip";
+        return $this->database->query($sql);
+
+    }
 }
 

@@ -1,0 +1,89 @@
+{{> header}}
+<!-- The Band Section -->
+<div class='w3-container w3-content w3-center w3-padding-64' style='max-width:90%' id='band'>
+    <h2 class='w3-wide'>Lista de tus contenidistas</h2>
+    <table class='w3-table'>
+        <tr>
+            <th>Id</th>
+            <th>Nombre y apellido</th>
+            <th>Email</th>
+            <th>Direccion</th>
+            <th>Rol</th>
+
+        </tr>
+        {{#contenidistas}}
+           <tr>
+                <td>{{id}}</td>
+                <td>{{nombre}}</td>
+                <td>{{email}}</td>
+               <td>{{ubicacion}}</td>
+               <td>{{descripcion}}</td>
+
+
+           </tr>
+         {{/contenidistas}}
+    </table>
+    <h2 class='w3-wide'>Lista de tus Lectores que adquirieron noticias</h2>
+    <table class='w3-table'>
+        <tr>
+            <th>Id</th>
+            <th>Nombre y apellido</th>
+            <th>Email</th>
+            <th>Direccion</th>
+            <th>publucacion</th>
+            <th>Edicion</th>
+            <th>Seccion</th>
+            <th>N° de Noticia</th>
+        </tr>
+        {{#lectores}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{nombre}}</td>
+                <td>{{email}}</td>
+                <td>{{ubicacion}}</td>
+                <td>{{informacion}}</td>
+                <td>{{descripEdicion}}</td>
+                <td>{{descripSeccion}}</td>
+                <td>{{notaId}}</td>
+
+
+            </tr>
+        {{/lectores}}
+    </table>
+    <h2 class='w3-wide'>Noticias vendidas </h2>
+    <table class='w3-table'>
+        <tr>
+            <th>N° de Noticia</th>
+            <th>Cantidad vendidas</th>
+
+        </tr>
+        {{#notasVendidas}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{cantidad}}</td>
+
+
+
+            </tr>
+        {{/notasVendidas}}
+    </table>
+    <h2 class='w3-wide'>Ediciones vendidas</h2>
+    <table class='w3-table'>
+        <tr>
+            <th>Ediciones</th>
+            <th>Cantidad vendidas</th>
+
+        </tr>
+        {{#edicionesVendidas}}
+            <tr>
+                <td>{{descripEdicion}}</td>
+                <td>{{cantidad}}</td>
+
+
+
+            </tr>
+        {{/edicionesVendidas}}
+    </table>
+    <div><br><a href=''>Generar PDF</a></div>
+</div>
+{{> footer}}

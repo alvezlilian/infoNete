@@ -280,7 +280,7 @@ class Options
      */
     public function __construct(array $attributes = null)
     {
-        $rootDir = realpath(__DIR__ . "/../");
+        $rootDir = realpath(__DIR__ . "/dompdf/");
         $this->setChroot(array($rootDir));
         $this->setRootDir($rootDir);
         $this->setTempDir(sys_get_temp_dir());
