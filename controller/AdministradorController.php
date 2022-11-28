@@ -47,8 +47,13 @@ class AdministradorController{
             ValidatorSession::routerSession();
         }
         $data = ValidatorSession::setSession();
-        $this->renderer->render("admin-modificar-usuario.mustache",$data);
+        $email = $_POST['email'];
 
+        if($this->estaRegistrado($email)){
+            $usuario = $this->model->getUserByMail($email);
+            $this->renderer->render("admin-modificar-usuario.mustache",$usuario, $data);
+        }
+        Redirect::doIt('/administrador/buscar_usuario');
     }
 
     public function eliminar_usuario(){
@@ -66,6 +71,26 @@ class AdministradorController{
         }
         $data['rol'] = ValidatorSession::setSession();
         $this->renderer->render("admin-alta-contenidista.mustache",$data);
+    }
+
+    public function buscar_usuario(){
+        if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
+            ValidatorSession::routerSession();
+        }
+        $data['rol'] = ValidatorSession::setSession();
+        $this->renderer->render("admin-buscar-usuario-actualizar.mustache",$data);
+    }
+
+    public function ver_publicaciones(){
+        $data['publicaciones'] = $this->model->getPublicaciones();
+        $data['rol'] = $_SESSION['rol'];
+        $this->renderer->render("admin-publicaciones.mustache", $data);
+    }
+
+    public function eliminar_publicacion(){
+        $id = $_POST['id'];
+        $this->model->eliminarPublicacionPor($id);
+        Redirect::doIt('/administrador/ver_publicaciones');
     }
 
     public function nuevo_usuario(){
@@ -90,13 +115,12 @@ class AdministradorController{
     public function update_usuario(){
         $nombre=$_POST["nombre"];
         $email=$_POST["email"];
-        $clave =$_POST["clave"];
-        $claveEncriptada=$this->encriptarClave($clave);
-        if($this->estaRegistrado($email)){
+        $ubicacion = $_POST['direccion'];
+        $rol = $_POST['rol'];
             $id = $this->model->getUserByMail($email);
-            $this->model->update_usuario($id, $nombre, $email, $claveEncriptada);
-            Redirect::doIt('/administrador/home');
-        }
+            $this->model->updateUsuario($id, $nombre, $email, $ubicacion, $rol);
+            Redirect::doIt('/administrador/acciones');
+
     }
 
     public function nuevo_contenidista(){
@@ -112,6 +136,7 @@ class AdministradorController{
     }
 
     public function estaRegistrado($email){
-        return $result = $this->model->verificarEmail($email);
+        return $result = $this->model->existeMail($email);
     }
+
 }

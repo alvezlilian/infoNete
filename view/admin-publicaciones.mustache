@@ -1,0 +1,27 @@
+{{> cabecera}}
+
+<div class='w3-container w3-content w3-center w3-padding-64' id='band'>
+
+    <h2 class='w3-wide'>Infonete</h2>
+
+    <div class='pt-4 d-flex justify-content-around flex-wrap'>
+        {{#publicaciones}}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title display-4">{{informacion}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Publicación Número: {{id}}</h6>
+                    <img class="card-img-top" src='../{{ruta}}' alt="Card image cap">
+                </div>
+                <div style="width: 100%;padding: 2%;">
+                    <form method="post" action="/administrador/eliminar_publicacion" >
+                        <button type="submit" name="id"
+                                class="btn btn-outline-primary" value={{id}} onclick="return confirm('¿Estas seguro de eliminar la publicación {{id}}?');">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+        {{/publicaciones}}
+    </div>
+
+</div>
+
+{{> footer}}

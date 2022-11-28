@@ -20,26 +20,24 @@ class AdministradorModel{
         $this->database->execute($sql);
     }
 
-    public function updateUsuario($id, $nombre, $email, $claveEncriptada){
-    //UPDATE `usuario` SET `id`='[value-1]',`nombre`='[value-2]',`ubicacion`='[value-3]',`email`='[value-4]',`latitud`='[value-5]',`longitud`='[value-6]',`activo`='[value-7]',`idRol`='[value-8]' WHERE 1
-        $sql = "UPDATE usuario SET nombre= '$nombre', email = '$email' WHERE id = '$id'";
+    public function updateUsuario($id, $nombre, $email, $ubicacion, $rol){
+        $userId = $id['id'];
+        $sql = "UPDATE usuario SET nombre='$nombre', email='$email', ubicacion='$ubicacion', idRol='$rol' WHERE id='$userId'";
         $this->database->execute($sql);
     }
 
-
-    public function verificarEmail($email){
-        $sql="SELECT * FROM usuario WHERE email = '$email'";
-        $result = $this->database->query($sql);
-        if(empty($result)){
-            return true;
-        }else{
+    public function existeMail($email){
+        $sql="SELECT email FROM usuario WHERE email = '$email'";
+        $result = $this->database->queryNum($sql);
+        if (is_null($result)){
             return false;
         }
+        return $result['email'] == $email;
     }
 
     public function getUserByMail($email){
-        $sql = "SELECT id from usuario WHERE email = '$email'";
-        return $resultado = $this->database->query($sql);
+        $sql = "SELECT * from usuario WHERE email = '$email'";
+        return $resultado = $this->database->queryNum($sql);
     }
 
     public function agregar_contenidista($nombre,$email,$direccion,$clave){
@@ -55,5 +53,14 @@ class AdministradorModel{
         return $resultado = $this->database->query($sql);
     }
 
+    public function getPublicaciones() {
+        $sql = 'SELECT * FROM publicacion';
+        return $this->database->query($sql);
+    }
+
+    public function eliminarPublicacionPor($id){
+        $sql="DELETE FROM publicacion WHERE id = '$id'";
+        $this->database->execute($sql);
+    }
 }
 
