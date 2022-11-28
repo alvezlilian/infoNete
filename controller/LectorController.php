@@ -54,16 +54,17 @@ class LectorController
         $idNota=$_GET["idNota"];
         $precioNota=$_GET["precio"];
         $idUsuario = (int)$data['id'];
+        $data['idNota'] = $idNota;
+        $data['precio'] = $precioNota;
         $data['idUsuario'] = $idUsuario;
-        //die(var_dump($idUsuario));
-        //TODO: Completar pantalla de confirmacion de compra (form validarCompra)
+
         $resultadoBusqueda = $this->model->buscarNota($idNota, $idUsuario);
 
         if(!$resultadoBusqueda){
-            $this->renderer->render("validarCompra.mustache", $data);
+            $this->renderer->render("validarCompraNota.mustache", $data);
         }else{
             $respuesta = "Ya compró esta noticia";
-            $this->verPublicaciones();
+            $this->renderer->render('lectorView.mustache', $respuesta);
         }
     }
 
@@ -72,31 +73,53 @@ class LectorController
         $data['rol'] = $_SESSION['rol'];
         $data['id'] = $_SESSION['id'];
 
-        $idNota=$_GET["idNota"];
-        $precioNota=$_GET["precio"];
+        $idNota=$_POST["idNota"];
+        $precioNota=$_POST["precio"];
         $idUsuario = (int)$data['id'];
 
-        $this->model->comprarNota($idNota, $precioNota, $idUsuario);
+        $precio = str_replace ( "$", '', $precioNota);
+        $precioValidado = str_replace ( ".", '', $precio);
+
+        $this->model->comprarNota($idUsuario, $idNota, $precioValidado);
         $respuesta = "Compra Exitosa";
         $this->renderer->render("respuestaCompra.mustache",$respuesta);
+    }
+
+    public function validarComprarEdicion(){
+        $data['rol'] = $_SESSION['rol'];
+        $data['id'] = $_SESSION['id'];
+
+        $idNota=$_GET["idEdicion"];
+        $precioNota=$_GET["precio"];
+        $idUsuario = (int)$data['id'];
+        $data['idNota'] = $idNota;
+        $data['precio'] = $precioNota;
+        $data['idUsuario'] = $idUsuario;
+
+        $resultadoBusqueda = $this->model->buscarEdicion($idNota, $idUsuario);
+
+        if(!$resultadoBusqueda){
+            $this->renderer->render("validarCompraEdicion.mustache", $data);
+        }else{
+            $respuesta = "Ya compró esta edición";
+            $this->renderer->render('lectorView.mustache', $respuesta);
+        }
     }
 
     public function comprarEdicion(){
         $data['rol'] = $_SESSION['rol'];
         $data['id'] = $_SESSION['id'];
 
-        $idEdicion=$_GET["idEdicion"];
-        $precioNota=$_GET["precio"];
+        $idEdicion=$_POST["idNota"];
+        $precioNota=$_POST["precio"];
         $idUsuario = (int)$data['id'];
-        //die(var_dump($idUsuario));
 
-        $resultadoCompra = $this->model->comprarEdicion($idEdicion, $precioNota, $idUsuario);
-        if($resultadoCompra){
-            $respuesta = "Compra Exitosa";
-            $this->renderer->render("respuestaCompra.mustache",$respuesta);
-        }else{
-            $respuesta = "No es posible realizar nuevamente esta compra";
-            $this->verPublicaciones();
-        }
+        $precio = str_replace ( "$", '', $precioNota);
+        $precioValidado = str_replace ( ".", '', $precio);
+
+        $this->model->comprarEdicion($idUsuario, $idEdicion, $precioValidado);
+        $respuesta = "Compra Exitosa";
+        $this->renderer->render("respuestaCompra.mustache",$respuesta);
+
     }
 }

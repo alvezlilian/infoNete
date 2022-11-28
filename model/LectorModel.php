@@ -65,27 +65,27 @@ class LectorModel
             return false;
         }
     }
-    public function comprarNota($idNota, $precioNota,$idUsuario){
+    public function comprarNota($idUsuario, $idNota, $precioNota){
 
-        $sql2 = "INSERT INTO compraNoticias (idUsuario, idNoticia, precio) VALUES ('$idUsuario', '$idNota', '$precioNota')";
-        $this->database->execute($sql2);
+        $sql = "INSERT INTO compraNoticias (idUsuario, idNoticia, precio) VALUES ('$idUsuario', '$idNota', '$precioNota')";
+        $this->database->execute($sql);
 
     }
-
-    public function comprarEdicion($idEdicion, $precioEdicion,$idUsuario){
-
-        $sql1 = "SELECT * FROM compraEdicion WHERE idEdicion = '$idEdicion' AND idUsuario = '$idUsuario'";
-        $res1 = $this->database->Query($sql1);
-
-        if(!$res1){
-            $sql2 = "INSERT INTO compraEdicion (idUsuario, idEdicion, precio) VALUES ('$idUsuario', '$idEdicion', '$precioEdicion')";
-            $this->database->execute($sql2);
-            $respuesta = true;
+    public function buscarEdicion($idNota, $idUsuario){
+        $sql = "SELECT * FROM compraEdicion WHERE idEdicion = '$idNota' AND idUsuario = '$idUsuario'";
+        $res = $this->database->Query($sql);
+        if($res){
+            return true;
         }else{
-            $respuesta = false;
+            return false;
         }
+    }
 
-        return $respuesta;
+    public function comprarEdicion($idUsuario, $idEdicion, $precioEdicion){
+
+        $sql = "INSERT INTO compraEdicion (idUsuario, idEdicion, precio) VALUES ('$idUsuario', '$idEdicion', '$precioEdicion')";
+        $this->database->execute($sql);
+
     }
 }
 

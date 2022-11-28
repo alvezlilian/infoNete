@@ -6,13 +6,16 @@
     button{
         width: 100%;
     }
+    #idNota{
+        display: none;
+    }
 </style>
 
 <div class='w3-content' style='width: 90%;'>
     <h2 class='w3-wide' style="text-align: center">Lista de notas </h2>
     <div class="contenedor" style="width: 100%">
 
-        <form method="post" action="/lector/comprarNota" id="form">
+        <form method="post" action="/lector/comprarEdicion" id="form">
             <div class="mb-1">
                 <h2>Confirme su Compra</h2>
 
@@ -28,9 +31,11 @@
                 <label for="cvv" class="form-label">CVV </label>
                 <input type="text" class="form-control" id="cvv" aria-describedby="cvv" name="cvv" placeholder="123" required>
 
-                <label for="precio" class="form-label">Precio </label>
-                <input type="text" class="form-control" id="codigo" aria-describedby="codigo" name="codigo" value="${{{precioNota}}}" readonly>
+                <label for="precio" class="form-label">Precio </label>{{#precio}}
+                <input type="text" class="form-control" id="precio" aria-describedby="precio" name="precio" value="${{precio}}" readonly>{{/precio}}
 
+                {{#idNota}}
+                <input type="text" class="form-control" id="idNota" aria-describedby="idNota" name="idNota" value="{{idNota}}" readonly>{{/idNota}}
             </div>
             <br>
 
