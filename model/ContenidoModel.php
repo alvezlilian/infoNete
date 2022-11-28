@@ -29,21 +29,21 @@ public function getSecciones(){
         return $this->database->query($sql);
 
     }
-    public function getContenido(){
+    public function getContenido($idEscritor){
         $sql = "SELECT nota.* ,edicion.descrip as descripEdicion,seccion.descrip as descripSeccion,estadodepublicacion.Estado as estado 
                 FROM nota JOIN seccion ON nota.idSeccion=seccion.id 
                     JOIN edicion on nota.idEdicion=edicion.id
                     join estadodepublicacion on estadodepublicacion.id = nota.idEstado 
-                WHERE nota.idUsuario=39 and estadodepublicacion.Estado='pendiente'";
+                WHERE nota.idEscritor='$idEscritor' and estadodepublicacion.Estado='pendiente'";
 
         return $this->database->query($sql);
 
-}
-public function nuevaNoticia($tituloNoticia, $subtitulo, $edicion, $seccionNoticia, $precioNoticia, $descripcionNoticia, $archivo,$link,$idUsuario){
+    }
+    public function nuevaNoticia($tituloNoticia, $subtitulo, $edicion, $seccionNoticia, $precioNoticia, $descripcionNoticia, $archivo,$link,$idUsuario){
 
        $valor=1;
 
-        $sql="INSERT INTO nota( Titulo, Subtitulo, contenido, idSeccion, idEdicion,precio,Imagen,idEstado,link,idUsuario)
+        $sql="INSERT INTO nota( Titulo, Subtitulo, contenido, idSeccion, idEdicion,precio,Imagen,idEstado,link,idEscritor)
                     VALUES ('$tituloNoticia','$subtitulo','$descripcionNoticia','$seccionNoticia','$edicion','$precioNoticia','$archivo','$valor','$link',$idUsuario)";
                    $this->database->execute($sql);
 

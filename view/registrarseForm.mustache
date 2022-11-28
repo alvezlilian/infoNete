@@ -23,8 +23,8 @@ input.error, textarea.error {
     <h3>{{#mensaje}}{{mensaje}}{{/mensaje}} </h3>
     <form method="post" action="/registrarse/procesarAlta" id="form">
         <div class="mb-1">
-            <label for="nombre" class="form-label">Nombre </label>
-            <input type="text" class="form-control" id="nombre" aria-describedby="nombre" name="nombre" pattern="[a-zA-Z0-9]+" minlength="2" maxlength="51" required>
+            <label for="nombre" class="form-label">Nombre y Apellido </label>
+            <input type="text" class="form-control" id="nombre" aria-describedby="nombre" name="nombre" pattern="[a-zA-Z0-9\s]+" minlength="2" maxlength="51" required>
             <div id="nombre" class="form-text"></div>
         </div>
         <br>

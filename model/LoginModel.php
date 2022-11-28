@@ -27,7 +27,7 @@ class LoginModel
             $idTableContra = implode($resIdTableContra);
 
             if($idTableUser == $idTableContra){
-                $sql4 = "SELECT nombre,idRol FROM usuario WHERE email = '$email'";
+                $sql4 = "SELECT nombreApellido,idRol FROM usuario WHERE email = '$email'";
                 $resultado = $this->database->queryNum($sql4);
             }
         }

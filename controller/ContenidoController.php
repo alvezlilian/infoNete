@@ -28,9 +28,8 @@ class ContenidoController
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
             ValidatorSession::routerSession();
         }
-
         $data['rol'] = $_SESSION['rol'];
-        $data['contenido']=$this->model->getContenido();
+        $data['contenido']=$this->model->getContenido($_SESSION['id']);
         $this->renderer->render('listaContenido.mustache', $data);
 
     }

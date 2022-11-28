@@ -16,6 +16,7 @@ class LectorController
 
     }
     public function home(){
+        $data['contenidista']=$this->model->getContenidista();
         $data['notas']=$this->model->getNotas();
         $data['rol'] = $_SESSION['rol'];
         $this->renderer->render('lectorView.mustache', $data);

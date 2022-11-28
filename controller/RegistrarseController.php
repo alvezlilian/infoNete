@@ -60,7 +60,6 @@ class RegistrarseController
 
     public function validarCodigo(){
         $codigo = $this->model->validarCodigoRegistro($_POST['codigo']);
-        die(var_dump());
         if($codigo){
             $this->renderer->render("loginView.mustache");
         }else{
