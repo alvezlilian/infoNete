@@ -23,6 +23,7 @@ class LectorController
 
     }
     public function notaCompleta(){
+        $data['contenidista']=$this->model->getContenidista();
         $idNota=$_GET["idNota"];
         $data['rol'] = $_SESSION['rol'];
         $data["nota"]=$this->model->getNotaCompletaxIdNota($idNota);
