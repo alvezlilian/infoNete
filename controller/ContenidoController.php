@@ -54,7 +54,8 @@ class ContenidoController
 
         $data['rol'] = $_SESSION['rol'];
 
-        $data["publicaciones"]=$this->model->getContenido();
+        $data["publicaciones"]=$this->model->getPublicaciones();
+
         $this->renderer->render("contenidoForm.mustache",$data);
 
     }
@@ -158,7 +159,7 @@ else{
 
     }
     public function obtenerPublicaciones(){
-        $ediciones = $this->model->getEdiciones($_POST['publicacion']);
+        $ediciones = $this->model->getEdicionesxIdPublicacion($_POST['publicacion']);
         foreach ($ediciones as $i){
             echo "<option value = '". $i['id']."'>" . $i['descrip'] . "</option>";
         }

@@ -7,11 +7,11 @@
 
     <form method="post" id="formContenido" action="/contenido/cargarNoticia" enctype="multipart/form-data" class="w3-padding-64" >
 
-    <div class="form-row">
+    <div class="form-row" style="width: 100%">
 
 
         <!---parte del ajax pincipio-->
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label for="cars">Publicacion</label>
             <select name="publicacion" id="publicacion" onchange="muestraEdicionesANotas(this.value)" class="form-control" style="width:100%;"  >
                 <option disabled selected>SELECCIONE UNA OPCION</option>
@@ -21,14 +21,15 @@
             </select>
         </div>
 
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label>Edicion</label>
             <select class="form-control" name="edicion" onclick="muestraSeccionesANotas(this.value)" id="edicion" style="width:100%;">
                 <option disabled selected>SELECCIONE UNA OPCION</option>
             </select>
         </div>
-        <div class="form-group col-md-12">
-            <select name="seccion" id="seccion" style="width:100%">
+        <div class="form-group col-md-4">
+            <label>Seccion</label>
+            <select class="form-control" name="seccion" id="seccion" style="width:100%">
                 <option disabled selected>SELECCIONE UNA OPCION</option>
             </select>
         </div>

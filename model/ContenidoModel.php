@@ -24,8 +24,8 @@ public function getSecciones(){
         return $this->database->query($sql);
     }
 
-    public function getEdiciones(){
-        $sql = 'SELECT * FROM edicion';
+    public function getEdicionesxIdPublicacion($idPublicacion){
+        $sql = "SELECT * FROM edicion where edicion.idPublicacion='$idPublicacion'";
         return $this->database->query($sql);
 
     }
