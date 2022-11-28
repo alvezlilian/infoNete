@@ -6,15 +6,17 @@
     }*/
     .p{
         font-size:x-small;
-        margin-right: 1.5%;
+        margin-right: 4%;
     }
 </style>
 <div class='w3-content' style='width: 95%;padding: 2%;'>
     <div style="margin-top: 50px;padding: 2%;">
         {{#nota}}
             <div class="info">
-                <p class="p"> Autor: nombre y apellido del autor </p>
-                <p class="p" > Publicado por: nombre y apellido del contenidista</p>
+                <p class="p"> Escrito por: {{nombreApellido}} </p>
+                {{#contenidista}}
+                    <p class="p" > Publicado por: {{nombreApellido}}</p>
+                {{/contenidista}}
                 <p class="p" > Publicacion: {{publicacion}}</p>
                 <p class="p" > Edicion: {{descripEdicion}}</p>
                 <p class="p" > Seccion: {{descripSeccion}}</p>
