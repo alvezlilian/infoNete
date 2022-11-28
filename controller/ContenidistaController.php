@@ -1,13 +1,11 @@
 <?php
-class ContenidistaController
-{
+class ContenidistaController{
 
     private $renderer;
     private $model;
 
-    public function __construct($render, $model)
-    {
-        $this->renderer = $render;
+    public function __construct($render, $model) {
+        $this->renderer =$render;
         $this->model = $model;
     }
 
@@ -17,32 +15,18 @@ class ContenidistaController
             ValidatorSession::routerSession();
         }
     }
-
-    public function home()
-    {
-
+    public function home(){
         $data['publicaciones'] = $this->model->getPublicaciones();
         $data['rol'] = $_SESSION['rol'];
         $this->renderer->render("contenidistaView.mustache", $data);
     }
-
-    public function alta()
-    {
-        if (!ValidatorSession::tienePermiso($_SESSION['rol'])) {
-            ValidatorSession::routerSession();
-        }
-        $data["CONTENIDISTA"] = true;
+    public function alta(){
+        $data["CONTENIDISTA"]=true;
         $data['alta'] = true;
         $this->renderer->render("publicacion.mustache", $data);
     }
-
-    public function procesarAlta()
-    {
-
-        if (!ValidatorSession::tienePermiso($_SESSION['rol'])) {
-            ValidatorSession::routerSession();
-        }
-        $path = "public/img/publications/";
+    public function procesarAlta(){
+        $path="public/img/publications/";
         $nombre = $_POST["descrip"];
 
         $name_img = $_FILES['imagen']['name'];
@@ -58,23 +42,14 @@ class ContenidistaController
         Redirect::doIt('/contenidista/home');
     }
 
-    public function altaEdicion()
-    {
-        if (!ValidatorSession::tienePermiso($_SESSION['rol'])) {
-            ValidatorSession::routerSession();
-        }
-        $data['secciones'] = $this->model->getSecciones();
+    public function altaEdicion(){
+        $data['secciones']=$this->model->getSecciones();
         $data['publicaciones'] = $this->model->getPublicaciones();
         $data["CONTENIDISTA"] = true;
         $data['rol'] = $_SESSION['rol'];
         $this->renderer->render("altaEdicionSeccion.mustache", $data);
     }
-
-    public function procesarAltaEdicionSeccion()
-    {
-        if (!ValidatorSession::tienePermiso($_SESSION['rol'])) {
-            ValidatorSession::routerSession();
-        }
+    public function procesarAltaEdicionSeccion(){
         $numEdicion = $_POST["edicion"];
         $valor = $_POST["valor"];
         $idPublicacion = (int)$_POST["publicacion"];
@@ -97,12 +72,7 @@ class ContenidistaController
             Redirect::doIt('/contenidista/altaEdicion');
         }
     }
-
-    public function agregarSeccion()
-    {
-        if (!ValidatorSession::tienePermiso($_SESSION['rol'])) {
-            ValidatorSession::routerSession();
-        }
+    public function agregarSeccion(){
         $data['secciones'] = $this->model->getSecciones();
         $data['publicaciones'] = $this->model->getPublicaciones();
         $data["CONTENIDISTA"] = true;
@@ -116,12 +86,7 @@ class ContenidistaController
             echo "<option value = '" . $i['id'] . "'>" . $i['descrip'] . "</option>";
         }
     }
-
-    public function obtenerSecciones()
-    {
-        if (!ValidatorSession::tienePermiso($_SESSION['rol'])) {
-            ValidatorSession::routerSession();
-        }
+    public function obtenerSecciones(){
         $idEdicion = $_POST['edicion'];
         $seccionesInexistentes = $this->model->getSeccionesInexistenes($idEdicion);
         $seccionesExistentes = $this->model->getSeccionesExistenes($idEdicion);
@@ -144,12 +109,7 @@ class ContenidistaController
         }
 
     }
-
-    public function procesaAltaSoloEdicionSeccion()
-    {
-        if (!ValidatorSession::tienePermiso($_SESSION['rol'])) {
-            ValidatorSession::routerSession();
-        }
+    public function procesaAltaSoloEdicionSeccion(){
         $idEdicion = $_POST["edicion"];
         foreach ($_POST["seccion"] as $i) {
             $this->model->altaEdicionSeccion($idEdicion, $i);
@@ -170,8 +130,6 @@ class ContenidistaController
         $this->model->deletePublicacion($_POST['eliminar']);
         redirect::doIt("/contenidista/home");
     }
-
-
     public function PublicacionesPendientes()
     {
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])) {
@@ -232,7 +190,7 @@ class ContenidistaController
             echo "<option value = '" . $i['id'] . "'>" . $i['descrip'] . "</option>";
         }
     }
-public function obtenerNotas(){
+    public function obtenerNotas(){
         $notas=$this->model->getNotas($_POST['seccion']);
         if (count($notas)>0){
             foreach ($notas as $i) {
@@ -240,18 +198,18 @@ public function obtenerNotas(){
                 <p>".$i['estado']."</p>
                 <figure style='height: 35%'>
                 <img src='../public/img/notas/".$i['Imagen']."' style='margin-bottom: 15pz;width: 88%;height: 90%'>
-</figure>
-<h5 class='text-truncate'> ".$i['Subtitulo']."</h5> 
-<a style='display: block' href='verMasInfoDarDeBaja?id=".$i['id']."'>ver mas</a>
-<a class='btn btn-outline-primary' href='darDeBaja?id=".$i['id']."'>Dar de baja</a>";
+    </figure>
+    <h5 class='text-truncate'> ".$i['Subtitulo']."</h5> 
+    <a style='display: block' href='verMasInfoDarDeBaja?id=".$i['id']."'>ver mas</a>
+    <a class='btn btn-outline-primary' href='darDeBaja?id=".$i['id']."'>Dar de baja</a>";
+                }
+            }else{
+                echo "<h3> no hay notas</h3>";
+
             }
-        }else{
-            echo "<h3> no hay notas</h3>";
 
-        }
-
-}
- public function darDeBaja(){
+    }
+    public function darDeBaja(){
       $this->model->darDeBajaPublicacion($_GET['id']);
      redirect::doIt('/contenidista/home');
 
@@ -267,5 +225,4 @@ public function obtenerNotas(){
 
     }
 }
-
 
