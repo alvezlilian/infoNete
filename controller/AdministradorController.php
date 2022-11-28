@@ -3,10 +3,12 @@
 class AdministradorController{
     private $renderer;
     private $model;
+    private $domPdf;
 
-    public function __construct($render, $model) {
+    public function __construct($render, $model,$domPdf) {
         $this->renderer =$render;
         $this->model = $model;
+        $this->domPdf=$domPdf;
     }
     public function list(){
         if (!ValidatorSession::tienePermiso($_SESSION['rol'])){
@@ -138,5 +140,21 @@ class AdministradorController{
     public function estaRegistrado($email){
         return $result = $this->model->existeMail($email);
     }
+public function verReporte(){
+        $data['contenidistas']=$this->model->listaDeContenidista();
+$data['lectores']=$this->model->listaDeLectores();
+$data['notasVendidas']=$this->model->ContarNotasVendidas();
+$data['edicionesVendidas']=$this->model->contarEdicionesVendidas();
+    $this->renderer->render("reporte.mustache", $data);
 
+
+}
+public function imprimirReporte(){
+    $data['contenidistas']=$this->model->listaDeContenidista();
+    $data['lectores']=$this->model->listaDeLectores();
+    $data['notasVendidas']=$this->model->ContarNotasVendidas();
+    $data['edicionesVendidas']=$this->model->contarEdicionesVendidas();
+    $html= $this->renderer->render("reporte.mustache", $data);
+    $this->domPdf->imp($html);
+}
 }
