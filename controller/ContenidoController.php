@@ -30,7 +30,7 @@ class ContenidoController
         }
 
         $data['rol'] = $_SESSION['rol'];
-        $data['contenido']=$this->model->getContenido();
+        $data['contenido']=$this->model->getPublicaciones();
         $this->renderer->render('listaContenido.mustache', $data);
 
     }
