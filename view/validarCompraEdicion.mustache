@@ -1,0 +1,46 @@
+{{> cabecera}}
+<style>
+    input{
+        text-align: center;
+    }
+    button{
+        width: 100%;
+    }
+    #idNota{
+        display: none;
+    }
+</style>
+
+<div class='w3-content' style='width: 90%;'>
+    <h2 class='w3-wide' style="text-align: center">Lista de notas </h2>
+    <div class="contenedor" style="width: 100%">
+
+        <form method="post" action="/lector/comprarEdicion" id="form">
+            <div class="mb-1">
+                <h2>Confirme su Compra</h2>
+
+                <label for="numTarjeta" class="form-label">Ingrese el número de su tarjeta de débito/crédito </label>
+                <input type="text" class="form-control" id="numTarjeta" aria-describedby="numTarjeta" name="numTarjeta" placeholder="xxxx-xxxx-xxxx-xxxx" required>
+
+                <label for="nombreTarjeta" class="form-label">Nombre del titular de la tarjeta </label>
+                <input type="text" class="form-control" id="nombreTarjeta" aria-describedby="nombreTarjeta" name="nombreTarjeta" placeholder="JUAN PEREZ" required>
+
+                <label for="fecVen" class="form-label">Fecha de Vencimiento </label>
+                <input type="text" class="form-control" id="fecVen" aria-describedby="fecVen" name="fecVen" placeholder="12/28" required>
+
+                <label for="cvv" class="form-label">CVV </label>
+                <input type="text" class="form-control" id="cvv" aria-describedby="cvv" name="cvv" placeholder="123" required>
+
+                <label for="precio" class="form-label">Precio </label>{{#precio}}
+                <input type="text" class="form-control" id="precio" aria-describedby="precio" name="precio" value="${{precio}}" readonly>{{/precio}}
+
+                {{#idNota}}
+                <input type="text" class="form-control" id="idNota" aria-describedby="idNota" name="idNota" value="{{idNota}}" readonly>{{/idNota}}
+            </div>
+            <br>
+
+            <button type="submit" class="btn btn-primary" onclick="displayMap()">Comprar</button>
+
+    </div>
+</div>
+{{> footer}}

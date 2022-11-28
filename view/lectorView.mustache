@@ -8,9 +8,9 @@
 <div class='w3-content' style='width: 90%;'>
     <h2 class='w3-wide' style="text-align: center">Lista de notas </h2>
     <div class="contenedor" style="width: 100%">
-        {{#notasEdicion}}
+        {{#notas}}
 
-
+            <h3>{{#mensaje}}{{mensaje}}{{/mensaje}} </h3>
             <div style="width: 40%;">
                 <p class="p" > Publicacion: {{publicacion}}</p>
                 <p class="p" style="float: right" > Seccion: {{descripSeccion}}</p>
@@ -20,14 +20,14 @@
                     <img src="../public/Img/{{Imagen}}" alt="" style="margin-bottom: 15px;width: 88%;height: 100%;">
                 </div>
                 <a href="notaCompleta?idNota={{id}}" style="  border: darkcyan 1px solid; padding :5px"  >Ver nota completa</a>
-                <a href="" style="  border: darkcyan 1px solid; padding :5px"  >Obtener a: ${{precio}}</a>
+                <a href="validarComprarNota?idNota={{id}}&precio={{precio}}" style="  border: darkcyan 1px solid; padding :5px"  >Obtener a: ${{precio}}</a>
                 <br>
 
                 <br>
 
             </div>
 
-        {{/notasEdicion}}
+        {{/notas}}
     </div>
 
 {{> footer}}
