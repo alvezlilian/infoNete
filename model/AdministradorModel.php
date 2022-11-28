@@ -7,7 +7,7 @@ class AdministradorModel{
     public function __construct( $database){ $this->database=$database; }
 
     public function alta($nombre,$email,$direccion,$rol, $clave){
-        $sql1="INSERT INTO usuario(nombre,ubicacion,email,activo,idRol) VALUES ('$nombre','$direccion','$email',TRUE,'$rol')";
+        $sql1="INSERT INTO usuario(nombreApellido,ubicacion,email,activo,idRol) VALUES ('$nombre','$direccion','$email',TRUE,'$rol')";
         $this->database->execute($sql1);
         $idUsuario=$this->database->insert();
         $sqlContrasenia="INSERT INTO contrasenia(clave,idUsuario,validado) VALUES ('$clave','$idUsuario',TRUE)";
@@ -22,7 +22,7 @@ class AdministradorModel{
 
     public function updateUsuario($id, $nombre, $email, $ubicacion, $rol){
         $userId = $id['id'];
-        $sql = "UPDATE usuario SET nombre='$nombre', email='$email', ubicacion='$ubicacion', idRol='$rol' WHERE id='$userId'";
+        $sql = "UPDATE usuario SET nombreApellido='$nombre', email='$email', ubicacion='$ubicacion', idRol='$rol' WHERE id='$userId'";
         $this->database->execute($sql);
     }
 
@@ -41,7 +41,7 @@ class AdministradorModel{
     }
 
     public function agregar_contenidista($nombre,$email,$direccion,$clave){
-        $sql1="INSERT INTO usuario(nombre,ubicacion,email,activo,idRol) VALUES ('$nombre','$direccion','$email',TRUE,4)";
+        $sql1="INSERT INTO usuario(nombreApellido,ubicacion,email,activo,idRol) VALUES ('$nombre','$direccion','$email',TRUE,4)";
         $this->database->execute($sql1);
         $idUsuario=$this->database->insert();
         $sqlContrasenia="INSERT INTO contrasenia(clave,idUsuario,validado) VALUES ('$clave','$idUsuario',TRUE)";

@@ -27,7 +27,7 @@
         </div>
         <div class="mb-1">
             <label for="nombre" class="form-label">Nombre </label>
-            <input type="text" class="form-control" id="nombre" aria-describedby="nombre" name="nombre" pattern="[a-zA-Z0-9]+" minlength="2" maxlength="51" required value="{{nombre}}">
+            <input type="text" class="form-control" id="nombre" aria-describedby="nombre" name="nombre" pattern="[a-zA-Z0-9\s]+" minlength="2" maxlength="51" required value="{{nombreApellido}}">
             <div id="nombre" class="form-text"></div>
         </div>
         <div class="mb-3">
@@ -62,7 +62,7 @@
         <script>
             $("#form").validate({
                 rules: {
-                    nombre : {
+                    nombre< : {
                         required: true,
                         minlength: 3,
                         maxlength: 50,

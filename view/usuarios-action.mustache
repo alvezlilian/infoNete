@@ -4,6 +4,7 @@
 
         <div class="d-flex justify-content-center"><h4 class="display-4">Acciones</h4></div>
         <div class="p-2 pt-3 d-flex justify-content-center"><a href="/administrador/verReporte" class="btn btn-success btn-lg btn-block" style="width: 80%" role="button" aria-disabled="true">Ver reporte</a></div>
+        <div class="p-2 pt-3 d-flex justify-content-center"><button type="button" onclick="drawChart()" class="btn btn-success btn-lg btn-block" style="width: 80%" role="button" aria-disabled="true">Gráfico</button></div>
 
         <div class="p-2 pt-3 d-flex justify-content-center"><a href="/administrador/alta_contenidista" class="btn btn-success btn-lg btn-block" style="width: 80%" role="button" aria-disabled="true">Agregar contenidista</a></div>
         <div class="p-2 pt-3 d-flex justify-content-center"><a href="/administrador/alta_usuario" class="btn btn-success btn-lg btn-block" style="width: 80%" role="button" aria-disabled="true">Agregar usuario</a></div>
@@ -11,6 +12,7 @@
         <div class="p-2 pt-3 d-flex justify-content-center"><a href="/administrador/eliminar_usuario" class="btn btn-danger btn-lg btn-block" style="width: 80%" role="button" aria-disabled="true">Eliminar usuario</a></div>
         <div class="p-2 pt-3 d-flex justify-content-center"><a href="/administrador/ver_publicaciones" class="btn btn-danger btn-lg btn-block" style="width: 80%" role="button" aria-disabled="true">Eliminar publicación</a></div>
     </div>
-
+    <div id="piechart" style="width:100px;height:200;">
+    </div>
 {{> footer}}
 

@@ -25,7 +25,7 @@
             <thead>
             <tr>
                 <th scope="col">User Id</th>
-                <th scope="col">Nombre</th>
+                <th scope="col">Nombre completo</th>
                 <th scope="col">Email</th>
                 <th scope="col">Eliminar</th>
             </tr>
@@ -33,7 +33,7 @@
             {{#usuarios}}
             <tbody>
                 <th scope="row">{{id}}</th>
-                <td>{{nombre}}</td>
+                <td>{{nombreApellido}}</td>
                 <td>{{email}}</td>
                 <td>
                 <form method="post" action="/administrador/baja_usuario">
