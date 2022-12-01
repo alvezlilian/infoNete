@@ -150,11 +150,72 @@ $data['edicionesVendidas']=$this->model->contarEdicionesVendidas();
 
 }
 public function imprimirReporte(){
+        $html="";
+        $html1="";
     $data['contenidistas']=$this->model->listaDeContenidista();
     $data['lectores']=$this->model->listaDeLectores();
     $data['notasVendidas']=$this->model->ContarNotasVendidas();
     $data['edicionesVendidas']=$this->model->contarEdicionesVendidas();
-    $html= $this->renderer->render("reporte.mustache", $data);
-    $this->domPdf->imp($html);
-}
+  foreach ($data['contenidistas'] as $contenidistas){
+
+      $html=" <h1 style='text-align: center'>Reporte administrativo</h1><div class='w3-container w3-content w3-center w3-padding-64' style='max-width:90%' id='band'>
+  <h2 class='w3-wide'>Lista de tus contenidistas</h2>
+ <table class='w3-table'>
+        <tr>
+            <th>Id</th>
+            <th>Nombre y apellido</th>
+            <th>Email</th>
+            <th>Direccion</th>
+            <th>Rol</th>
+
+        </tr>
+      
+           <tr>
+                <td>".$contenidistas['id']."</td>
+                <td>".$contenidistas['nombreApellido']."</td>
+                <td>".$contenidistas['email']."</td>
+               <td>".$contenidistas['ubicacion']."</td>
+               <td>".$contenidistas['descripcion']."</td>
+
+
+           </tr>
+         
+    </table></div>";
+  }
+
+  foreach ($data['lectores']as $lector){
+      $html1="<h2 class='w3-wide'>Lista de tus Lectores que adquirieron noticias</h2>
+    <table class='w3-table'>
+        <tr>
+            <th>Id</th>
+            <th>Nombre y apellido</th>
+            <th>Email</th>
+            <th>Direccion</th>
+            <th>publucacion</th>
+            <th>Edicion</th>
+            <th>Seccion</th>
+            <th>N° de Noticia</th>
+        </tr>
+    
+            <tr>
+                <td>".$lector['id']."</td>
+                <td>".$lector['nombreApellido']."</td>
+                <td>".$lector['email']."</td>
+                <td>".$lector['ubicacion']."</td>
+                <td>".$lector['informacion']."</td>
+                <td>".$lector['descripEdicion']."</td>
+                <td>".$lector['descripSeccion']."</td>
+                <td>".$lector['notaId']."</td>
+
+
+            </tr>
+        
+    </table>";
+    }
+
+
+
+    $this->domPdf->recibirHtml($html.$html1);
+    }
+
 }
